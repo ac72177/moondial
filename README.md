@@ -15,3 +15,10 @@ them how to use the moon to determine what time it is. Previously, I drew diagra
 they could not decipher without assistance. With the current situation of COVID-19, I doubt that I will be able to 
 teach them in person. Hopefully this application will be simple enough for a child to use and will successfully teach 
 any user how to use the moon, when it is visible, to determine the approximate time.  
+
+### User Stories
+
+As a user, I want to be able to add an observation to a list of past observations
+As a user, I want to see the data from past observations
+As a user, I want to see a summary of my past observations categorized by moon phase
+As a user, I want to select observations to delete 
