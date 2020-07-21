@@ -23,11 +23,16 @@ public class ObservationList {
         observations = new ArrayList<>();
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds an observation to the end of the list
+    public void addObservation(Observation o) {
+    }
+
     // REQUIRES: observation is in list
     // MODIFIES: this
     // EFFECTS: removes observation from list
-    public void remove(Observation o) {
-        // return null
+    public void removeObservation(Observation o) {
+         //stub
     }
 
     // EFFECTS: returns number of observations in list

@@ -2,9 +2,9 @@ package model;
 
 import org.junit.jupiter.api.Test;
 
-// Unit tests for Observation
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
+// Unit tests for Observation
 
 class ObservationTest {
     private Observation newObservation;
@@ -16,6 +16,7 @@ class ObservationTest {
 
         assertEquals("New Moon", newObservation.getMoonPhase());
         assertEquals(90, newObservation.getAngleFromEast());
+        assertEquals("Noon", newObservation.newMoonTime(90));
         assertEquals("Noon", newObservation.identifyTime());
     }
 
@@ -25,6 +26,7 @@ class ObservationTest {
 
         assertEquals("New Moon", newObservation.getMoonPhase());
         assertEquals(45, newObservation.getAngleFromEast());
+        assertEquals("3PM", newObservation.newMoonTime(45));
         assertEquals("3PM", newObservation.identifyTime());
     }
 
@@ -34,6 +36,7 @@ class ObservationTest {
 
         assertEquals("New Moon", newObservation.getMoonPhase());
         assertEquals(0, newObservation.getAngleFromEast());
+        assertEquals("6PM", newObservation.newMoonTime(0));
         assertEquals("6PM", newObservation.identifyTime());
     }
 
@@ -43,6 +46,7 @@ class ObservationTest {
 
         assertEquals("New Moon", newObservation.getMoonPhase());
         assertEquals(180, newObservation.getAngleFromEast());
+        assertEquals("6AM", newObservation.newMoonTime(180));
         assertEquals("6AM", newObservation.identifyTime());
     }
 
@@ -52,6 +56,7 @@ class ObservationTest {
 
         assertEquals("New Moon", newObservation.getMoonPhase());
         assertEquals(135, newObservation.getAngleFromEast());
+        assertEquals("9AM", newObservation.newMoonTime(135));
         assertEquals("9AM", newObservation.identifyTime());
     }
 
@@ -62,6 +67,7 @@ class ObservationTest {
 
         assertEquals("Waxing Crescent", newObservation.getMoonPhase());
         assertEquals(135, newObservation.getAngleFromEast());
+        assertEquals("Noon", newObservation.waxingCrescentTime(135));
         assertEquals("Noon", newObservation.identifyTime());
     }
 
@@ -71,6 +77,7 @@ class ObservationTest {
 
         assertEquals("Waxing Crescent", newObservation.getMoonPhase());
         assertEquals(90, newObservation.getAngleFromEast());
+        assertEquals("3PM", newObservation.waxingCrescentTime(90));
         assertEquals("3PM", newObservation.identifyTime());
     }
 
@@ -80,6 +87,7 @@ class ObservationTest {
 
         assertEquals("Waxing Crescent", newObservation.getMoonPhase());
         assertEquals(45, newObservation.getAngleFromEast());
+        assertEquals("6PM", newObservation.waxingCrescentTime(45));
         assertEquals("6PM", newObservation.identifyTime());
     }
 
@@ -89,6 +97,7 @@ class ObservationTest {
 
         assertEquals("Waxing Crescent", newObservation.getMoonPhase());
         assertEquals(0, newObservation.getAngleFromEast());
+        assertEquals("9PM", newObservation.waxingCrescentTime(0));
         assertEquals("9PM", newObservation.identifyTime());
     }
 
@@ -98,6 +107,7 @@ class ObservationTest {
 
         assertEquals("Waxing Crescent", newObservation.getMoonPhase());
         assertEquals(180, newObservation.getAngleFromEast());
+        assertEquals("9AM", newObservation.waxingCrescentTime(180));
         assertEquals("9AM", newObservation.identifyTime());
     }
     // FirstQuarter
@@ -107,6 +117,7 @@ class ObservationTest {
 
         assertEquals("First Quarter", newObservation.getMoonPhase());
         assertEquals(180, newObservation.getAngleFromEast());
+        assertEquals("Noon", newObservation.firstQuarterTime(180));
         assertEquals("Noon", newObservation.identifyTime());
     }
 
@@ -116,6 +127,7 @@ class ObservationTest {
 
         assertEquals("First Quarter", newObservation.getMoonPhase());
         assertEquals(135, newObservation.getAngleFromEast());
+        assertEquals("3PM", newObservation.firstQuarterTime(135));
         assertEquals("3PM", newObservation.identifyTime());
     }
 
@@ -125,6 +137,7 @@ class ObservationTest {
 
         assertEquals("First Quarter", newObservation.getMoonPhase());
         assertEquals(90, newObservation.getAngleFromEast());
+        assertEquals("6PM", newObservation.firstQuarterTime(90));
         assertEquals("6PM", newObservation.identifyTime());
     }
 
@@ -134,6 +147,7 @@ class ObservationTest {
 
         assertEquals("First Quarter", newObservation.getMoonPhase());
         assertEquals(45, newObservation.getAngleFromEast());
+        assertEquals("9PM", newObservation.firstQuarterTime(45));
         assertEquals("9PM", newObservation.identifyTime());
     }
 
@@ -143,6 +157,7 @@ class ObservationTest {
 
         assertEquals("First Quarter", newObservation.getMoonPhase());
         assertEquals(0, newObservation.getAngleFromEast());
+        assertEquals("Midnight", newObservation.firstQuarterTime(0));
         assertEquals("Midnight", newObservation.identifyTime());
     }
 
@@ -153,6 +168,7 @@ class ObservationTest {
 
         assertEquals("Waxing Gibbous", newObservation.getMoonPhase());
         assertEquals(180, newObservation.getAngleFromEast());
+        assertEquals("3PM", newObservation.waxingGibbousTime(180));
         assertEquals("3PM", newObservation.identifyTime());
     }
 
@@ -162,6 +178,7 @@ class ObservationTest {
 
         assertEquals("Waxing Gibbous", newObservation.getMoonPhase());
         assertEquals(135, newObservation.getAngleFromEast());
+        assertEquals("6PM", newObservation.waxingGibbousTime(135));
         assertEquals("6PM", newObservation.identifyTime());
     }
 
@@ -171,6 +188,7 @@ class ObservationTest {
 
         assertEquals("Waxing Gibbous", newObservation.getMoonPhase());
         assertEquals(90, newObservation.getAngleFromEast());
+        assertEquals("9PM", newObservation.waxingGibbousTime(90));
         assertEquals("9PM", newObservation.identifyTime());
     }
 
@@ -180,6 +198,7 @@ class ObservationTest {
 
         assertEquals("Waxing Gibbous", newObservation.getMoonPhase());
         assertEquals(45, newObservation.getAngleFromEast());
+        assertEquals("Midnight", newObservation.waxingGibbousTime(45));
         assertEquals("Midnight", newObservation.identifyTime());
     }
 
@@ -189,6 +208,7 @@ class ObservationTest {
 
         assertEquals("Waxing Gibbous", newObservation.getMoonPhase());
         assertEquals(0, newObservation.getAngleFromEast());
+        assertEquals("3AM", newObservation.waxingGibbousTime(0));
         assertEquals("3AM", newObservation.identifyTime());
     }
 
@@ -199,6 +219,7 @@ class ObservationTest {
 
         assertEquals("Full Moon", newObservation.getMoonPhase());
         assertEquals(180, newObservation.getAngleFromEast());
+        assertEquals("6PM", newObservation.fullMoonTime(180));
         assertEquals("6PM", newObservation.identifyTime());
     }
 
@@ -208,6 +229,7 @@ class ObservationTest {
 
         assertEquals("Full Moon", newObservation.getMoonPhase());
         assertEquals(135, newObservation.getAngleFromEast());
+        assertEquals("9PM", newObservation.fullMoonTime(135));
         assertEquals("9PM", newObservation.identifyTime());
     }
 
@@ -217,6 +239,7 @@ class ObservationTest {
 
         assertEquals("Full Moon", newObservation.getMoonPhase());
         assertEquals(90, newObservation.getAngleFromEast());
+        assertEquals("Midnight", newObservation.fullMoonTime(90));
         assertEquals("Midnight", newObservation.identifyTime());
     }
 
@@ -226,6 +249,7 @@ class ObservationTest {
 
         assertEquals("Full Moon", newObservation.getMoonPhase());
         assertEquals(45, newObservation.getAngleFromEast());
+        assertEquals("3AM", newObservation.fullMoonTime(45));
         assertEquals("3AM", newObservation.identifyTime());
     }
 
@@ -235,6 +259,7 @@ class ObservationTest {
 
         assertEquals("Full Moon", newObservation.getMoonPhase());
         assertEquals(0, newObservation.getAngleFromEast());
+        assertEquals("6AM", newObservation.fullMoonTime(0));
         assertEquals("6AM", newObservation.identifyTime());
     }
 
@@ -246,6 +271,7 @@ class ObservationTest {
 
         assertEquals("Waning Gibbous", newObservation.getMoonPhase());
         assertEquals(180, newObservation.getAngleFromEast());
+        assertEquals("9PM", newObservation.waningGibbousTime(180));
         assertEquals("9PM", newObservation.identifyTime());
     }
 
@@ -255,6 +281,7 @@ class ObservationTest {
 
         assertEquals("Waning Gibbous", newObservation.getMoonPhase());
         assertEquals(135, newObservation.getAngleFromEast());
+        assertEquals("Midnight", newObservation.waningGibbousTime(135));
         assertEquals("Midnight", newObservation.identifyTime());
     }
 
@@ -264,6 +291,7 @@ class ObservationTest {
 
         assertEquals("Waning Gibbous", newObservation.getMoonPhase());
         assertEquals(90, newObservation.getAngleFromEast());
+        assertEquals("3AM", newObservation.waningGibbousTime(90));
         assertEquals("3AM", newObservation.identifyTime());
     }
 
@@ -273,6 +301,7 @@ class ObservationTest {
 
         assertEquals("Waning Gibbous", newObservation.getMoonPhase());
         assertEquals(45, newObservation.getAngleFromEast());
+        assertEquals("6AM", newObservation.waningGibbousTime(45));
         assertEquals("6AM", newObservation.identifyTime());
     }
 
@@ -282,6 +311,7 @@ class ObservationTest {
 
         assertEquals("Waning Gibbous", newObservation.getMoonPhase());
         assertEquals(0, newObservation.getAngleFromEast());
+        assertEquals("9AM", newObservation.waningGibbousTime(0));
         assertEquals("9AM", newObservation.identifyTime());
     }
     // ThirdQuarter
@@ -291,6 +321,7 @@ class ObservationTest {
 
         assertEquals("Third Quarter", newObservation.getMoonPhase());
         assertEquals(0, newObservation.getAngleFromEast());
+        assertEquals("Noon", newObservation.thirdQuarterTime(0));
         assertEquals("Noon", newObservation.identifyTime());
     }
 
@@ -300,6 +331,7 @@ class ObservationTest {
 
         assertEquals("Third Quarter", newObservation.getMoonPhase());
         assertEquals(180, newObservation.getAngleFromEast());
+        assertEquals("Midnight", newObservation.thirdQuarterTime(180));
         assertEquals("Midnight", newObservation.identifyTime());
     }
 
@@ -309,6 +341,7 @@ class ObservationTest {
 
         assertEquals("Third Quarter", newObservation.getMoonPhase());
         assertEquals(135, newObservation.getAngleFromEast());
+        assertEquals("3AM", newObservation.thirdQuarterTime(135));
         assertEquals("3AM", newObservation.identifyTime());
     }
 
@@ -318,7 +351,8 @@ class ObservationTest {
 
         assertEquals("Third Quarter", newObservation.getMoonPhase());
         assertEquals(90, newObservation.getAngleFromEast());
-        assertEquals("Six", newObservation.identifyTime());
+        assertEquals("6AM", newObservation.thirdQuarterTime(90));
+        assertEquals("6AM", newObservation.identifyTime());
     }
 
     @Test
@@ -327,6 +361,7 @@ class ObservationTest {
 
         assertEquals("Third Quarter", newObservation.getMoonPhase());
         assertEquals(45, newObservation.getAngleFromEast());
+        assertEquals("9AM", newObservation.thirdQuarterTime(45));
         assertEquals("9AM", newObservation.identifyTime());
     }
     // WaningCrescent
@@ -336,6 +371,7 @@ class ObservationTest {
 
         assertEquals("Waning Crescent", newObservation.getMoonPhase());
         assertEquals(45, newObservation.getAngleFromEast());
+        assertEquals("Noon", newObservation.waningCrescentTime(45));
         assertEquals("Noon", newObservation.identifyTime());
     }
 
@@ -345,6 +381,7 @@ class ObservationTest {
 
         assertEquals("Waning Crescent", newObservation.getMoonPhase());
         assertEquals(0, newObservation.getAngleFromEast());
+        assertEquals("3PM", newObservation.waningCrescentTime(0));
         assertEquals("3PM", newObservation.identifyTime());
     }
 
@@ -355,6 +392,7 @@ class ObservationTest {
 
         assertEquals("Waning Crescent", newObservation.getMoonPhase());
         assertEquals(180, newObservation.getAngleFromEast());
+        assertEquals("3AM", newObservation.waningCrescentTime(180));
         assertEquals("3AM", newObservation.identifyTime());
     }
 
@@ -364,6 +402,7 @@ class ObservationTest {
 
         assertEquals("Waning Crescent", newObservation.getMoonPhase());
         assertEquals(135, newObservation.getAngleFromEast());
+        assertEquals("6AM", newObservation.waningCrescentTime(135));
         assertEquals("6AM", newObservation.identifyTime());
     }
 
@@ -373,6 +412,7 @@ class ObservationTest {
 
         assertEquals("Waning Crescent", newObservation.getMoonPhase());
         assertEquals(90, newObservation.getAngleFromEast());
+        assertEquals("9AM", newObservation.waningCrescentTime(90));
         assertEquals("9AM", newObservation.identifyTime());
     }
     //
