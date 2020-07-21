@@ -18,7 +18,7 @@ any user how to use the moon, when it is visible, to determine the approximate t
 
 ### User Stories
 
-As a user, I want to be able to add an observation to a list of past observations
+As a user, I want to be able to add an observation to a list of observations
 As a user, I want to see the data from past observations
 As a user, I want to see a summary of my past observations categorized by moon phase
 As a user, I want to select observations to delete 
