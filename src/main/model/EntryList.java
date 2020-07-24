@@ -5,9 +5,7 @@ import java.util.List;
 
 // Represents a list of observations of the moon
 public class EntryList {
-    protected int index;
-
-    private final List<Entry> entries;
+    protected final List<Entry> entries;
 
     // EFFECTS: entries is empty
     public EntryList() {

@@ -22,10 +22,8 @@ public class MoonTime {
             return "Noon";
         } else if (angleFromEast == 135) {
             return "3PM";
-        } else if (angleFromEast == 180) {
+        } else  {
             return "6PM";
-        } else {
-            return null;
         }
     }
 
@@ -41,10 +39,8 @@ public class MoonTime {
             return "3PM";
         } else if (angleFromEast == 135) {
             return "6PM";
-        } else if (angleFromEast == 180) {
-            return "9PM";
         } else {
-            return null;
+            return "9PM";
         }
     }
 
@@ -60,10 +56,8 @@ public class MoonTime {
             return "6PM";
         } else if (angleFromEast == 135) {
             return "9PM";
-        } else if (angleFromEast == 180) {
-            return "Midnight";
         } else {
-            return null;
+            return "Midnight";
         }
     }
 
@@ -79,10 +73,8 @@ public class MoonTime {
             return "9PM";
         } else if (angleFromEast == 135) {
             return "Midnight";
-        } else if (angleFromEast == 180) {
+        } else  {
             return "3AM";
-        } else {
-            return null;
         }
     }
 
@@ -98,10 +90,8 @@ public class MoonTime {
             return "Midnight";
         } else if (angleFromEast == 135) {
             return "3AM";
-        } else if (angleFromEast == 180) {
-            return "6AM";
         } else {
-            return null;
+            return "6AM";
         }
     }
 
@@ -117,10 +107,8 @@ public class MoonTime {
             return "3AM";
         } else if (angleFromEast == 135) {
             return "6AM";
-        } else if (angleFromEast == 180) {
-            return "9AM";
         } else {
-            return null;
+            return "9AM";
         }
     }
 
@@ -136,10 +124,8 @@ public class MoonTime {
             return "6AM";
         } else if (angleFromEast == 135) {
             return "9AM";
-        } else if (angleFromEast == 180) {
-            return "Noon";
         } else {
-            return null;
+            return "Noon";
         }
     }
 
@@ -155,10 +141,8 @@ public class MoonTime {
             return "9AM";
         } else if (angleFromEast == 135) {
             return "Noon";
-        } else if (angleFromEast == 180) {
-            return "3PM";
         } else {
-            return null;
+            return "3PM";
         }
     }
 
@@ -174,21 +158,13 @@ public class MoonTime {
         return angleFromEast;
     }
 
-    // MODIFIES: this
-    // EFFECTS: returns true if it is a valid moon phase, false otherwise
-    private boolean isMoonPhase() {
-        return false; //stub
-    }
-
     // REQUIRES: moonPhase is one of "New Moon", "Waxing Crescent", "First Quarter", "Waxing Gibbous", "Full Moon",
     //           "Waning Gibbous",
     //           angleFromEast is one of 0, 45, 90, 135, 180
     // MODIFIES: this
     // EFFECTS: return approximate time based on moonPhase and angleFromEast
-    public String identifyTime(String moonPhase, double angleFromEast) throws Exception.NotMoonPhase() {
-        if (!notMoonPhase) {
-            throw new NotMoonPhase();
-        } else if (moonPhase.equals("New Moon")) {
+    public String identifyTime(String moonPhase, double angleFromEast) {
+        if (moonPhase.equals("New Moon")) {
             return newMoonTime(angleFromEast);
         } else if (moonPhase.equals("Waxing Crescent")) {
             return waxingCrescentTime(angleFromEast);
@@ -202,7 +178,7 @@ public class MoonTime {
             return waningGibbousTime(angleFromEast);
         } else if (moonPhase.equals("Third Quarter")) {
             return thirdQuarterTime(angleFromEast);
-        } else if (moonPhase.equals("Waning Crescent")) {
+        } else {
             return waningCrescentTime(angleFromEast);
         }
     }

@@ -5,8 +5,7 @@ public class Entry extends MoonTime {
 
 
     // REQUIRES: angle to be 0, 45, 90, 135, or 180 degrees and moon to be in visible sky
-    // EFFECTS: creates an entry
-
+    // EFFECTS: creates an entry to be put into a list
     public Entry(String moonPhase, double angleFromEast) {
         super(moonPhase, angleFromEast);
         this.time = super.identifyTime(moonPhase, angleFromEast);
