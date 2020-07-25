@@ -1,0 +1,68 @@
+Index: README.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># My Personal Project\r\n\r\n## Moondial\r\n\r\nThe application, *Moondial* will attempt to teach the user to determine the approximate time, based on the Moon's \r\nposition in the sky. The precision will be determined by the precision of the angle specified Time approximation will \r\nonly be possible when the moon is visible in the user's sky view. The application will use data inputted by the user such as:\r\n- current moon phase\r\n- position in the sky \r\n- approximate angle to the horizon\r\n- user location in relation to hemisphere \r\n\r\nConsequently, *Moondial* serves to fulfill my overdue promise to a kid, who is an astronomy fanatic and will teach \r\nthem how to use the moon to determine what time it is. Previously, I drew diagrams and explanations on paper to which \r\nthey could not decipher without assistance. With the current situation of COVID-19, I doubt that I will be able to \r\nteach them in person. Hopefully this application will be simple enough for a child to use and will successfully teach \r\nany user how to use the moon, when it is visible, to determine the approximate time.  \r\n\r\n### User Stories\r\n\r\nAs a user, I want to be able to add an observation to a list of observations\r\nAs a user, I want to see the data from past observations\r\nAs a user, I want to see a summary of my past observations categorized by moon phase\r\nAs a user, I want to select observations to delete \r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- README.md	(revision 80a8ebd9ef95a471571f0d7138a877199c429e1d)
++++ README.md	(date 1595649551833)
+@@ -8,7 +8,7 @@
+ - current moon phase
+ - position in the sky 
+ - approximate angle to the horizon
+-- user location in relation to hemisphere 
++- not account for daylight savings and only be applicable in the Northern Hemisphere
+ 
+ Consequently, *Moondial* serves to fulfill my overdue promise to a kid, who is an astronomy fanatic and will teach 
+ them how to use the moon to determine what time it is. Previously, I drew diagrams and explanations on paper to which 
+Index: src/main/model/EntryList.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\n// Represents a list of observations of the moon\r\npublic class EntryList {\r\n    private final List<Entry> entries;\r\n    private int newM = 0;\r\n    private int waxCr = 0;\r\n    private int firstQ = 0;\r\n    private int waxGib = 0;\r\n    private int fullM = 0;\r\n    private int wanGib = 0;\r\n    private int thirdQ = 0;\r\n    private int wanCr = 0;\r\n\r\n    // EFFECTS: entries is empty\r\n    public EntryList() {\r\n        super();\r\n        entries = new ArrayList<>();\r\n    }\r\n\r\n    // REQUIRES: observation is in list\r\n    // MODIFIES: this\r\n    // EFFECTS: returns specified entry\r\n    public Entry getEntry(Entry e) {\r\n        return entries.get(entries.indexOf(e));\r\n    }\r\n\r\n\r\n    // MODIFIES: this\r\n    // EFFECTS: adds an entry to the end of the list\r\n    public void addObservation(Entry e) {\r\n        entries.add(e);\r\n    }\r\n\r\n    // REQUIRES: observation is in list\r\n    // MODIFIES: this\r\n    // EFFECTS: removes first occurrence of entry from list\r\n    public void removeObservation(Entry e) {\r\n        entries.remove(e);\r\n    }\r\n\r\n    // EFFECTS: returns number of observations in list\r\n    public int size() {\r\n        return entries.size();\r\n    }\r\n\r\n    // EFFECTS: returns the amount of each type of phase in a list ordered by new Moon,\r\n    // waxing Crescent, first quarter, waxing gibbous, full moon, waning gibbous, third quarter, waning crescent\r\n    public List<Integer> sortAndCountListByPhase() {\r\n        List<Integer> sortedByPhase = new ArrayList<>();\r\n        for (int i = 0; i < 8; i++) {\r\n            sortedByPhase.add(i, 0);\r\n        }\r\n        for (Entry item : entries) {\r\n            if (item.getMoonPhase().equals(\"New Moon\")) {\r\n                sortedByPhase.set(0, newM = newM + 1);\r\n            } else if (item.getMoonPhase().equals(\"Waxing Crescent\")) {\r\n                sortedByPhase.set(1, waxCr = waxCr + 1);\r\n            } else if (item.getMoonPhase().equals(\"First Quarter\")) {\r\n                sortedByPhase.set(2, firstQ = firstQ + 1);\r\n            } else if (item.getMoonPhase().equals(\"Waxing Gibbous\")) {\r\n                sortedByPhase.set(3, waxGib = waxGib + 1);\r\n            } else if (item.getMoonPhase().equals(\"Full Moon\")) {\r\n                sortedByPhase.set(4, fullM = fullM + 1);\r\n            } else if (item.getMoonPhase().equals(\"Waning Gibbous\")) {\r\n                sortedByPhase.set(5, wanGib = wanGib + 1);\r\n            } else if (item.getMoonPhase().equals(\"Third Quarter\")) {\r\n                sortedByPhase.set(6, thirdQ = thirdQ + 1);\r\n            } else {\r\n                sortedByPhase.set(7, wanCr = wanCr + 1);\r\n            }\r\n        }\r\n        return sortedByPhase;\r\n    }\r\n}\r\n\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/model/EntryList.java	(revision 80a8ebd9ef95a471571f0d7138a877199c429e1d)
++++ src/main/model/EntryList.java	(date 1595651545119)
+@@ -6,21 +6,15 @@
+ // Represents a list of observations of the moon
+ public class EntryList {
+     private final List<Entry> entries;
+-    private int newM = 0;
+-    private int waxCr = 0;
+-    private int firstQ = 0;
+-    private int waxGib = 0;
+-    private int fullM = 0;
+-    private int wanGib = 0;
+-    private int thirdQ = 0;
+-    private int wanCr = 0;
++
+ 
+     // EFFECTS: entries is empty
+     public EntryList() {
+-        super();
+         entries = new ArrayList<>();
+     }
+ 
++    // EFFECTS: public Integ= new ArrayList<>();
++
+     // REQUIRES: observation is in list
+     // MODIFIES: this
+     // EFFECTS: returns specified entry
+@@ -51,6 +45,15 @@
+     // waxing Crescent, first quarter, waxing gibbous, full moon, waning gibbous, third quarter, waning crescent
+     public List<Integer> sortAndCountListByPhase() {
+         List<Integer> sortedByPhase = new ArrayList<>();
++        int newM = 0;
++        int waxCr = 0;
++        int firstQ = 0;
++        int waxGib = 0;
++        int fullM = 0;
++        int wanGib = 0;
++        int thirdQ = 0;
++        int wanCr = 0;
++
+         for (int i = 0; i < 8; i++) {
+             sortedByPhase.add(i, 0);
+         }

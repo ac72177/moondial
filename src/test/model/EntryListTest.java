@@ -69,124 +69,132 @@ public class EntryListTest {
     void testSortAndCountListByPhaseOnlyNewMoon() {
         newEntryList.addObservation(newMoonEntryOne);
         newEntryList.addObservation(newMoonEntryTwo);
+        newEntryList.sortAndCountListByPhase();
 
-        assertEquals(2, newEntryList.sortAndCountListByPhase().get(0));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(1));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(2));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(3));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(4));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(5));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(6));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(7));
-        assertEquals(8, newEntryList.sortAndCountListByPhase().size());
+        assertEquals(2, newEntryList.getIndexValue(0));
+        assertEquals(0, newEntryList.getIndexValue(1));
+        assertEquals(0, newEntryList.getIndexValue(2));
+        assertEquals(0, newEntryList.getIndexValue(3));
+        assertEquals(0, newEntryList.getIndexValue(4));
+        assertEquals(0, newEntryList.getIndexValue(5));
+        assertEquals(0, newEntryList.getIndexValue(6));
+        assertEquals(0, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
     }
 
     @Test
     void testSortAndCountListByPhaseOnlyWaxingCrescent() {
         newEntryList.addObservation(waxingCrescentOne);
         newEntryList.addObservation(waxingCrescentTwo);
+        newEntryList.sortAndCountListByPhase();
 
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(0));
-        assertEquals(2, newEntryList.sortAndCountListByPhase().get(1));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(2));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(3));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(4));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(5));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(6));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(7));
-        assertEquals(8, newEntryList.sortAndCountListByPhase().size());
+        assertEquals(0, newEntryList.getIndexValue(0));
+        assertEquals(2, newEntryList.getIndexValue(1));
+        assertEquals(0, newEntryList.getIndexValue(2));
+        assertEquals(0, newEntryList.getIndexValue(3));
+        assertEquals(0, newEntryList.getIndexValue(4));
+        assertEquals(0, newEntryList.getIndexValue(5));
+        assertEquals(0, newEntryList.getIndexValue(6));
+        assertEquals(0, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
     }
 
     @Test
     void testSortAndCountListByPhaseOnlyFirstQuarter() {
         newEntryList.addObservation(firstQuarterSingleEntry);
+        newEntryList.sortAndCountListByPhase();
 
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(0));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(1));
-        assertEquals(1, newEntryList.sortAndCountListByPhase().get(2));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(3));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(4));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(5));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(6));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(7));
-        assertEquals(8, newEntryList.sortAndCountListByPhase().size());
+        assertEquals(0, newEntryList.getIndexValue(0));
+        assertEquals(0, newEntryList.getIndexValue(1));
+        assertEquals(1, newEntryList.getIndexValue(2));
+        assertEquals(0, newEntryList.getIndexValue(3));
+        assertEquals(0, newEntryList.getIndexValue(4));
+        assertEquals(0, newEntryList.getIndexValue(5));
+        assertEquals(0, newEntryList.getIndexValue(6));
+        assertEquals(0, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
     }
 
     @Test
     void testSortAndCountListByPhaseOnlyWaxingGibbous() {
         newEntryList.addObservation(waxingGibbousSingleEntry);
+        newEntryList.sortAndCountListByPhase();
 
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(0));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(1));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(2));
-        assertEquals(1, newEntryList.sortAndCountListByPhase().get(3));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(4));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(5));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(6));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(7));
-        assertEquals(8, newEntryList.sortAndCountListByPhase().size());
+        assertEquals(0, newEntryList.getIndexValue(0));
+        assertEquals(0, newEntryList.getIndexValue(1));
+        assertEquals(0, newEntryList.getIndexValue(2));
+        assertEquals(1, newEntryList.getIndexValue(3));
+        assertEquals(0, newEntryList.getIndexValue(4));
+        assertEquals(0, newEntryList.getIndexValue(5));
+        assertEquals(0, newEntryList.getIndexValue(6));
+        assertEquals(0, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
     }
 
     @Test
     void testSortAndCountListByPhaseOnlyFullMoon() {
         newEntryList.addObservation(fullMoonEntryOne);
         newEntryList.addObservation(fullMoonEntryTwo);
+        newEntryList.sortAndCountListByPhase();
 
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(0));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(1));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(2));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(3));
-        assertEquals(2, newEntryList.sortAndCountListByPhase().get(4));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(5));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(6));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(7));
-        assertEquals(8, newEntryList.sortAndCountListByPhase().size());
+        assertEquals(0, newEntryList.getIndexValue(0));
+        assertEquals(0, newEntryList.getIndexValue(1));
+        assertEquals(0, newEntryList.getIndexValue(2));
+        assertEquals(0, newEntryList.getIndexValue(3));
+        assertEquals(2, newEntryList.getIndexValue(4));
+        assertEquals(0, newEntryList.getIndexValue(5));
+        assertEquals(0, newEntryList.getIndexValue(6));
+        assertEquals(0, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
     }
 
     @Test
     void testSortAndCountListByPhaseOnlyWaningGibbous() {
         newEntryList.addObservation(waningGibbousEntryOne);
         newEntryList.addObservation(waningGibbousEntryTwo);
+        newEntryList.sortAndCountListByPhase();
 
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(0));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(1));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(2));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(3));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(4));
-        assertEquals(2, newEntryList.sortAndCountListByPhase().get(5));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(6));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(7));
-        assertEquals(8, newEntryList.sortAndCountListByPhase().size());
+        assertEquals(0, newEntryList.getIndexValue(0));
+        assertEquals(0, newEntryList.getIndexValue(1));
+        assertEquals(0, newEntryList.getIndexValue(2));
+        assertEquals(0, newEntryList.getIndexValue(3));
+        assertEquals(0, newEntryList.getIndexValue(4));
+        assertEquals(2, newEntryList.getIndexValue(5));
+        assertEquals(0, newEntryList.getIndexValue(6));
+        assertEquals(0, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
     }
 
     @Test
     void testSortAndCountListByPhaseOnlyThirdQuarter() {
         newEntryList.addObservation(thirdQuarterSingleEntry);
+        newEntryList.sortAndCountListByPhase();
 
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(0));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(1));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(2));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(3));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(4));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(5));
-        assertEquals(1, newEntryList.sortAndCountListByPhase().get(6));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(7));
-        assertEquals(8, newEntryList.sortAndCountListByPhase().size());
+        assertEquals(0, newEntryList.getIndexValue(0));
+        assertEquals(0, newEntryList.getIndexValue(1));
+        assertEquals(0, newEntryList.getIndexValue(2));
+        assertEquals(0, newEntryList.getIndexValue(3));
+        assertEquals(0, newEntryList.getIndexValue(4));
+        assertEquals(0, newEntryList.getIndexValue(5));
+        assertEquals(1, newEntryList.getIndexValue(6));
+        assertEquals(0, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
     }
 
     @Test
     void testSortAndCountListByPhaseOnlyWaningCrescent() {
         newEntryList.addObservation(waningCrescentSingleEntry);
+        newEntryList.sortAndCountListByPhase();
 
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(0));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(1));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(2));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(3));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(4));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(5));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(6));
-        assertEquals(1, newEntryList.sortAndCountListByPhase().get(7));
-        assertEquals(8, newEntryList.sortAndCountListByPhase().size());
+        assertEquals(0, newEntryList.getIndexValue(0));
+        assertEquals(0, newEntryList.getIndexValue(1));
+        assertEquals(0, newEntryList.getIndexValue(2));
+        assertEquals(0, newEntryList.getIndexValue(3));
+        assertEquals(0, newEntryList.getIndexValue(4));
+        assertEquals(0, newEntryList.getIndexValue(5));
+        assertEquals(0, newEntryList.getIndexValue(6));
+        assertEquals(1, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
     }
 
     @Test
@@ -196,16 +204,17 @@ public class EntryListTest {
         newEntryList.addObservation(newMoonEntryOne);
         newEntryList.addObservation(fullMoonEntryTwo);
         newEntryList.addObservation(newMoonEntryTwo);
+        newEntryList.sortAndCountListByPhase();
 
-        assertEquals(2, newEntryList.sortAndCountListByPhase().get(0));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(1));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(2));
-        assertEquals(1, newEntryList.sortAndCountListByPhase().get(3));
-        assertEquals(1, newEntryList.sortAndCountListByPhase().get(4));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(5));
-        assertEquals(0, newEntryList.sortAndCountListByPhase().get(6));
-        assertEquals(1, newEntryList.sortAndCountListByPhase().get(7));
-        assertEquals(8, newEntryList.sortAndCountListByPhase().size());
+        assertEquals(2, newEntryList.getIndexValue(0));
+        assertEquals(0, newEntryList.getIndexValue(1));
+        assertEquals(0, newEntryList.getIndexValue(2));
+        assertEquals(1, newEntryList.getIndexValue(3));
+        assertEquals(1, newEntryList.getIndexValue(4));
+        assertEquals(0, newEntryList.getIndexValue(5));
+        assertEquals(0, newEntryList.getIndexValue(6));
+        assertEquals(1, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
     }
 
     @Test
@@ -221,15 +230,16 @@ public class EntryListTest {
         newEntryList.addObservation(firstQuarterSingleEntry);
         newEntryList.addObservation(waningGibbousEntryOne);
         newEntryList.addObservation(thirdQuarterSingleEntry);
+        newEntryList.sortAndCountListByPhase();
 
-        assertEquals(2, newEntryList.sortAndCountListByPhase().get(0));
-        assertEquals(1, newEntryList.sortAndCountListByPhase().get(1));
-        assertEquals(1, newEntryList.sortAndCountListByPhase().get(2));
-        assertEquals(1, newEntryList.sortAndCountListByPhase().get(3));
-        assertEquals(1, newEntryList.sortAndCountListByPhase().get(4));
-        assertEquals(1, newEntryList.sortAndCountListByPhase().get(5));
-        assertEquals(3, newEntryList.sortAndCountListByPhase().get(6));
-        assertEquals(1, newEntryList.sortAndCountListByPhase().get(7));
-        assertEquals(8, newEntryList.sortAndCountListByPhase().size());
+        assertEquals(2, newEntryList.getIndexValue(0));
+        assertEquals(1, newEntryList.getIndexValue(1));
+        assertEquals(1, newEntryList.getIndexValue(2));
+        assertEquals(1, newEntryList.getIndexValue(3));
+        assertEquals(1, newEntryList.getIndexValue(4));
+        assertEquals(1, newEntryList.getIndexValue(5));
+        assertEquals(3, newEntryList.getIndexValue(6));
+        assertEquals(1, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
     }
 }

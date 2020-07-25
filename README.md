@@ -8,7 +8,7 @@ only be possible when the moon is visible in the user's sky view. The applicatio
 - current moon phase
 - position in the sky 
 - approximate angle to the horizon
-- user location in relation to hemisphere 
+- not account for daylight savings and only be applicable in the Northern Hemisphere
 
 Consequently, *Moondial* serves to fulfill my overdue promise to a kid, who is an astronomy fanatic and will teach 
 them how to use the moon to determine what time it is. Previously, I drew diagrams and explanations on paper to which 
