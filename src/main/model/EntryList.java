@@ -6,10 +6,18 @@ import java.util.List;
 // Represents a list of observations of the moon
 public class EntryList {
     private final List<Entry> entries;
-    private List<Integer> sortedByPhase;
+    private int newM = 0;
+    private int waxCr = 0;
+    private int firstQ = 0;
+    private int waxGib = 0;
+    private int fullM = 0;
+    private int wanGib = 0;
+    private int thirdQ = 0;
+    private int wanCr = 0;
 
     // EFFECTS: entries is empty
     public EntryList() {
+        super();
         entries = new ArrayList<>();
     }
 
@@ -39,60 +47,36 @@ public class EntryList {
         return entries.size();
     }
 
-    // EFFECTS:
-
-
+    // EFFECTS: returns the amount of each type of phase in a list ordered by new Moon,
+    // waxing Crescent, first quarter, waxing gibbous, full moon, waning gibbous, third quarter, waning crescent
     public List<Integer> sortAndCountListByPhase() {
-        int newM = 0;
-        int waxCr = 0;
-        int firstQ = 0;
-        int waxGib = 0;
-        int fullM = 0;
-        int wanGib = 0;
-        int thirdQ = 0;
-        int wanCr = 0;
-        sortedByPhase = new ArrayList<>();
-
+        List<Integer> sortedByPhase = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
             sortedByPhase.add(i, 0);
         }
         for (Entry item : entries) {
             if (item.getMoonPhase().equals("New Moon")) {
-                newM = newM + 1;
-                sortedByPhase.remove(0);
-                sortedByPhase.add(0, newM);
+                sortedByPhase.set(0, newM = newM + 1);
             } else if (item.getMoonPhase().equals("Waxing Crescent")) {
-                waxCr = waxCr + 1;
-                sortedByPhase.remove(1);
-                sortedByPhase.add(1, waxCr);
+                sortedByPhase.set(1, waxCr = waxCr + 1);
             } else if (item.getMoonPhase().equals("First Quarter")) {
-                firstQ = firstQ + 1;
-                sortedByPhase.remove(2);
-                sortedByPhase.add(2, firstQ);
+                sortedByPhase.set(2, firstQ = firstQ + 1);
             } else if (item.getMoonPhase().equals("Waxing Gibbous")) {
-                waxGib = waxGib + 1;
-                sortedByPhase.remove(3);
-                sortedByPhase.add(3, waxGib);
+                sortedByPhase.set(3, waxGib = waxGib + 1);
             } else if (item.getMoonPhase().equals("Full Moon")) {
-                fullM = fullM + 1;
-                sortedByPhase.remove(4);
-                sortedByPhase.add(4, fullM);
+                sortedByPhase.set(4, fullM = fullM + 1);
             } else if (item.getMoonPhase().equals("Waning Gibbous")) {
-                wanGib = wanGib + 1;
-                sortedByPhase.remove(5);
-                sortedByPhase.add(5, wanGib);
+                sortedByPhase.set(5, wanGib = wanGib + 1);
             } else if (item.getMoonPhase().equals("Third Quarter")) {
-                thirdQ = thirdQ + 1;
-                sortedByPhase.remove(6);
-                sortedByPhase.add(6, thirdQ);
+                sortedByPhase.set(6, thirdQ = thirdQ + 1);
             } else {
-                wanCr = wanCr + 1;
-                sortedByPhase.remove(7);
-                sortedByPhase.add(7, wanCr);
+                sortedByPhase.set(7, wanCr = wanCr + 1);
             }
         }
         return sortedByPhase;
     }
 }
+
+
 
 
