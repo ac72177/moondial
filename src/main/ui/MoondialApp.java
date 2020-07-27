@@ -40,7 +40,7 @@ public class MoondialApp {
             }
         }
 
-        System.out.println("\nGoodbye!");
+        System.out.println("\nGoodbye! Thank you for using Moondial.");
     }
 
     // MODIFIES: this
@@ -132,10 +132,8 @@ public class MoondialApp {
             return "Waning Gibbous";
         } else if (s.equals("thirdq")) {
             return "Third Quarter";
-        } else if (s.equals("wancr")) {
-            return "Waning Crescent";
         } else {
-            return null;
+            return "Waning Crescent";
         }
     }
 
@@ -168,10 +166,8 @@ public class MoondialApp {
             return 90;
         } else if (a.equals("135")) {
             return 135;
-        } else if (a.equals("180")) {
-            return 180;
         } else {
-            return 156;
+            return 180;
         }
     }
 
@@ -185,7 +181,6 @@ public class MoondialApp {
             System.err.println("This is out of the bounds of the list.");
         }
         entryList.sortAndCountListByPhase();
-        printEntryList();
     }
 
     // MODIFIES: this
@@ -235,14 +230,13 @@ public class MoondialApp {
     private void selectEntryToPrint() {
         String selectionEntry = ""; // force entry into loop
 
-
         while (!(selectionEntry.equals("0") || (selectionEntry.equals("1")) || (selectionEntry.equals("2"))
                 || (selectionEntry.equals("3")) || (selectionEntry.equals("4")))) {
-            System.out.println("0 for 1st entry");
-            System.out.println("1 for 2nd entry");
-            System.out.println("2 for 3rd entry");
-            System.out.println("3 for 4th entry");
-            System.out.println("4 for 5th entry");
+            System.out.println("0 for Entry 0");
+            System.out.println("1 for Entry 1");
+            System.out.println("2 for Entry 2");
+            System.out.println("3 for Entry 3");
+            System.out.println("4 for Entry 4");
             selectionEntry = input.next();
         }
         if (selectionEntry.equals("0") && entryList.size() >= 1) {
