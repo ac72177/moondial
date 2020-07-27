@@ -1,16 +1,19 @@
 package model;
 
+import exceptions.NotAMoonPhase;
+import exceptions.NotAValidAngle;
+
 public class Entry extends MoonTime {
     public String time;
 
 
-    // REQUIRES: angle to be 0, 45, 90, 135, or 180 degrees and moon to be in visible sky
     // EFFECTS: creates an entry to be put into a list
-    public Entry(String moonPhase, double angleFromEast) {
+    public Entry(String moonPhase, int angleFromEast) throws NotAMoonPhase, NotAValidAngle {
         super(moonPhase, angleFromEast);
         this.time = super.identifyTime(moonPhase, angleFromEast);
     }
 
+    // EFFECTS: returns the time of the entry
     public String getTime() {
         return this.time;
     }

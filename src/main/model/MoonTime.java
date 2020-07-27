@@ -1,20 +1,46 @@
 package model;
 
-public class MoonTime {
+import exceptions.NotAMoonPhase;
+import exceptions.NotAValidAngle;
+
+import java.util.List;
+
+public class MoonTime extends ValidAngle {
     private final String moonPhase;
-    private final double angleFromEast;
+    private final int angleFromEast;
 
     // EFFECTS: creates an observation of moonPhase and angle
-    public MoonTime(String moonPhase, double angleFromEast) {
-        this.moonPhase = moonPhase;
-        this.angleFromEast = angleFromEast;
+    public MoonTime(String moonPhase, int angleFromEast) throws NotAMoonPhase, NotAValidAngle {
+        if (!(moonPhase.equals("New Moon") || moonPhase.equals("Waxing Crescent") || moonPhase.equals("First Quarter")
+                || moonPhase.equals("Waxing Gibbous") || moonPhase.equals("Full Moon")
+                || moonPhase.equals("Waning Gibbous") || moonPhase.equals("Third Quarter")
+                || moonPhase.equals("Waning Crescent"))) {
+            throw new NotAMoonPhase();
+        } else if (!containsValidAngle(angleFromEast)) {
+            throw new NotAValidAngle();
+        } else {
+            this.moonPhase = moonPhase;
+            this.angleFromEast = angleFromEast;
+        }
+    }
+
+    // EFFECTS: returns true if angle is 0, 45, 90, 135, or 180, false otherwise
+    private boolean containsValidAngle(int i) {
+        List<Integer> validAngles = null;
+        validAngles.add(0, 0);
+        validAngles.add(1, 45);
+        validAngles.add(2, 90);
+        validAngles.add(3, 135);
+        validAngles.add(4, 180);
+
+        return validAngles.contains(i);
     }
 
 
     // REQUIRES: angleFromEast to be 0, 45, 90, 135, 180
     // MODIFIES: this
     // EFFECTS: returns time of New Moon indicated by angle
-    public String newMoonTime(double angleFromEast) {
+    public String newMoonTime(int angleFromEast) {
         if (angleFromEast == 0) {
             return "6AM";
         } else if (angleFromEast == 45) {
@@ -23,7 +49,7 @@ public class MoonTime {
             return "Noon";
         } else if (angleFromEast == 135) {
             return "3PM";
-        } else  {
+        } else {
             return "6PM";
         }
     }
@@ -31,7 +57,7 @@ public class MoonTime {
     // REQUIRES: angleFromEast to be 0, 45, 90, 135, 180
     // MODIFIES: this
     // EFFECTS: returns time of Waxing Crescent indicated by angle
-    public String waxingCrescentTime(double angleFromEast) {
+    public String waxingCrescentTime(int angleFromEast) {
         if (angleFromEast == 0) {
             return "9AM";
         } else if (angleFromEast == 45) {
@@ -48,7 +74,7 @@ public class MoonTime {
     // REQUIRES: angleFromEast to be 0, 45, 90, 135, 180
     // MODIFIES: this
     // EFFECTS: returns time of First Quarter indicated by angle
-    public String firstQuarterTime(double angleFromEast) {
+    public String firstQuarterTime(int angleFromEast) {
         if (angleFromEast == 0) {
             return "Noon";
         } else if (angleFromEast == 45) {
@@ -65,7 +91,7 @@ public class MoonTime {
     // REQUIRES: angleFromEast to be 0, 45, 90, 135, 180
     // MODIFIES: this
     // EFFECTS: returns time of Waxing Gibbous indicated by angle
-    public String waxingGibbousTime(double angleFromEast) {
+    public String waxingGibbousTime(int angleFromEast) {
         if (angleFromEast == 0) {
             return "3PM";
         } else if (angleFromEast == 45) {
@@ -74,7 +100,7 @@ public class MoonTime {
             return "9PM";
         } else if (angleFromEast == 135) {
             return "Midnight";
-        } else  {
+        } else {
             return "3AM";
         }
     }
@@ -82,7 +108,7 @@ public class MoonTime {
     // REQUIRES: angleFromEast to be 0, 45, 90, 135, 180
     // MODIFIES: this
     // EFFECTS: returns time of Full Moon indicated by angle
-    public String fullMoonTime(double angleFromEast) {
+    public String fullMoonTime(int angleFromEast) {
         if (angleFromEast == 0) {
             return "6PM";
         } else if (angleFromEast == 45) {
@@ -99,7 +125,7 @@ public class MoonTime {
     // REQUIRES: angleFromEast to be 0, 45, 90, 135, 180
     // MODIFIES: this
     // EFFECTS: returns time of Waning Gibbous indicated by angle
-    public String waningGibbousTime(double angleFromEast) {
+    public String waningGibbousTime(int angleFromEast) {
         if (angleFromEast == 0) {
             return "9PM";
         } else if (angleFromEast == 45) {
@@ -116,7 +142,7 @@ public class MoonTime {
     // REQUIRES: angleFromEast to be 0, 45, 90, 135, 180
     // MODIFIES: this
     // EFFECTS: returns time of Third Quarter indicated by angle
-    public String thirdQuarterTime(double angleFromEast) {
+    public String thirdQuarterTime(int angleFromEast) {
         if (angleFromEast == 0) {
             return "Midnight";
         } else if (angleFromEast == 45) {
@@ -133,7 +159,7 @@ public class MoonTime {
     // REQUIRES: angleFromEast to be 0, 45, 90, 135, 180
     // MODIFIES: this
     // EFFECTS: returns time of Waning Crescent indicated by angle
-    public String waningCrescentTime(double angleFromEast) {
+    public String waningCrescentTime(int angleFromEast) {
         if (angleFromEast == 0) {
             return "3AM";
         } else if (angleFromEast == 45) {
@@ -164,7 +190,7 @@ public class MoonTime {
     //           angleFromEast is one of 0, 45, 90, 135, 180
     // MODIFIES: this
     // EFFECTS: return approximate time based on moonPhase and angleFromEast
-    public String identifyTime(String moonPhase, double angleFromEast) {
+    public String identifyTime(String moonPhase, int angleFromEast) {
         if (moonPhase.equals("New Moon")) {
             return newMoonTime(angleFromEast);
         } else if (moonPhase.equals("Waxing Crescent")) {

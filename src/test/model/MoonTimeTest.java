@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.NotAMoonPhase;
+import exceptions.NotAValidAngle;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

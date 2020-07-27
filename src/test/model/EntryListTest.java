@@ -58,7 +58,7 @@ public class EntryListTest {
         newEntryList.addObservation(firstQuarterSingleEntry);
         newEntryList.addObservation(thirdQuarterSingleEntry);
         newEntryList.addObservation(firstQuarterSingleEntry);
-        newEntryList.removeObservation(firstQuarterSingleEntry);
+        newEntryList.removeObservation(0);
 
         assertEquals(2, newEntryList.size());
         assertEquals(thirdQuarterSingleEntry, newEntryList.getEntryFromList(0));
@@ -122,6 +122,92 @@ public class EntryListTest {
         newEntryList.addObservation(waningCrescentSingleEntry);
         newEntryList.increment(waningCrescentSingleEntry);
         assertEquals(1, newEntryList.getIndexValue(7));
+    }
+
+    @Test
+    void testSortAndCountListByPhaseMoreThanOnceOnSameList() {
+        newEntryList.addObservation(newMoonEntryOne);
+        newEntryList.addObservation(newMoonEntryTwo);
+        newEntryList.sortAndCountListByPhase();
+
+        assertEquals(2, newEntryList.getIndexValue(0));
+        assertEquals(0, newEntryList.getIndexValue(1));
+        assertEquals(0, newEntryList.getIndexValue(2));
+        assertEquals(0, newEntryList.getIndexValue(3));
+        assertEquals(0, newEntryList.getIndexValue(4));
+        assertEquals(0, newEntryList.getIndexValue(5));
+        assertEquals(0, newEntryList.getIndexValue(6));
+        assertEquals(0, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
+
+        newEntryList.sortAndCountListByPhase();
+        assertEquals(2, newEntryList.getIndexValue(0));
+        assertEquals(0, newEntryList.getIndexValue(1));
+        assertEquals(0, newEntryList.getIndexValue(2));
+        assertEquals(0, newEntryList.getIndexValue(3));
+        assertEquals(0, newEntryList.getIndexValue(4));
+        assertEquals(0, newEntryList.getIndexValue(5));
+        assertEquals(0, newEntryList.getIndexValue(6));
+        assertEquals(0, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
+    }
+
+    @Test
+    void testSortAndCountListByPhaseMoreThanOnceOnSameListAfterRemovingOneOfSamePhase() {
+        newEntryList.addObservation(newMoonEntryOne);
+        newEntryList.addObservation(newMoonEntryTwo);
+        newEntryList.sortAndCountListByPhase();
+
+        assertEquals(2, newEntryList.getIndexValue(0));
+        assertEquals(0, newEntryList.getIndexValue(1));
+        assertEquals(0, newEntryList.getIndexValue(2));
+        assertEquals(0, newEntryList.getIndexValue(3));
+        assertEquals(0, newEntryList.getIndexValue(4));
+        assertEquals(0, newEntryList.getIndexValue(5));
+        assertEquals(0, newEntryList.getIndexValue(6));
+        assertEquals(0, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
+
+        newEntryList.removeObservation(0);
+        newEntryList.sortAndCountListByPhase();
+        assertEquals(1, newEntryList.getIndexValue(0));
+        assertEquals(0, newEntryList.getIndexValue(1));
+        assertEquals(0, newEntryList.getIndexValue(2));
+        assertEquals(0, newEntryList.getIndexValue(3));
+        assertEquals(0, newEntryList.getIndexValue(4));
+        assertEquals(0, newEntryList.getIndexValue(5));
+        assertEquals(0, newEntryList.getIndexValue(6));
+        assertEquals(0, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
+    }
+
+    @Test
+    void testSortAndCountListByPhaseMoreThanOnceOnSameListAfterRemovingOneOfDifferentPhase() {
+        newEntryList.addObservation(newMoonEntryOne);
+        newEntryList.addObservation(firstQuarterSingleEntry);
+        newEntryList.sortAndCountListByPhase();
+
+        assertEquals(1, newEntryList.getIndexValue(0));
+        assertEquals(0, newEntryList.getIndexValue(1));
+        assertEquals(1, newEntryList.getIndexValue(2));
+        assertEquals(0, newEntryList.getIndexValue(3));
+        assertEquals(0, newEntryList.getIndexValue(4));
+        assertEquals(0, newEntryList.getIndexValue(5));
+        assertEquals(0, newEntryList.getIndexValue(6));
+        assertEquals(0, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
+
+        newEntryList.removeObservation(0);
+        newEntryList.sortAndCountListByPhase();
+        assertEquals(0, newEntryList.getIndexValue(0));
+        assertEquals(0, newEntryList.getIndexValue(1));
+        assertEquals(1, newEntryList.getIndexValue(2));
+        assertEquals(0, newEntryList.getIndexValue(3));
+        assertEquals(0, newEntryList.getIndexValue(4));
+        assertEquals(0, newEntryList.getIndexValue(5));
+        assertEquals(0, newEntryList.getIndexValue(6));
+        assertEquals(0, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
     }
 
     @Test

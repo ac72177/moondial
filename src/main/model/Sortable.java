@@ -17,7 +17,6 @@ public abstract class Sortable {
     // waxing Crescent, first quarter, waxing gibbous, full moon, waning gibbous, third quarter, waning crescent
     public abstract List<Integer> sortAndCountListByPhase();
 
-
     // MODIFIES: this
     // EFFECTS: gets value at given index
     public int getIndexValue(int i) {
@@ -29,5 +28,5 @@ public abstract class Sortable {
     public int getSortedListSize() {
         return sortedByPhase.size();
     }
-
 }
+
