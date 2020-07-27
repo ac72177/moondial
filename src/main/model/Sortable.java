@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+// Represents a Sorted List by phase
 public abstract class Sortable {
     public List<Integer> sortedByPhase;
 

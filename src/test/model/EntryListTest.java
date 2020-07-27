@@ -1,7 +1,6 @@
 package model;
 
 import exceptions.IllegalListSize;
-import exceptions.NotAValidIndexPosition;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,18 +28,18 @@ public class EntryListTest {
     @BeforeEach
     public void setUpBeforeEachTest() {
         newEntryList = new EntryList();
-            newMoonEntryOne = new Entry("New Moon", 135);
-            newMoonEntryTwo = new Entry("New Moon", 45);
-            waxingCrescentOne = new Entry("Waxing Crescent", 90);
-            waxingCrescentTwo = new Entry("Waxing Crescent", 0);
-            firstQuarterSingleEntry = new Entry("First Quarter", 135);
-            waxingGibbousSingleEntry = new Entry("Waxing Gibbous", 0);
-            fullMoonEntryOne = new Entry("Full Moon", 180);
-            fullMoonEntryTwo = new Entry("Full Moon", 90);
-            waningGibbousEntryOne = new Entry("Waning Gibbous", 180);
-            waningGibbousEntryTwo = new Entry("Waning Gibbous", 180);
-            thirdQuarterSingleEntry = new Entry("Third Quarter", 45);
-            waningCrescentSingleEntry = new Entry("Waning Crescent", 90);
+        newMoonEntryOne = new Entry("New Moon", 135);
+        newMoonEntryTwo = new Entry("New Moon", 45);
+        waxingCrescentOne = new Entry("Waxing Crescent", 90);
+        waxingCrescentTwo = new Entry("Waxing Crescent", 0);
+        firstQuarterSingleEntry = new Entry("First Quarter", 135);
+        waxingGibbousSingleEntry = new Entry("Waxing Gibbous", 0);
+        fullMoonEntryOne = new Entry("Full Moon", 180);
+        fullMoonEntryTwo = new Entry("Full Moon", 90);
+        waningGibbousEntryOne = new Entry("Waning Gibbous", 180);
+        waningGibbousEntryTwo = new Entry("Waning Gibbous", 180);
+        thirdQuarterSingleEntry = new Entry("Third Quarter", 45);
+        waningCrescentSingleEntry = new Entry("Waning Crescent", 90);
     }
 
     @Test
@@ -92,7 +91,7 @@ public class EntryListTest {
         try {
             newEntryList.removeObservation(0);
         } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
-            // all good
+            // expect this
         }
         assertEquals(0, newEntryList.size());
 
@@ -505,7 +504,7 @@ public class EntryListTest {
             newEntryList.addObservation(waningGibbousEntryOne);
             newEntryList.addObservation(thirdQuarterSingleEntry);
         } catch (IllegalListSize illegalListsize) {
-            // all good
+            // expect this
         }
         newEntryList.sortAndCountListByPhase();
 

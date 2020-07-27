@@ -1,5 +1,6 @@
 package model;
 
+// Represents a moon observation accompanied by the estimated time it was observed
 public class Entry extends MoonTime {
     public String time;
 

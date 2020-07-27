@@ -5,7 +5,7 @@ import exceptions.IllegalListSize;
 import java.util.ArrayList;
 import java.util.List;
 
-// Represents a list of observations of the moon
+// Represents a list of entries of the moon observations
 public class EntryList extends Sortable {
     private final List<Entry> entryList;
     private final int maxListSize = 5;
