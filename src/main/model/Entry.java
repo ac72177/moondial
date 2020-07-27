@@ -14,8 +14,4 @@ public class Entry extends MoonTime {
     public String getTime() {
         return this.time;
     }
-
-
-
-
 }

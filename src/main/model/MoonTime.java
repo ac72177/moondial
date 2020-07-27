@@ -10,6 +10,7 @@ public class MoonTime {
         this.angleFromEast = angleFromEast;
     }
 
+
     // REQUIRES: angleFromEast to be 0, 45, 90, 135, 180
     // MODIFIES: this
     // EFFECTS: returns time of New Moon indicated by angle

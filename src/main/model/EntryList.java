@@ -5,7 +5,7 @@ import java.util.List;
 
 // Represents a list of observations of the moon
 public class EntryList extends Sortable {
-    private final List<Entry> entries;
+    private final List<Entry> entryList;
     private int newM = 0;
     private int waxCr = 0;
     private int firstQ = 0;
@@ -17,33 +17,32 @@ public class EntryList extends Sortable {
 
     // EFFECTS: entries is empty
     public EntryList() {
-        entries = new ArrayList<>();
+        entryList = new ArrayList<>();
     }
 
     // REQUIRES: observation is in list
     // MODIFIES: this
     // EFFECTS: returns specified entry
-    public Entry getEntry(Entry e) {
-        return entries.get(entries.indexOf(e));
+    public Entry getEntryFromList(int i) {
+        return entryList.get(i);
     }
-
 
     // MODIFIES: this
     // EFFECTS: adds an entry to the end of the list
     public void addObservation(Entry e) {
-        entries.add(e);
+        entryList.add(e);
     }
 
     // REQUIRES: observation is in list
     // MODIFIES: this
     // EFFECTS: removes first occurrence of entry from list
     public void removeObservation(Entry e) {
-        entries.remove(e);
+        entryList.remove(e);
     }
 
     // EFFECTS: returns number of observations in list
     public int size() {
-        return entries.size();
+        return entryList.size();
     }
 
     // MODIFIES: this
@@ -72,7 +71,7 @@ public class EntryList extends Sortable {
     // EFFECTS: returns the amount of each type of phase in a list ordered by new Moon,
     // waxing Crescent, first quarter, waxing gibbous, full moon, waning gibbous, third quarter, waning crescent
     public List<Integer> sortAndCountListByPhase() {
-        for (Entry item : entries) {
+        for (Entry item : entryList) {
             increment(item);
         }
         return sortedByPhase;

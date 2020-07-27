@@ -61,8 +61,67 @@ public class EntryListTest {
         newEntryList.removeObservation(firstQuarterSingleEntry);
 
         assertEquals(2, newEntryList.size());
-        assertEquals(thirdQuarterSingleEntry, newEntryList.getEntry(thirdQuarterSingleEntry));
-        assertEquals(firstQuarterSingleEntry, newEntryList.getEntry(firstQuarterSingleEntry));
+        assertEquals(thirdQuarterSingleEntry, newEntryList.getEntryFromList(0));
+        assertEquals(firstQuarterSingleEntry, newEntryList.getEntryFromList(1));
+    }
+
+    @Test
+    void testIncrementNewMoon() {
+        newEntryList.addObservation(newMoonEntryOne);
+        newEntryList.increment(newMoonEntryOne);
+        assertEquals(1, newEntryList.getIndexValue(0));
+    }
+
+    @Test
+    void testIncrementWaxingCrescent() {
+        newEntryList.addObservation(waxingCrescentOne);
+        newEntryList.increment(waxingCrescentOne);
+        assertEquals(1, newEntryList.getIndexValue(1));
+    }
+
+    @Test
+    void testIncrementFirstQuarter() {
+        newEntryList.addObservation(firstQuarterSingleEntry);
+        newEntryList.increment(firstQuarterSingleEntry);
+        assertEquals(1, newEntryList.getIndexValue(2));
+    }
+
+    @Test
+    void testIncrementWaxingGibbous() {
+        newEntryList.addObservation(waxingGibbousSingleEntry);
+        newEntryList.increment(waxingGibbousSingleEntry);
+        assertEquals(1, newEntryList.getIndexValue(3));
+    }
+
+    @Test
+    void testIncrementFullMoon() {
+        newEntryList.addObservation(fullMoonEntryOne);
+        newEntryList.addObservation(fullMoonEntryTwo);
+        newEntryList.increment(fullMoonEntryOne);
+        assertEquals(1, newEntryList.getIndexValue(4));
+        newEntryList.increment(fullMoonEntryTwo);
+        assertEquals(2, newEntryList.getIndexValue(4));
+    }
+
+    @Test
+    void testIncrementWaningGibbous() {
+        newEntryList.addObservation(waningGibbousEntryOne);
+        newEntryList.increment(waningGibbousEntryOne);
+        assertEquals(1, newEntryList.getIndexValue(5));
+    }
+
+    @Test
+    void testIncrementThirdQuarter() {
+        newEntryList.addObservation(thirdQuarterSingleEntry);
+        newEntryList.increment(thirdQuarterSingleEntry);
+        assertEquals(1, newEntryList.getIndexValue(6));
+    }
+
+    @Test
+    void testIncrementWaningCrescent() {
+        newEntryList.addObservation(waningCrescentSingleEntry);
+        newEntryList.increment(waningCrescentSingleEntry);
+        assertEquals(1, newEntryList.getIndexValue(7));
     }
 
     @Test
