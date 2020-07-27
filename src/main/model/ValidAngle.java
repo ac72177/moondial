@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ValidAngle {
-    public List<Integer> validAngles;
+    public List<Double> validAngles;
 
     public ValidAngle() {
         validAngles = new ArrayList<>();

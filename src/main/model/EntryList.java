@@ -44,7 +44,10 @@ public class EntryList extends Sortable {
     // REQUIRES: observation is in list
     // MODIFIES: this
     // EFFECTS: removes observation at specified index
-    public void removeObservation(int i) {
+    public void removeObservation(int i) throws IndexOutOfBoundsException {
+        if (!(i == 0 || i == 1 || i == 2 || i == 3 || i == 4)) {
+            throw new IndexOutOfBoundsException();
+        }
         entryList.remove(i);
     }
 

@@ -1,40 +1,34 @@
 package model;
 
-import exceptions.NotAMoonPhase;
-import exceptions.NotAValidAngle;
-
-import java.util.List;
-
 public class MoonTime extends ValidAngle {
     private final String moonPhase;
     private final int angleFromEast;
 
     // EFFECTS: creates an observation of moonPhase and angle
-    public MoonTime(String moonPhase, int angleFromEast) throws NotAMoonPhase, NotAValidAngle {
-        if (!(moonPhase.equals("New Moon") || moonPhase.equals("Waxing Crescent") || moonPhase.equals("First Quarter")
-                || moonPhase.equals("Waxing Gibbous") || moonPhase.equals("Full Moon")
-                || moonPhase.equals("Waning Gibbous") || moonPhase.equals("Third Quarter")
-                || moonPhase.equals("Waning Crescent"))) {
-            throw new NotAMoonPhase();
-        } else if (!containsValidAngle(angleFromEast)) {
-            throw new NotAValidAngle();
-        } else {
+    public MoonTime(String moonPhase, int angleFromEast) {
+//        if (!(moonPhase.equals("New Moon") || moonPhase.equals("Waxing Crescent") || moonPhase.equals("First Quarter")
+//                || moonPhase.equals("Waxing Gibbous") || moonPhase.equals("Full Moon")
+//                || moonPhase.equals("Waning Gibbous") || moonPhase.equals("Third Quarter")
+//                || moonPhase.equals("Waning Crescent"))) {
+//            throw new NotAMoonPhase();
+//        } else if (!containsValidAngle(angleFromEast)) {
+//            throw new NotAValidAngle();
+//        } else {
             this.moonPhase = moonPhase;
             this.angleFromEast = angleFromEast;
-        }
     }
 
-    // EFFECTS: returns true if angle is 0, 45, 90, 135, or 180, false otherwise
-    private boolean containsValidAngle(int i) {
-        List<Integer> validAngles = null;
-        validAngles.add(0, 0);
-        validAngles.add(1, 45);
-        validAngles.add(2, 90);
-        validAngles.add(3, 135);
-        validAngles.add(4, 180);
-
-        return validAngles.contains(i);
-    }
+//    // EFFECTS: returns true if angle is 0, 45, 90, 135, or 180, false otherwise
+//    private boolean containsValidAngle(int i) {
+//        List<Integer> validAngles = null;
+//        validAngles.add(0, 0);
+//        validAngles.add(1, 45);
+//        validAngles.add(2, 90);
+//        validAngles.add(3, 135);
+//        validAngles.add(4, 180);
+//
+//        return validAngles.contains(i);
+//    }
 
 
     // REQUIRES: angleFromEast to be 0, 45, 90, 135, 180
@@ -181,7 +175,7 @@ public class MoonTime extends ValidAngle {
 
     // MODIFIES: this
     // EFFECTS: returns angle from east
-    public double getAngleFromEast() {
+    public int getAngleFromEast() {
         return angleFromEast;
     }
 

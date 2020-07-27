@@ -1,14 +1,11 @@
 package model;
 
-import exceptions.NotAMoonPhase;
-import exceptions.NotAValidAngle;
-
 public class Entry extends MoonTime {
     public String time;
 
 
     // EFFECTS: creates an entry to be put into a list
-    public Entry(String moonPhase, int angleFromEast) throws NotAMoonPhase, NotAValidAngle {
+    public Entry(String moonPhase, int angleFromEast) {
         super(moonPhase, angleFromEast);
         this.time = super.identifyTime(moonPhase, angleFromEast);
     }

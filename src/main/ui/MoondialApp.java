@@ -1,9 +1,6 @@
 package ui;
 
 import exceptions.IllegalListSize;
-import exceptions.NotAMoonPhase;
-import exceptions.NotAValidAngle;
-import exceptions.NotAValidIndexPosition;
 import model.Entry;
 import model.EntryList;
 
@@ -17,7 +14,7 @@ public class MoondialApp {
     private List<Integer> sortedByPhase;
     private Scanner input;
     private String moonPhase;
-    private int angleFromEast = 0;
+    private int angleFromEast;
     private Entry entry;
 
     // EFFECTS: runs the teller application
@@ -85,20 +82,9 @@ public class MoondialApp {
     // MODIFIES: this
     // EFFECTS: makes an observation and adds it to the end of the list
     private void doMakeObservation() {
-        tryCatchMoonPhase();
-        tryCatchAngle();
-        try {
-            angleFromEast = selectAngleFromEast();
-        } catch (NotAValidAngle notAValidAngle) {
-            notAValidAngle.printStackTrace();
-        }
-        try {
-            entry = new Entry(moonPhase, angleFromEast);
-        } catch (NotAMoonPhase notAMoonPhase) {
-            System.err.println("This is not a valid moon phase.");
-        } catch (NotAValidAngle notAValidAngle) {
-            System.err.println("This is not a valid angle.");
-        }
+        moonPhase = selectMoonPhase();
+        angleFromEast = selectAngleFromEast();
+        entry = new Entry(moonPhase, angleFromEast);
         try {
             entryList.addObservation(entry);
         } catch (IllegalListSize illegalListSize) {
@@ -108,27 +94,8 @@ public class MoondialApp {
                 + entry.getTime() + ".");
     }
 
-    // EFFECTS: try catch for moon phase exception
-    private void tryCatchMoonPhase() {
-        try {
-            moonPhase = selectMoonPhase();
-        } catch (NotAMoonPhase notAMoonPhase) {
-            System.err.println("This is not a valid angle.");
-        }
-    }
-
-    // EFFECTS: try catch for angle exception
-    private void tryCatchAngle() {
-        try {
-            angleFromEast = selectAngleFromEast();
-        } catch (NotAValidAngle notAValidAngle) {
-            notAValidAngle.printStackTrace();
-        }
-    }
-
-
     // EFFECTS: prompts user to select moon phase
-    private String selectMoonPhase() throws NotAMoonPhase {
+    private String selectMoonPhase() {
         String selectionMoonPhase = ""; // force entry into loop
 
         while (!(selectionMoonPhase.equals("nm") || selectionMoonPhase.equals("waxcr")
@@ -153,7 +120,7 @@ public class MoondialApp {
     }
 
     // EFFECTS: expands a shortened moon phase to full name
-    private String expandPhase(String s) throws NotAMoonPhase {
+    private String expandPhase(String s) {
         if (s.equals("nm")) {
             return "New Moon";
         } else if (s.equals("waxcr")) {
@@ -171,12 +138,12 @@ public class MoondialApp {
         } else if (s.equals("wancr")) {
             return "Waning Crescent";
         } else {
-            throw new NotAMoonPhase();
+            return null;
         }
     }
 
     // EFFECTS: prompts user to select angle from east
-    private int selectAngleFromEast() throws NotAValidAngle {
+    private int selectAngleFromEast() {
         String selectionAngle = ""; // force entry into loop
 
         while (!(selectionAngle.equals("0") || selectionAngle.equals("45") || selectionAngle.equals("90")
@@ -195,7 +162,7 @@ public class MoondialApp {
     }
 
     // EFFECTS: changes a string representing an angle value into an integer
-    private Integer convertAngle(String a) throws NotAValidAngle {
+    private int convertAngle(String a) {
         if (a.equals("0")) {
             return 0;
         } else if (a.equals("45")) {
@@ -207,7 +174,7 @@ public class MoondialApp {
         } else if (a.equals("180")) {
             return 180;
         } else {
-            throw new NotAValidAngle();
+            return 156;
         }
     }
 
@@ -217,8 +184,8 @@ public class MoondialApp {
         printEntryList();
         try {
             entryList.removeObservation(selectEntry());
-        } catch (NotAValidIndexPosition notAValidIndexPosition) {
-            System.err.println("This is not a valid entry position.");
+        } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
+            System.err.println("This is out of the bounds of the list.");
         }
         entryList.sortAndCountListByPhase();
         printEntryList();
@@ -226,7 +193,7 @@ public class MoondialApp {
 
     // MODIFIES: this
     // EFFECTS: selects Entry
-    private int selectEntry() throws NotAValidIndexPosition {
+    private int selectEntry() {
         String selectionEntry = ""; // force entry into loop
 
         while (!(selectionEntry.equals("0") || (selectionEntry.equals("1")) || (selectionEntry.equals("2"))
@@ -250,35 +217,30 @@ public class MoondialApp {
         } else if (selectionEntry.equals("4")) {
             return 4;
         } else {
-            throw new NotAValidIndexPosition();
+            return 5;
         }
 
     }
 
     // EFFECTS: prints specified entry
     private void printEntry(int i) {
-
-        System.out.println("Entry " + i + " " + getEntryMoonPhaseFromEntryList(i)
-                + " " + getEntryAngleFromEntryList(i) + " degrees " + getEntryTimeFromEntryList(i));
+        System.out.println("Entry " + i + ": " + getEntryMoonPhaseFromEntryList(i)
+                + " " + getEntryAngleFromEntryList(i) + " degrees at " + getEntryTimeFromEntryList(i));
 
     }
 
-    // EFFECTS: prompts user to select an entry and prints entry to screen
+    // EFFECTS: prompts user to select an entry and prints entry to screen,
     private void printSelectedEntry() {
-        printEntryList();
-        try {
-            selectEntryToPrint();
-        } catch (NotAValidIndexPosition notAValidIndexPosition) {
-            System.err.println("This is not a valid entry");
-        }
-    }
-
-    // EFFECTS: selects entry to print
-    private void selectEntryToPrint() throws NotAValidIndexPosition {
+//        selectEntryToPrint();
+//    }
+//
+//    // EFFECTS: selects entry to print, and returns true if index of entry is in list, false otherwise
+//    private boolean selectEntryToPrint() {
         String selectionEntry = ""; // force entry into loop
+        boolean notValidEntry = !(selectionEntry.equals("0") || (selectionEntry.equals("1"))
+                || (selectionEntry.equals("2")) || (selectionEntry.equals("3")) || (selectionEntry.equals("4")));
 
-        while (!(selectionEntry.equals("0") || (selectionEntry.equals("1")) || (selectionEntry.equals("2"))
-                || (selectionEntry.equals("3")) || (selectionEntry.equals("4")))) {
+        while (notValidEntry) {
             System.out.println("0 for Entry 0");
             System.out.println("1 for Entry 1");
             System.out.println("2 for Entry 2");
@@ -287,6 +249,11 @@ public class MoondialApp {
             selectionEntry = input.next();
         }
 
+        printEntryAtValidIndex(selectionEntry);
+    }
+
+    // EFFECTS: prints entry at selected index
+    private void printEntryAtValidIndex(String selectionEntry) {
         if (selectionEntry.equals("0")) {
             printEntry(0);
         } else if (selectionEntry.equals("1")) {
@@ -298,7 +265,7 @@ public class MoondialApp {
         } else if (selectionEntry.equals("4")) {
             printEntry(4);
         } else {
-            throw new NotAValidIndexPosition();
+            System.out.println("This is not a valid entry.");
         }
     }
 
@@ -307,7 +274,7 @@ public class MoondialApp {
         String selectionList = ""; // force entry into loop
 
         while (!(selectionList.equals("e") || (selectionList.equals("s")))) {
-            System.out.println("Select a list to print");
+            System.out.println("Select a list to print.");
 
 
             System.out.println("e -> Entry List");
@@ -325,6 +292,9 @@ public class MoondialApp {
 
     // EFFECTS: prints sortedByPhase
     private void printSortedByPhase() {
+        if (entryList.size() == 0) {
+            System.out.println("No observations have been made.");
+        }
         entryList.sortAndCountListByPhase();
         System.out.println(" Here is your summary of observations");
         System.out.println(" ");
@@ -340,8 +310,12 @@ public class MoondialApp {
 
     // EFFECTS: prints entry List
     private void printEntryList() {
-        for (int i = 0; i < entryList.size(); i++) {
-            printEntry(i);
+        if (!(entryList.size() == 0)) {
+            for (int i = 0; i < entryList.size(); i++) {
+                printEntry(i);
+            }
+        } else {
+            System.out.println("No Observations have been made.");
         }
         System.out.println(entryList);
     }
@@ -357,7 +331,7 @@ public class MoondialApp {
     // REQUIRES: observation is in list
     // MODIFIES: this
     // EFFECTS: returns specified entry's angle
-    public double getEntryAngleFromEntryList(int i) {
+    public int getEntryAngleFromEntryList(int i) {
         Entry entry = entryList.getEntryFromList(i);
         return entry.getAngleFromEast();
     }
