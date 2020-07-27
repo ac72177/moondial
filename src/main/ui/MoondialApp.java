@@ -13,9 +13,6 @@ public class MoondialApp {
     private EntryList entryList;
     private List<Integer> sortedByPhase;
     private Scanner input;
-    private String moonPhase;
-    private int angleFromEast;
-    private Entry entry;
 
     // EFFECTS: runs the teller application
     public MoondialApp() {
@@ -82,9 +79,9 @@ public class MoondialApp {
     // MODIFIES: this
     // EFFECTS: makes an observation and adds it to the end of the list
     private void doMakeObservation() {
-        moonPhase = selectMoonPhase();
-        angleFromEast = selectAngleFromEast();
-        entry = new Entry(moonPhase, angleFromEast);
+        String moonPhase = selectMoonPhase();
+        int angleFromEast = selectAngleFromEast();
+        Entry entry = new Entry(moonPhase, angleFromEast);
         try {
             entryList.addObservation(entry);
         } catch (IllegalListSize illegalListSize) {
@@ -214,10 +211,8 @@ public class MoondialApp {
             return 2;
         } else if (selectionEntry.equals("3")) {
             return 3;
-        } else if (selectionEntry.equals("4")) {
-            return 4;
         } else {
-            return 5;
+            return 4;
         }
 
     }
@@ -231,38 +226,34 @@ public class MoondialApp {
 
     // EFFECTS: prompts user to select an entry and prints entry to screen,
     private void printSelectedEntry() {
-//        selectEntryToPrint();
-//    }
-//
-//    // EFFECTS: selects entry to print, and returns true if index of entry is in list, false otherwise
-//    private boolean selectEntryToPrint() {
-        String selectionEntry = ""; // force entry into loop
-        boolean notValidEntry = !(selectionEntry.equals("0") || (selectionEntry.equals("1"))
-                || (selectionEntry.equals("2")) || (selectionEntry.equals("3")) || (selectionEntry.equals("4")));
-
-        while (notValidEntry) {
-            System.out.println("0 for Entry 0");
-            System.out.println("1 for Entry 1");
-            System.out.println("2 for Entry 2");
-            System.out.println("3 for Entry 3");
-            System.out.println("4 for Entry 4");
-            selectionEntry = input.next();
-        }
-
-        printEntryAtValidIndex(selectionEntry);
+        printEntryList();
+        selectEntryToPrint();
     }
 
-    // EFFECTS: prints entry at selected index
-    private void printEntryAtValidIndex(String selectionEntry) {
-        if (selectionEntry.equals("0")) {
+    // MODIFIES: this
+    // EFFECTS: selects Entry
+    private void selectEntryToPrint() {
+        String selectionEntry = ""; // force entry into loop
+
+
+        while (!(selectionEntry.equals("0") || (selectionEntry.equals("1")) || (selectionEntry.equals("2"))
+                || (selectionEntry.equals("3")) || (selectionEntry.equals("4")))) {
+            System.out.println("0 for 1st entry");
+            System.out.println("1 for 2nd entry");
+            System.out.println("2 for 3rd entry");
+            System.out.println("3 for 4th entry");
+            System.out.println("4 for 5th entry");
+            selectionEntry = input.next();
+        }
+        if (selectionEntry.equals("0") && entryList.size() >= 1) {
             printEntry(0);
-        } else if (selectionEntry.equals("1")) {
+        } else if (selectionEntry.equals("1") && entryList.size() >= 2) {
             printEntry(1);
-        } else if (selectionEntry.equals("2")) {
+        } else if (selectionEntry.equals("2") && entryList.size() >= 3) {
             printEntry(2);
-        } else if (selectionEntry.equals("3")) {
+        } else if (selectionEntry.equals("3") && entryList.size() >= 4) {
             printEntry(3);
-        } else if (selectionEntry.equals("4")) {
+        } else if (selectionEntry.equals("4") && entryList.size() >= 5) {
             printEntry(4);
         } else {
             System.out.println("This is not a valid entry.");
