@@ -4,8 +4,7 @@ import exceptions.IllegalListSize;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class EntryListTest {
     private EntryList newEntryList;
@@ -65,7 +64,7 @@ public class EntryListTest {
     }
 
     @Test
-    void testRemoveObservation() {
+    void testRemoveObservationUnexpectedIllegalListSizeAndUnexpectedIndexOutOfBoundsExceptions() {
         try {
             newEntryList.addObservation(firstQuarterSingleEntry);
             newEntryList.addObservation(thirdQuarterSingleEntry);
@@ -80,13 +79,14 @@ public class EntryListTest {
             fail("Unexpected IndexOutOfBoundsException Exception");
         }
 
+        assertTrue(newEntryList.size() > 0);
         assertEquals(2, newEntryList.size());
         assertEquals(thirdQuarterSingleEntry, newEntryList.getEntryFromList(0));
         assertEquals(firstQuarterSingleEntry, newEntryList.getEntryFromList(1));
     }
 
     @Test
-    void testRemoveObservationFromEmptyList() {
+    void testRemoveObservationFromEmptyListExpectIndexOutOfBoundsException() {
         assertEquals(0, newEntryList.size());
         try {
             newEntryList.removeObservation(0);
@@ -95,11 +95,10 @@ public class EntryListTest {
         }
         assertEquals(0, newEntryList.size());
 
-
     }
 
     @Test
-    void testIncrementNewMoon() {
+    void testIncrementNewMoonUnexpectedIllegalListSizeException() {
         try {
             newEntryList.addObservation(newMoonEntryOne);
         } catch (IllegalListSize illegalListSize) {
@@ -110,7 +109,7 @@ public class EntryListTest {
     }
 
     @Test
-    void testIncrementWaxingCrescent() {
+    void testIncrementWaxingCrescentUnexpectedIllegalListSizeException() {
         try {
             newEntryList.addObservation(waxingCrescentOne);
         } catch (IllegalListSize illegalListSize) {
@@ -121,7 +120,7 @@ public class EntryListTest {
     }
 
     @Test
-    void testIncrementFirstQuarter() {
+    void testIncrementFirstQuarterUnexpectedIllegalListSizeException() {
         try {
             newEntryList.addObservation(firstQuarterSingleEntry);
         } catch (IllegalListSize illegalListSize) {
@@ -132,7 +131,7 @@ public class EntryListTest {
     }
 
     @Test
-    void testIncrementWaxingGibbous() {
+    void testIncrementWaxingGibbousUnexpectedIllegalListSizeException() {
         try {
             newEntryList.addObservation(waxingGibbousSingleEntry);
         } catch (IllegalListSize illegalListSize) {
@@ -143,7 +142,7 @@ public class EntryListTest {
     }
 
     @Test
-    void testIncrementFullMoon() {
+    void testIncrementFullMoonUnexpectedIllegalListSizeException() {
         try {
             newEntryList.addObservation(fullMoonEntryOne);
             newEntryList.addObservation(fullMoonEntryTwo);
@@ -158,7 +157,7 @@ public class EntryListTest {
     }
 
     @Test
-    void testIncrementWaningGibbous() {
+    void testIncrementWaningGibbousUnexpectedIllegalListSizeException() {
         try {
             newEntryList.addObservation(waningGibbousEntryOne);
         } catch (IllegalListSize illegalListSize) {
@@ -169,7 +168,7 @@ public class EntryListTest {
     }
 
     @Test
-    void testIncrementThirdQuarter() {
+    void testIncrementThirdQuarterUnexpectedIllegalListSizeException() {
         try {
             newEntryList.addObservation(thirdQuarterSingleEntry);
         } catch (IllegalListSize illegalListSize) {
@@ -180,7 +179,7 @@ public class EntryListTest {
     }
 
     @Test
-    void testIncrementWaningCrescent() {
+    void testIncrementWaningCrescentUnexpectedIllegalListSizeException() {
         try {
             newEntryList.addObservation(waningCrescentSingleEntry);
         } catch (IllegalListSize illegalListSize) {
@@ -191,7 +190,7 @@ public class EntryListTest {
     }
 
     @Test
-    void testSortAndCountListByPhaseMoreThanOnceOnSameList() {
+    void testSortAndCountListByPhaseSamePhaseAddedUnexpectedIllegalListSizeException() {
         try {
             newEntryList.addObservation(newMoonEntryOne);
             newEntryList.addObservation(newMoonEntryTwo);
@@ -223,10 +222,11 @@ public class EntryListTest {
     }
 
     @Test
-    void testSortAndCountListByPhaseMoreThanOnceOnSameListAfterRemovingOneOfSamePhase() {
+    void testSortAndCountListByPhaseMoreThanOnceOnSameListAfterRemovingOneOfDifferentPhaseUnexpectedExceptions() {
         try {
             newEntryList.addObservation(newMoonEntryOne);
-            newEntryList.addObservation(newMoonEntryTwo);
+            newEntryList.addObservation(newMoonEntryOne);
+            newEntryList.addObservation(firstQuarterSingleEntry);
         } catch (IllegalListSize illegalListSize) {
             fail("Unexpected IllegalListSize Exception");
         }
@@ -234,7 +234,7 @@ public class EntryListTest {
 
         assertEquals(2, newEntryList.getIndexValue(0));
         assertEquals(0, newEntryList.getIndexValue(1));
-        assertEquals(0, newEntryList.getIndexValue(2));
+        assertEquals(1, newEntryList.getIndexValue(2));
         assertEquals(0, newEntryList.getIndexValue(3));
         assertEquals(0, newEntryList.getIndexValue(4));
         assertEquals(0, newEntryList.getIndexValue(5));
@@ -250,43 +250,6 @@ public class EntryListTest {
         newEntryList.sortAndCountListByPhase();
         assertEquals(1, newEntryList.getIndexValue(0));
         assertEquals(0, newEntryList.getIndexValue(1));
-        assertEquals(0, newEntryList.getIndexValue(2));
-        assertEquals(0, newEntryList.getIndexValue(3));
-        assertEquals(0, newEntryList.getIndexValue(4));
-        assertEquals(0, newEntryList.getIndexValue(5));
-        assertEquals(0, newEntryList.getIndexValue(6));
-        assertEquals(0, newEntryList.getIndexValue(7));
-        assertEquals(8, newEntryList.getSortedListSize());
-    }
-
-    @Test
-    void testSortAndCountListByPhaseMoreThanOnceOnSameListAfterRemovingOneOfDifferentPhase() {
-        try {
-            newEntryList.addObservation(newMoonEntryOne);
-            newEntryList.addObservation(firstQuarterSingleEntry);
-        } catch (IllegalListSize illegalListSize) {
-            fail("Unexpected IllegalListSize Exception");
-        }
-        newEntryList.sortAndCountListByPhase();
-
-        assertEquals(1, newEntryList.getIndexValue(0));
-        assertEquals(0, newEntryList.getIndexValue(1));
-        assertEquals(1, newEntryList.getIndexValue(2));
-        assertEquals(0, newEntryList.getIndexValue(3));
-        assertEquals(0, newEntryList.getIndexValue(4));
-        assertEquals(0, newEntryList.getIndexValue(5));
-        assertEquals(0, newEntryList.getIndexValue(6));
-        assertEquals(0, newEntryList.getIndexValue(7));
-        assertEquals(8, newEntryList.getSortedListSize());
-
-        try {
-            newEntryList.removeObservation(0);
-        } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
-            fail("Unexpected IndexOutOfBoundsException Exception");
-        }
-        newEntryList.sortAndCountListByPhase();
-        assertEquals(0, newEntryList.getIndexValue(0));
-        assertEquals(0, newEntryList.getIndexValue(1));
         assertEquals(1, newEntryList.getIndexValue(2));
         assertEquals(0, newEntryList.getIndexValue(3));
         assertEquals(0, newEntryList.getIndexValue(4));
@@ -296,200 +259,9 @@ public class EntryListTest {
         assertEquals(8, newEntryList.getSortedListSize());
     }
 
-    @Test
-    void testSortAndCountListByPhaseOnlyNewMoon() {
-        try {
-            newEntryList.addObservation(newMoonEntryOne);
-            newEntryList.addObservation(newMoonEntryTwo);
-        } catch (IllegalListSize illegalListSize) {
-            fail("Unexpected IllegalListSize Exception");
-        }
-        newEntryList.sortAndCountListByPhase();
-
-        assertEquals(2, newEntryList.getIndexValue(0));
-        assertEquals(0, newEntryList.getIndexValue(1));
-        assertEquals(0, newEntryList.getIndexValue(2));
-        assertEquals(0, newEntryList.getIndexValue(3));
-        assertEquals(0, newEntryList.getIndexValue(4));
-        assertEquals(0, newEntryList.getIndexValue(5));
-        assertEquals(0, newEntryList.getIndexValue(6));
-        assertEquals(0, newEntryList.getIndexValue(7));
-        assertEquals(8, newEntryList.getSortedListSize());
-    }
 
     @Test
-    void testSortAndCountListByPhaseOnlyWaxingCrescent() {
-        try {
-            newEntryList.addObservation(waxingCrescentOne);
-            newEntryList.addObservation(waxingCrescentTwo);
-        } catch (IllegalListSize illegalListSize) {
-            fail("Unexpected IllegalListSize Exception");
-        }
-        newEntryList.sortAndCountListByPhase();
-
-        assertEquals(0, newEntryList.getIndexValue(0));
-        assertEquals(2, newEntryList.getIndexValue(1));
-        assertEquals(0, newEntryList.getIndexValue(2));
-        assertEquals(0, newEntryList.getIndexValue(3));
-        assertEquals(0, newEntryList.getIndexValue(4));
-        assertEquals(0, newEntryList.getIndexValue(5));
-        assertEquals(0, newEntryList.getIndexValue(6));
-        assertEquals(0, newEntryList.getIndexValue(7));
-        assertEquals(8, newEntryList.getSortedListSize());
-    }
-
-    @Test
-    void testSortAndCountListByPhaseOnlyFirstQuarter() {
-        try {
-            newEntryList.addObservation(firstQuarterSingleEntry);
-        } catch (IllegalListSize illegalListSize) {
-            fail("Unexpected IllegalListSize Exception");
-        }
-        newEntryList.sortAndCountListByPhase();
-
-        assertEquals(0, newEntryList.getIndexValue(0));
-        assertEquals(0, newEntryList.getIndexValue(1));
-        assertEquals(1, newEntryList.getIndexValue(2));
-        assertEquals(0, newEntryList.getIndexValue(3));
-        assertEquals(0, newEntryList.getIndexValue(4));
-        assertEquals(0, newEntryList.getIndexValue(5));
-        assertEquals(0, newEntryList.getIndexValue(6));
-        assertEquals(0, newEntryList.getIndexValue(7));
-        assertEquals(8, newEntryList.getSortedListSize());
-    }
-
-    @Test
-    void testSortAndCountListByPhaseOnlyWaxingGibbous() {
-        try {
-            newEntryList.addObservation(waxingGibbousSingleEntry);
-        } catch (IllegalListSize illegalListSize) {
-            fail("Unexpected IllegalListSize Exception");
-        }
-        newEntryList.sortAndCountListByPhase();
-
-        assertEquals(0, newEntryList.getIndexValue(0));
-        assertEquals(0, newEntryList.getIndexValue(1));
-        assertEquals(0, newEntryList.getIndexValue(2));
-        assertEquals(1, newEntryList.getIndexValue(3));
-        assertEquals(0, newEntryList.getIndexValue(4));
-        assertEquals(0, newEntryList.getIndexValue(5));
-        assertEquals(0, newEntryList.getIndexValue(6));
-        assertEquals(0, newEntryList.getIndexValue(7));
-        assertEquals(8, newEntryList.getSortedListSize());
-    }
-
-    @Test
-    void testSortAndCountListByPhaseOnlyFullMoon() {
-        try {
-            newEntryList.addObservation(fullMoonEntryOne);
-            newEntryList.addObservation(fullMoonEntryTwo);
-        } catch (IllegalListSize illegalListSize) {
-            fail("Unexpected IllegalListSize Exception");
-
-        }
-        newEntryList.sortAndCountListByPhase();
-
-        assertEquals(0, newEntryList.getIndexValue(0));
-        assertEquals(0, newEntryList.getIndexValue(1));
-        assertEquals(0, newEntryList.getIndexValue(2));
-        assertEquals(0, newEntryList.getIndexValue(3));
-        assertEquals(2, newEntryList.getIndexValue(4));
-        assertEquals(0, newEntryList.getIndexValue(5));
-        assertEquals(0, newEntryList.getIndexValue(6));
-        assertEquals(0, newEntryList.getIndexValue(7));
-        assertEquals(8, newEntryList.getSortedListSize());
-    }
-
-    @Test
-    void testSortAndCountListByPhaseOnlyWaningGibbous() {
-        try {
-            newEntryList.addObservation(waningGibbousEntryOne);
-            newEntryList.addObservation(waningGibbousEntryTwo);
-        } catch (IllegalListSize illegalListSize) {
-            fail("Unexpected IllegalListSize Exception");
-        }
-
-        newEntryList.sortAndCountListByPhase();
-
-        assertEquals(0, newEntryList.getIndexValue(0));
-        assertEquals(0, newEntryList.getIndexValue(1));
-        assertEquals(0, newEntryList.getIndexValue(2));
-        assertEquals(0, newEntryList.getIndexValue(3));
-        assertEquals(0, newEntryList.getIndexValue(4));
-        assertEquals(2, newEntryList.getIndexValue(5));
-        assertEquals(0, newEntryList.getIndexValue(6));
-        assertEquals(0, newEntryList.getIndexValue(7));
-        assertEquals(8, newEntryList.getSortedListSize());
-    }
-
-    @Test
-    void testSortAndCountListByPhaseOnlyThirdQuarter() {
-        try {
-            newEntryList.addObservation(thirdQuarterSingleEntry);
-        } catch (IllegalListSize illegalListSize) {
-            fail("Unexpected IllegalListSize Exception");
-        }
-        newEntryList.sortAndCountListByPhase();
-
-        assertEquals(0, newEntryList.getIndexValue(0));
-        assertEquals(0, newEntryList.getIndexValue(1));
-        assertEquals(0, newEntryList.getIndexValue(2));
-        assertEquals(0, newEntryList.getIndexValue(3));
-        assertEquals(0, newEntryList.getIndexValue(4));
-        assertEquals(0, newEntryList.getIndexValue(5));
-        assertEquals(1, newEntryList.getIndexValue(6));
-        assertEquals(0, newEntryList.getIndexValue(7));
-        assertEquals(8, newEntryList.getSortedListSize());
-    }
-
-    @Test
-    void testSortAndCountListByPhaseOnlyWaningCrescent() {
-        try {
-            newEntryList.addObservation(waningCrescentSingleEntry);
-        } catch (IllegalListSize illegalListSize) {
-            fail("Unexpected IllegalListSize Exception");
-        }
-        newEntryList.sortAndCountListByPhase();
-
-        assertEquals(0, newEntryList.getIndexValue(0));
-        assertEquals(0, newEntryList.getIndexValue(1));
-        assertEquals(0, newEntryList.getIndexValue(2));
-        assertEquals(0, newEntryList.getIndexValue(3));
-        assertEquals(0, newEntryList.getIndexValue(4));
-        assertEquals(0, newEntryList.getIndexValue(5));
-        assertEquals(0, newEntryList.getIndexValue(6));
-        assertEquals(1, newEntryList.getIndexValue(7));
-        assertEquals(8, newEntryList.getSortedListSize());
-    }
-
-    @Test
-    void testSortAndCountListByPhaseManyDifferentPhasesSomePhasesOmitted() {
-
-        try {
-            newEntryList.addObservation(waxingGibbousSingleEntry);
-            newEntryList.addObservation(waningCrescentSingleEntry);
-            newEntryList.addObservation(newMoonEntryOne);
-            newEntryList.addObservation(fullMoonEntryTwo);
-            newEntryList.addObservation(newMoonEntryTwo);
-        } catch (IllegalListSize illegalListSize) {
-            fail("Unexpected NotIllegalListSize Exception");
-        }
-
-        newEntryList.sortAndCountListByPhase();
-
-        assertEquals(2, newEntryList.getIndexValue(0));
-        assertEquals(0, newEntryList.getIndexValue(1));
-        assertEquals(0, newEntryList.getIndexValue(2));
-        assertEquals(1, newEntryList.getIndexValue(3));
-        assertEquals(1, newEntryList.getIndexValue(4));
-        assertEquals(0, newEntryList.getIndexValue(5));
-        assertEquals(0, newEntryList.getIndexValue(6));
-        assertEquals(1, newEntryList.getIndexValue(7));
-        assertEquals(8, newEntryList.getSortedListSize());
-    }
-
-    @Test
-    void testSortAndCountListByPhaseManyDifferentPhasesTooManyEntries() {
+    void testSortAndCountListByPhaseManyDifferentPhasesTooManyEntriesExpectIllegalSizeException() {
         try {
             newEntryList.addObservation(waxingGibbousSingleEntry);
             newEntryList.addObservation(waningCrescentSingleEntry);
@@ -515,6 +287,197 @@ public class EntryListTest {
         assertEquals(1, newEntryList.getIndexValue(4));
         assertEquals(0, newEntryList.getIndexValue(5));
         assertEquals(1, newEntryList.getIndexValue(6));
+        assertEquals(1, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
+    }
+    @Test
+    void testSortAndCountListByPhaseOnlyNewMoonUnexpectedIllegalSizeException() {
+        try {
+            newEntryList.addObservation(newMoonEntryOne);
+            newEntryList.addObservation(newMoonEntryTwo);
+        } catch (IllegalListSize illegalListSize) {
+            fail("Unexpected IllegalListSize Exception");
+        }
+        newEntryList.sortAndCountListByPhase();
+
+        assertEquals(2, newEntryList.getIndexValue(0));
+        assertEquals(0, newEntryList.getIndexValue(1));
+        assertEquals(0, newEntryList.getIndexValue(2));
+        assertEquals(0, newEntryList.getIndexValue(3));
+        assertEquals(0, newEntryList.getIndexValue(4));
+        assertEquals(0, newEntryList.getIndexValue(5));
+        assertEquals(0, newEntryList.getIndexValue(6));
+        assertEquals(0, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
+    }
+
+    @Test
+    void testSortAndCountListByPhaseOnlyWaxingCrescentUnexpectedIllegalSizeException() {
+        try {
+            newEntryList.addObservation(waxingCrescentOne);
+            newEntryList.addObservation(waxingCrescentTwo);
+        } catch (IllegalListSize illegalListSize) {
+            fail("Unexpected IllegalListSize Exception");
+        }
+        newEntryList.sortAndCountListByPhase();
+
+        assertEquals(0, newEntryList.getIndexValue(0));
+        assertEquals(2, newEntryList.getIndexValue(1));
+        assertEquals(0, newEntryList.getIndexValue(2));
+        assertEquals(0, newEntryList.getIndexValue(3));
+        assertEquals(0, newEntryList.getIndexValue(4));
+        assertEquals(0, newEntryList.getIndexValue(5));
+        assertEquals(0, newEntryList.getIndexValue(6));
+        assertEquals(0, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
+    }
+
+    @Test
+    void testSortAndCountListByPhaseOnlyFirstQuarterUnexpectedIllegalSizeException() {
+        try {
+            newEntryList.addObservation(firstQuarterSingleEntry);
+        } catch (IllegalListSize illegalListSize) {
+            fail("Unexpected IllegalListSize Exception");
+        }
+        newEntryList.sortAndCountListByPhase();
+
+        assertEquals(0, newEntryList.getIndexValue(0));
+        assertEquals(0, newEntryList.getIndexValue(1));
+        assertEquals(1, newEntryList.getIndexValue(2));
+        assertEquals(0, newEntryList.getIndexValue(3));
+        assertEquals(0, newEntryList.getIndexValue(4));
+        assertEquals(0, newEntryList.getIndexValue(5));
+        assertEquals(0, newEntryList.getIndexValue(6));
+        assertEquals(0, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
+    }
+
+    @Test
+    void testSortAndCountListByPhaseOnlyWaxingGibbousUnexpectedIllegalSizeException() {
+        try {
+            newEntryList.addObservation(waxingGibbousSingleEntry);
+        } catch (IllegalListSize illegalListSize) {
+            fail("Unexpected IllegalListSize Exception");
+        }
+        newEntryList.sortAndCountListByPhase();
+
+        assertEquals(0, newEntryList.getIndexValue(0));
+        assertEquals(0, newEntryList.getIndexValue(1));
+        assertEquals(0, newEntryList.getIndexValue(2));
+        assertEquals(1, newEntryList.getIndexValue(3));
+        assertEquals(0, newEntryList.getIndexValue(4));
+        assertEquals(0, newEntryList.getIndexValue(5));
+        assertEquals(0, newEntryList.getIndexValue(6));
+        assertEquals(0, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
+    }
+
+    @Test
+    void testSortAndCountListByPhaseOnlyFullMoonUnexpectedIllegalSizeException() {
+        try {
+            newEntryList.addObservation(fullMoonEntryOne);
+            newEntryList.addObservation(fullMoonEntryTwo);
+        } catch (IllegalListSize illegalListSize) {
+            fail("Unexpected IllegalListSize Exception");
+
+        }
+        newEntryList.sortAndCountListByPhase();
+
+        assertEquals(0, newEntryList.getIndexValue(0));
+        assertEquals(0, newEntryList.getIndexValue(1));
+        assertEquals(0, newEntryList.getIndexValue(2));
+        assertEquals(0, newEntryList.getIndexValue(3));
+        assertEquals(2, newEntryList.getIndexValue(4));
+        assertEquals(0, newEntryList.getIndexValue(5));
+        assertEquals(0, newEntryList.getIndexValue(6));
+        assertEquals(0, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
+    }
+
+    @Test
+    void testSortAndCountListByPhaseOnlyWaningGibbousUnexpectedIllegalSizeException() {
+        try {
+            newEntryList.addObservation(waningGibbousEntryOne);
+            newEntryList.addObservation(waningGibbousEntryTwo);
+        } catch (IllegalListSize illegalListSize) {
+            fail("Unexpected IllegalListSize Exception");
+        }
+
+        newEntryList.sortAndCountListByPhase();
+
+        assertEquals(0, newEntryList.getIndexValue(0));
+        assertEquals(0, newEntryList.getIndexValue(1));
+        assertEquals(0, newEntryList.getIndexValue(2));
+        assertEquals(0, newEntryList.getIndexValue(3));
+        assertEquals(0, newEntryList.getIndexValue(4));
+        assertEquals(2, newEntryList.getIndexValue(5));
+        assertEquals(0, newEntryList.getIndexValue(6));
+        assertEquals(0, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
+    }
+
+    @Test
+    void testSortAndCountListByPhaseOnlyThirdQuarterUnexpectedIllegalSizeException() {
+        try {
+            newEntryList.addObservation(thirdQuarterSingleEntry);
+        } catch (IllegalListSize illegalListSize) {
+            fail("Unexpected IllegalListSize Exception");
+        }
+        newEntryList.sortAndCountListByPhase();
+
+        assertEquals(0, newEntryList.getIndexValue(0));
+        assertEquals(0, newEntryList.getIndexValue(1));
+        assertEquals(0, newEntryList.getIndexValue(2));
+        assertEquals(0, newEntryList.getIndexValue(3));
+        assertEquals(0, newEntryList.getIndexValue(4));
+        assertEquals(0, newEntryList.getIndexValue(5));
+        assertEquals(1, newEntryList.getIndexValue(6));
+        assertEquals(0, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
+    }
+
+    @Test
+    void testSortAndCountListByPhaseOnlyWaningCrescentUnexpectedIllegalSizeException() {
+        try {
+            newEntryList.addObservation(waningCrescentSingleEntry);
+        } catch (IllegalListSize illegalListSize) {
+            fail("Unexpected IllegalListSize Exception");
+        }
+        newEntryList.sortAndCountListByPhase();
+
+        assertEquals(0, newEntryList.getIndexValue(0));
+        assertEquals(0, newEntryList.getIndexValue(1));
+        assertEquals(0, newEntryList.getIndexValue(2));
+        assertEquals(0, newEntryList.getIndexValue(3));
+        assertEquals(0, newEntryList.getIndexValue(4));
+        assertEquals(0, newEntryList.getIndexValue(5));
+        assertEquals(0, newEntryList.getIndexValue(6));
+        assertEquals(1, newEntryList.getIndexValue(7));
+        assertEquals(8, newEntryList.getSortedListSize());
+    }
+
+    @Test
+    void testSortAndCountListByPhaseManyDifferentPhasesSomePhasesOmittedUnexpectedIllegalSizeException() {
+
+        try {
+            newEntryList.addObservation(waxingGibbousSingleEntry);
+            newEntryList.addObservation(waningCrescentSingleEntry);
+            newEntryList.addObservation(newMoonEntryOne);
+            newEntryList.addObservation(fullMoonEntryTwo);
+            newEntryList.addObservation(newMoonEntryTwo);
+        } catch (IllegalListSize illegalListSize) {
+            fail("Unexpected NotIllegalListSize Exception");
+        }
+
+        newEntryList.sortAndCountListByPhase();
+
+        assertEquals(2, newEntryList.getIndexValue(0));
+        assertEquals(0, newEntryList.getIndexValue(1));
+        assertEquals(0, newEntryList.getIndexValue(2));
+        assertEquals(1, newEntryList.getIndexValue(3));
+        assertEquals(1, newEntryList.getIndexValue(4));
+        assertEquals(0, newEntryList.getIndexValue(5));
+        assertEquals(0, newEntryList.getIndexValue(6));
         assertEquals(1, newEntryList.getIndexValue(7));
         assertEquals(8, newEntryList.getSortedListSize());
     }
