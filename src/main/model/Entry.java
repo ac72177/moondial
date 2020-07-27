@@ -4,7 +4,7 @@ package model;
 public class Entry extends MoonTime {
     public String time;
 
-
+    // REQUIRES: moonPhase to be a moon Phase and angleFromEast to be one of 0, 45, 90, 135, 180
     // EFFECTS: creates an entry to be put into a list
     public Entry(String moonPhase, int angleFromEast) {
         super(moonPhase, angleFromEast);

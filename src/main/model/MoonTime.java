@@ -5,6 +5,7 @@ public class MoonTime {
     private final String moonPhase;
     private final int angleFromEast;
 
+    // REQUIRES: moonPhase to be a moon Phase and angleFromEast to be one of 0, 45, 90, 135, 180
     // EFFECTS: creates an observation of moonPhase and angle
     public MoonTime(String moonPhase, int angleFromEast) {
         this.moonPhase = moonPhase;
@@ -159,9 +160,7 @@ public class MoonTime {
         return angleFromEast;
     }
 
-    // REQUIRES: moonPhase is one of "New Moon", "Waxing Crescent", "First Quarter", "Waxing Gibbous", "Full Moon",
-    //           "Waning Gibbous",
-    //           angleFromEast is one of 0, 45, 90, 135, 180
+    // REQUIRES: moonPhase to be a moon Phase and angleFromEast to be one of 0, 45, 90, 135, 180
     // MODIFIES: this
     // EFFECTS: return approximate time based on moonPhase and angleFromEast
     public String identifyTime(String moonPhase, int angleFromEast) {
