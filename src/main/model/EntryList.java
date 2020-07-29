@@ -1,7 +1,9 @@
 package model;
 
 import exceptions.IllegalListSize;
+import persistence.Reader;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,6 +97,22 @@ public class EntryList extends Sortable {
         } else {
             sortedByPhase.set(7, wanCr += 1);
         }
+    }
+
+    @Override
+    public void save(PrintWriter printWriter) {
+        for (Entry item : entryList) {
+            printWriter.print(item.getMoonPhase());
+            printWriter.print(Reader.DELIMITER);
+            printWriter.print(item.getAngleFromEast());
+            printWriter.print(Reader.DELIMITER);
+            printWriter.print(item.getTime());
+        }
+    }
+
+    @Override
+    public void add(Entry parseEntry) {
+        entryList.add(parseEntry);
     }
 }
 

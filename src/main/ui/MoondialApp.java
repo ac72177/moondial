@@ -3,13 +3,21 @@ package ui;
 import exceptions.IllegalListSize;
 import model.Entry;
 import model.EntryList;
+import model.Sortable;
+import persistence.Reader;
+import persistence.Writer;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Scanner;
 
 // Time Estimator Application based on TellerApp in AccountNotRobust
 
 public class MoondialApp {
+    private static final String ENTRYLIST_FILE = ".data/entrylist.txt";
     private EntryList entryList;
     private List<Integer> sortedByPhase;
     private Scanner input;
@@ -26,6 +34,7 @@ public class MoondialApp {
         String command;
         input = new Scanner(System.in);
 
+        loadEntryList();
         initialize();
 
         while (keepGoing) {
@@ -35,12 +44,26 @@ public class MoondialApp {
 
             if (command.equals("q")) {
                 keepGoing = false;
+                saveEntryList();
             } else {
                 processCommand(command);
             }
         }
 
         System.out.println("\nGoodbye! Thank you for using Moondial.");
+    }
+
+
+    // MODIFIES: this
+    // EFFECTS: loads accounts from ACCOUNTS_FILE, if that file exists;
+    // otherwise initializes accounts with default values
+    private void loadEntryList() {
+        try {
+            EntryList pastEntryList = Reader.readEntryList(new File(ENTRYLIST_FILE));
+            entryList = pastEntryList;
+        } catch (IOException e) {
+            initialize();
+        }
     }
 
     // MODIFIES: this
@@ -50,6 +73,21 @@ public class MoondialApp {
         sortedByPhase = entryList.sortAndCountListByPhase();
     }
 
+    // EFFECTS: saves state of entryList to ENTRYLIST_FILE
+    private void saveEntryList() {
+        try {
+            Writer writer = new Writer(new File(ENTRYLIST_FILE));
+            writer.write(entryList);
+            writer.close();
+            System.out.println("List of Observations saved to file " + ENTRYLIST_FILE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to save observations to " + ENTRYLIST_FILE);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            // this is due to a programming error
+        }
+    }
+
     // EFFECTS: displays menu of options to user
     private void displayMenu() {
         System.out.println("\nSelect from:");
@@ -57,7 +95,7 @@ public class MoondialApp {
         System.out.println("\tr -> remove entry");
         System.out.println("\te -> print entry");
         System.out.println("\tp -> select list to print");
-        System.out.println("\tq -> quit");
+        System.out.println("\tq -> quit and save");
     }
 
     // MODIFIES: this

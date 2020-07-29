@@ -1,10 +1,12 @@
 package model;
 
+import persistence.Saveable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents a Sorted List by phase
-public abstract class Sortable {
+public abstract class Sortable implements Saveable {
     public List<Integer> sortedByPhase;
 
     public Sortable() {
@@ -29,5 +31,7 @@ public abstract class Sortable {
     public int getSortedListSize() {
         return sortedByPhase.size();
     }
+
+    public abstract void add(Entry parseEntry);
 }
 

@@ -2,8 +2,8 @@ package model;
 
 // Represents an observation given a moon phase and an angle
 public class MoonTime {
-    private final String moonPhase;
-    private final int angleFromEast;
+    public final String moonPhase;
+    public final int angleFromEast;
 
     // REQUIRES: moonPhase to be a moon Phase and angleFromEast to be one of 0, 45, 90, 135, 180
     // EFFECTS: creates an observation of moonPhase and angle
