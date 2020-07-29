@@ -24,3 +24,5 @@ any user how to use the moon, when it is visible, to determine the approximate t
 - As a user, I want to see a list of my past observations that have not been deleted
 - As a user, I want to see a summary of my past observations categorized by moon phase
 - As a user, I want to select observations to delete 
+- As a user, I want to be able to save my current list of observations to file
+- As a user, I want to be able to optionally load my list of observations from file when the program starts
