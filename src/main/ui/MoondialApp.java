@@ -3,7 +3,6 @@ package ui;
 import exceptions.IllegalListSize;
 import model.Entry;
 import model.EntryList;
-import model.Sortable;
 import persistence.Reader;
 import persistence.Writer;
 
@@ -11,7 +10,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Scanner;
 
