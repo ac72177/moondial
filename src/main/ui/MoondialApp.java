@@ -34,7 +34,6 @@ public class MoondialApp {
         input = new Scanner(System.in);
 
         loadEntryList();
-        initialize();
 
         while (keepGoing) {
             displayMenu();
@@ -54,7 +53,7 @@ public class MoondialApp {
 
 
     // MODIFIES: this
-    // EFFECTS: loads accounts from ACCOUNTS_FILE, if that file exists;
+    // EFFECTS: loads accounts from ENTRYLIST_FILE, if that file exists;
     // otherwise initializes accounts with default values
     private void loadEntryList() {
         try {

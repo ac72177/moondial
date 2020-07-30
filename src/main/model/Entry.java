@@ -22,7 +22,6 @@ public class Entry extends MoonTime {
         this.time = time;
     }
 
-
     // EFFECTS: returns the time of the entry
     public String getTime() {
         return this.time;
