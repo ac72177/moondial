@@ -4,7 +4,8 @@
 
 The application, *Moondial* will attempt to teach the user to determine the approximate time, based on the Moon's 
 position in the sky. The precision will be determined by the precision of the angle specified Time approximation will 
-only be possible when the moon is visible in the user's sky view. The application will use data inputted by the user such as:
+only be possible when the moon is visible in the user's sky view. The application will use data inputted by the user 
+such as:
 - current moon phase
 - position in the sky 
 - approximate angle to the horizon
@@ -25,4 +26,5 @@ any user how to use the moon, when it is visible, to determine the approximate t
 - As a user, I want to see a summary of my past observations categorized by moon phase
 - As a user, I want to select observations to delete 
 - As a user, I want to be able to save my current list of observations to file
-- As a user, I want to be able to optionally load my list of observations from file when the program starts
+- As a user, I want to be able to automatically load my previous list of observations from file when the program starts
+- As a user, I want to be able to automatically save my observations when I quit
