@@ -1,0 +1,2 @@
+Full Moon,180,6AM
+Third Quarter,45,3AM

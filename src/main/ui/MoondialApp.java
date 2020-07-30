@@ -11,13 +11,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Scanner;
 
 // Time Estimator Application based on TellerApp in AccountNotRobust
 
 public class MoondialApp {
-    private static final String ENTRYLIST_FILE = ".data/entrylist.txt";
+    private static final String ENTRYLIST_FILE = "./data/entrylist.txt";
     private EntryList entryList;
     private List<Integer> sortedByPhase;
     private Scanner input;
@@ -43,8 +44,8 @@ public class MoondialApp {
             command = command.toLowerCase();
 
             if (command.equals("q")) {
-                keepGoing = false;
                 saveEntryList();
+                keepGoing = false;
             } else {
                 processCommand(command);
             }
@@ -95,6 +96,7 @@ public class MoondialApp {
         System.out.println("\tr -> remove entry");
         System.out.println("\te -> print entry");
         System.out.println("\tp -> select list to print");
+        System.out.println("\ts -> save entry list");
         System.out.println("\tq -> quit and save");
     }
 
@@ -109,6 +111,8 @@ public class MoondialApp {
             printSelectedEntry();
         } else if (command.equals("p")) {
             printList();
+        } else if (command.equals("s")) {
+            saveEntryList();
         } else {
             System.out.println("Selection not valid...");
         }

@@ -106,7 +106,8 @@ public class EntryList extends Sortable {
             printWriter.print(Reader.DELIMITER);
             printWriter.print(item.getAngleFromEast());
             printWriter.print(Reader.DELIMITER);
-            printWriter.print(item.getTime());
+            printWriter.print(item.identifyTime(item.getMoonPhase(),item.getAngleFromEast()));
+            printWriter.println();
         }
     }
 

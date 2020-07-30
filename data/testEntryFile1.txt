@@ -1,0 +1,2 @@
+New Moon,90,Noon
+Waxing Crescent,135,6PM

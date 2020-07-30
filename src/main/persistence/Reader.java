@@ -14,7 +14,7 @@ import java.util.List;
 public class Reader {
     public static final String DELIMITER = ",";
 
-    // EFFECTS: returns a list of accounts parsed from file; throws
+    // EFFECTS: returns an entry list parsed from file; throws
     // IOException if an exception is raised when opening / reading from file
     public static EntryList readEntryList(File file) throws IOException {
         List<String> fileContent = readFile(file);
@@ -46,14 +46,15 @@ public class Reader {
         return new ArrayList<>(Arrays.asList(splits));
     }
 
-    // REQUIRES: components has size 2 where element 0 represents the
+    // REQUIRES: components has size 3 where element 0 represents the
     // moon phase of the next Entry to be constructed, element 1 represents
-    // the angle from the East facing South
+    // the angle from the East facing South, element 2 represents the time of observation
     // EFFECTS: returns an entry constructed from components
     private static Entry parseEntry(List<String> components) {
-        String moonPhase = components.get(0);
-        int angleFromEast = Integer.parseInt(components.get(1));
-        return new Entry(moonPhase, angleFromEast);
+        String phaseName = components.get(0);
+        int angle = Integer.parseInt(components.get(1));
+        String time = components.get(2);
+        return new Entry(phaseName, angle, time);
     }
 }
 
