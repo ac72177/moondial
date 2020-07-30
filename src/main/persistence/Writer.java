@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
-// A writer that can write account data to a file
+// A writer that can write an entry list to a file based on Reader in AccountNotRobust
 public class Writer {
     private PrintWriter printWriter;
 

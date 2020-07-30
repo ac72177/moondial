@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-// A reader that can read account data from a file
+// A reader that can read an entry list from a file based on Reader in AccountNotRobust
 public class Reader {
     public static final String DELIMITER = ",";
 
