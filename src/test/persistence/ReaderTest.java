@@ -12,6 +12,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class ReaderTest {
+
+    @Test
+    // dummy test suggested by TA in piazza for code coverage score
+    void testReaderConstructorDummy() {
+        Reader reader = new Reader();
+    }
+
     @Test
     void testParseEntryListFile1() {
         try {
