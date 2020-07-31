@@ -301,7 +301,6 @@ public class MoondialApp {
         while (!(selectionList.equals("e") || (selectionList.equals("s")))) {
             System.out.println("Select a list to print.");
 
-
             System.out.println("e -> Entry List");
             System.out.println("s -> Sorted List");
             selectionList = input.next();
