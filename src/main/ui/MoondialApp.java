@@ -219,6 +219,7 @@ public class MoondialApp {
         } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
             System.err.println("This is out of the bounds of the list.");
         }
+        printEntryList();
         entryList.sortAndCountListByPhase();
     }
 
@@ -319,7 +320,7 @@ public class MoondialApp {
         if (entryList.size() == 0) {
             System.out.println("No observations have been made.");
         }
-        entryList.sortAndCountListByPhase();
+        sortedByPhase = entryList.sortAndCountListByPhase();
         System.out.println(" Here is your summary of observations");
         System.out.println(" ");
         System.out.println("# of New Moon = " + sortedByPhase.get(0));
