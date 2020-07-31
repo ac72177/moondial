@@ -341,7 +341,6 @@ public class MoondialApp {
         } else {
             System.out.println("No Observations have been made.");
         }
-        System.out.println(entryList);
     }
 
     // REQUIRES: observation is in list
