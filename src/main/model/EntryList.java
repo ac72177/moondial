@@ -99,6 +99,8 @@ public class EntryList extends Sortable {
         }
     }
 
+
+
     @Override
     public void save(PrintWriter printWriter) {
         for (Entry item : entryList) {
