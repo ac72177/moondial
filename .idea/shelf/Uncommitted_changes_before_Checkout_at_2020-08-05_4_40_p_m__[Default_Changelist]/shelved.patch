@@ -1,0 +1,328 @@
+Index: src/main/ui/AnglePanel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ui;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.awt.event.ActionEvent;\r\nimport java.awt.event.ActionListener;\r\n\r\nimport static ui.EntryListPanel.LBL_WIDTH;\r\n\r\npublic class AnglePanel extends JPanel implements ActionListener {\r\n    private JPanel anglePanel;\r\n    private JPanel zeroDegrees;\r\n    private JPanel fortyFiveDegrees;\r\n    private JPanel ninetyDegrees;\r\n    private JPanel hundredThirtyFiveDegrees;\r\n    private JPanel hundredEightyDegrees;\r\n    private int angleFromEast;\r\n    private static final int ANGLE_PANEL_HEIGHT = 200;\r\n    private JLabel angleInstruction;\r\n\r\n\r\n    public AnglePanel() {\r\n        anglePanel = new JPanel(new FlowLayout());\r\n        anglePanel.setBackground(new Color(0xA00F32));\r\n        anglePanel.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, ANGLE_PANEL_HEIGHT));\r\n        angleInstruction = new JLabel(\"Please choose the angle the moon makes with the east.\");\r\n        anglePanel.add(angleInstruction);\r\n\r\n       // initializeAngleButtonPanels();\r\n       // initializeAngleButtons();  todo uncomment\r\n    }\r\n\r\n    private void initializeAngleButtonPanels() {\r\n        zeroDegrees = new JPanel();\r\n        fortyFiveDegrees = new JPanel();\r\n        ninetyDegrees = new JPanel();\r\n        hundredThirtyFiveDegrees = new JPanel();\r\n        hundredEightyDegrees = new JPanel();\r\n\r\n        anglePanel.add(zeroDegrees, FlowLayout.LEFT);\r\n        anglePanel.add(fortyFiveDegrees, FlowLayout.CENTER);\r\n        anglePanel.add(ninetyDegrees, FlowLayout.RIGHT);\r\n        anglePanel.add(hundredThirtyFiveDegrees, FlowLayout.LEADING);\r\n        anglePanel.add(hundredEightyDegrees, FlowLayout.TRAILING);\r\n    }\r\n\r\n    // MODIFIES: this\r\n    // EFFECTS: a helper method which declares and instantiates all radio moon phase buttons\r\n    private void initializeAngleButtons() {\r\n        JRadioButton zeroButton = new JRadioButton(\"0\");\r\n        zeroButton.setActionCommand(\"0\");\r\n        JRadioButton fortyFiveButton = new JRadioButton(\"45\");\r\n        fortyFiveButton.setActionCommand(\"45\");\r\n        JRadioButton ninetyButton = new JRadioButton(\"90\");\r\n        ninetyButton.setActionCommand(\"90\");\r\n        JRadioButton hundredThirtyFiveButton = new JRadioButton(\"135\");\r\n        hundredThirtyFiveButton.setActionCommand(\"135\");\r\n        JRadioButton hundredEightyButton = new JRadioButton(\"180\");\r\n        hundredEightyButton.setActionCommand(\"180\");\r\n\r\n\r\n        ButtonGroup group = new ButtonGroup();\r\n        group.add(zeroButton);\r\n        group.add(fortyFiveButton);\r\n        group.add(ninetyButton);\r\n        group.add(hundredThirtyFiveButton);\r\n        group.add(hundredEightyButton);\r\n\r\n        zeroButton.addActionListener(this);\r\n        fortyFiveButton.addActionListener(this);\r\n        ninetyButton.addActionListener(this);\r\n        hundredThirtyFiveButton.addActionListener(this);\r\n        hundredEightyButton.addActionListener(this);\r\n    }\r\n\r\n    @Override\r\n    public void actionPerformed(ActionEvent e) {\r\n        angleFromEast = Integer.parseInt(e.getActionCommand());\r\n        anglePanel.setVisible(false);\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/ui/AnglePanel.java	(revision 6d6c160e09015112418cc82d161a11e9cc4dfaf2)
++++ src/main/ui/AnglePanel.java	(date 1596669488789)
+@@ -5,61 +5,55 @@
+ import java.awt.event.ActionEvent;
+ import java.awt.event.ActionListener;
+ 
++import static java.awt.GridBagConstraints.SOUTHEAST;
+ import static ui.EntryListPanel.LBL_WIDTH;
++import static ui.MoondialGUI.PANEL_HEIGHT;
+ 
+ public class AnglePanel extends JPanel implements ActionListener {
+     private JPanel anglePanel;
+-    private JPanel zeroDegrees;
+-    private JPanel fortyFiveDegrees;
+-    private JPanel ninetyDegrees;
+-    private JPanel hundredThirtyFiveDegrees;
+-    private JPanel hundredEightyDegrees;
++    private JRadioButton zeroButton;
++    private JRadioButton fortyFiveButton;
++    private JRadioButton ninetyButton;
++    private JRadioButton hundredThirtyFiveButton;
++    private JRadioButton hundredEightyButton;
+     private int angleFromEast;
+     private static final int ANGLE_PANEL_HEIGHT = 200;
+     private JLabel angleInstruction;
++    private ButtonGroup group;
++    private final Icon icon;
++    private GridBagConstraints gbc;
+ 
+ 
+     public AnglePanel() {
+-        anglePanel = new JPanel(new FlowLayout());
+-        anglePanel.setBackground(new Color(0xA00F32));
+-        anglePanel.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, ANGLE_PANEL_HEIGHT));
++        anglePanel = new JPanel();
++        gbc = new GridBagConstraints();
++        setLayout(new GridBagLayout());
++
+         angleInstruction = new JLabel("Please choose the angle the moon makes with the east.");
+         anglePanel.add(angleInstruction);
+ 
+-       // initializeAngleButtonPanels();
+-       // initializeAngleButtons();  todo uncomment
+-    }
++        initializeAngleButtons();
++        addAngleButtonsToPanel();
+ 
+-    private void initializeAngleButtonPanels() {
+-        zeroDegrees = new JPanel();
+-        fortyFiveDegrees = new JPanel();
+-        ninetyDegrees = new JPanel();
+-        hundredThirtyFiveDegrees = new JPanel();
+-        hundredEightyDegrees = new JPanel();
+-
+-        anglePanel.add(zeroDegrees, FlowLayout.LEFT);
+-        anglePanel.add(fortyFiveDegrees, FlowLayout.CENTER);
+-        anglePanel.add(ninetyDegrees, FlowLayout.RIGHT);
+-        anglePanel.add(hundredThirtyFiveDegrees, FlowLayout.LEADING);
+-        anglePanel.add(hundredEightyDegrees, FlowLayout.TRAILING);
++        icon = null; // todo maybe an empty something
+     }
+ 
+     // MODIFIES: this
+     // EFFECTS: a helper method which declares and instantiates all radio moon phase buttons
+     private void initializeAngleButtons() {
+-        JRadioButton zeroButton = new JRadioButton("0");
++        zeroButton = new JRadioButton("0", icon);
+         zeroButton.setActionCommand("0");
+-        JRadioButton fortyFiveButton = new JRadioButton("45");
++
++        fortyFiveButton = new JRadioButton("45", icon);
+         fortyFiveButton.setActionCommand("45");
+-        JRadioButton ninetyButton = new JRadioButton("90");
++        ninetyButton = new JRadioButton("90", icon);
+         ninetyButton.setActionCommand("90");
+-        JRadioButton hundredThirtyFiveButton = new JRadioButton("135");
++        hundredThirtyFiveButton = new JRadioButton("135", icon);
+         hundredThirtyFiveButton.setActionCommand("135");
+-        JRadioButton hundredEightyButton = new JRadioButton("180");
++        hundredEightyButton = new JRadioButton("180", icon);
+         hundredEightyButton.setActionCommand("180");
+ 
+-
+-        ButtonGroup group = new ButtonGroup();
++        group = new ButtonGroup();
+         group.add(zeroButton);
+         group.add(fortyFiveButton);
+         group.add(ninetyButton);
+@@ -71,6 +65,36 @@
+         ninetyButton.addActionListener(this);
+         hundredThirtyFiveButton.addActionListener(this);
+         hundredEightyButton.addActionListener(this);
++
++    }
++
++    private void addAngleButtonsToPanel() {
++        gbc.insets = new Insets(30, 60, 30, 60);
++        gbc.gridx = 1;
++        gbc.gridy = 7;
++        gbc.gridwidth = 1;
++        gbc.gridheight = 1;
++        this.add(zeroButton, gbc);
++        gbc.gridx = 3;
++        gbc.gridy = 4;
++        gbc.gridwidth = 1;
++        gbc.gridheight = 1;
++        this.add(fortyFiveButton, gbc);
++        gbc.gridx = 7;
++        gbc.gridy = 1;
++        gbc.gridwidth = 1;
++        gbc.gridheight = 1;
++        this.add(ninetyButton, gbc);
++        gbc.gridx = 10;
++        gbc.gridy = 4;
++        gbc.gridwidth = 1;
++        gbc.gridheight = 1;
++        this.add(hundredThirtyFiveButton, gbc);
++        gbc.gridx = 13;
++        gbc.gridy = 7;
++        gbc.gridwidth = 1;
++        gbc.gridheight = 1;
++        this.add(hundredEightyButton, gbc);
+     }
+ 
+     @Override
+Index: src/main/ui/MoonPhasePanel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ui;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.awt.event.ActionEvent;\r\nimport java.awt.event.ActionListener;\r\n\r\nimport static ui.EntryListPanel.LBL_WIDTH;\r\n\r\npublic class MoonPhasePanel extends JPanel implements ActionListener {\r\n    private final JPanel moonPhasePanel;\r\n    private JPanel newMoon;\r\n    private JPanel waxingCrescent;\r\n    private JPanel firstQuarter;\r\n    private JPanel waxingGibbous;\r\n    private JPanel fullMoon;\r\n    private JPanel waningGibbous;\r\n    private JPanel thirdQuarter;\r\n    private JPanel waningCrescent;\r\n    private String moonPhase;\r\n    private static final int ANGLE_PANEL_HEIGHT = 200;\r\n\r\n    public MoonPhasePanel() {\r\n        moonPhasePanel = new JPanel(new FlowLayout());\r\n        moonPhasePanel.setBackground(new Color(0x488090));\r\n        moonPhasePanel.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, ANGLE_PANEL_HEIGHT));\r\n      //  initializeMoonPhaseButtonPanels();\r\n      //  initializePhaseButtons();\r\n    }\r\n\r\n    private void initializeMoonPhaseButtonPanels() {\r\n        newMoon = new JPanel();\r\n        waxingCrescent = new JPanel();\r\n        firstQuarter = new JPanel();\r\n        waxingGibbous = new JPanel();\r\n        fullMoon = new JPanel();\r\n        waningGibbous = new JPanel();\r\n        thirdQuarter = new JPanel();\r\n        waningCrescent = new JPanel();\r\n\r\n        moonPhasePanel.add(newMoon, FlowLayout.LEFT);\r\n        moonPhasePanel.add(waxingCrescent, FlowLayout.RIGHT);\r\n        moonPhasePanel.add(firstQuarter, FlowLayout.CENTER);\r\n        moonPhasePanel.add(waxingGibbous, FlowLayout.SOUTH);\r\n        moonPhasePanel.add(fullMoon, BorderLayout.SOUTH);\r\n        moonPhasePanel.add(waningGibbous, BorderLayout.SOUTH);\r\n        moonPhasePanel.add(thirdQuarter, BorderLayout.SOUTH);\r\n        moonPhasePanel.add(waningCrescent, BorderLayout.SOUTH);\r\n    }\r\n\r\n    // MODIFIES: this\r\n    // EFFECTS: a helper method which declares and instantiates all radio moon phase buttons\r\n    private void initializePhaseButtons() {\r\n        JRadioButton newMButton = new JRadioButton(\"New Moon\");\r\n        newMButton.setActionCommand(\"New Moon\");\r\n        JRadioButton waxCrButton = new JRadioButton(\"Waxing Crescent\");\r\n        waxCrButton.setActionCommand(\"Waxing Crescent\");\r\n        JRadioButton firstQButton = new JRadioButton(\"First Quarter\");\r\n        firstQButton.setActionCommand(\"First Quarter\");\r\n        JRadioButton waxGibButton = new JRadioButton(\"Waxing Gibbous\");\r\n        waxGibButton.setActionCommand(\"Waxing Gibbous\");\r\n        JRadioButton fullMButton = new JRadioButton(\"Full Moon\");\r\n        fullMButton.setActionCommand(\"Full Moon\");\r\n        JRadioButton wanGibButton = new JRadioButton(\"Waning Gibbous\");\r\n        wanGibButton.setActionCommand(\"Waning Gibbous\");\r\n        JRadioButton thirdQButton = new JRadioButton(\"Third Quarter\");\r\n        thirdQButton.setActionCommand(\"Third Quarter\");\r\n        JRadioButton wanCrButton = new JRadioButton(\"Waning Crescent\");\r\n        wanCrButton.setActionCommand(\"Waning Crescent\");\r\n\r\n        ButtonGroup group = new ButtonGroup();\r\n        group.add(newMButton);\r\n        group.add(waxCrButton);\r\n        group.add(firstQButton);\r\n        group.add(waxGibButton);\r\n        group.add(fullMButton);\r\n        group.add(wanGibButton);\r\n        group.add(thirdQButton);\r\n        group.add(wanCrButton);\r\n\r\n        newMButton.addActionListener(this);\r\n        waxCrButton.addActionListener(this);\r\n        firstQButton.addActionListener(this);\r\n        waxGibButton.addActionListener(this);\r\n        fullMButton.addActionListener(this);\r\n        wanGibButton.addActionListener(this);\r\n        thirdQButton.addActionListener(this);\r\n        wanGibButton.addActionListener(this);\r\n    }\r\n\r\n    @Override\r\n    public void actionPerformed(ActionEvent e) {\r\n        moonPhase = e.getActionCommand(); // todo maybe some issues here\r\n        moonPhasePanel.setVisible(false);\r\n\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/ui/MoonPhasePanel.java	(revision 6d6c160e09015112418cc82d161a11e9cc4dfaf2)
++++ src/main/ui/MoonPhasePanel.java	(date 1596670195995)
+@@ -5,67 +5,47 @@
+ import java.awt.event.ActionEvent;
+ import java.awt.event.ActionListener;
+ 
+-import static ui.EntryListPanel.LBL_WIDTH;
+ 
+-public class MoonPhasePanel extends JPanel implements ActionListener {
++public class MoonPhasePanel extends JPanel implements ActionListener  {
+     private final JPanel moonPhasePanel;
+-    private JPanel newMoon;
+-    private JPanel waxingCrescent;
+-    private JPanel firstQuarter;
+-    private JPanel waxingGibbous;
+-    private JPanel fullMoon;
+-    private JPanel waningGibbous;
+-    private JPanel thirdQuarter;
+-    private JPanel waningCrescent;
++    private JRadioButton newMButton;
++    private JRadioButton waxCrButton;
++    private JRadioButton firstQButton;
++    private JRadioButton waxGibButton;
++    private JRadioButton fullMButton;
++    private JRadioButton wanGibButton;
++    private JRadioButton thirdQButton;
++    private JRadioButton wanCrButton;
+     private String moonPhase;
+-    private static final int ANGLE_PANEL_HEIGHT = 200;
++    private GridBagConstraints gbc;
+ 
+     public MoonPhasePanel() {
+-        moonPhasePanel = new JPanel(new FlowLayout());
+-        moonPhasePanel.setBackground(new Color(0x488090));
+-        moonPhasePanel.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, ANGLE_PANEL_HEIGHT));
+-      //  initializeMoonPhaseButtonPanels();
+-      //  initializePhaseButtons();
+-    }
++        moonPhasePanel = new JPanel();
++        gbc = new GridBagConstraints();
++        setLayout(new GridBagLayout());
++        initializePhaseButtons();
++        addPhaseButtonsToPanel();
+ 
+-    private void initializeMoonPhaseButtonPanels() {
+-        newMoon = new JPanel();
+-        waxingCrescent = new JPanel();
+-        firstQuarter = new JPanel();
+-        waxingGibbous = new JPanel();
+-        fullMoon = new JPanel();
+-        waningGibbous = new JPanel();
+-        thirdQuarter = new JPanel();
+-        waningCrescent = new JPanel();
+-
+-        moonPhasePanel.add(newMoon, FlowLayout.LEFT);
+-        moonPhasePanel.add(waxingCrescent, FlowLayout.RIGHT);
+-        moonPhasePanel.add(firstQuarter, FlowLayout.CENTER);
+-        moonPhasePanel.add(waxingGibbous, FlowLayout.SOUTH);
+-        moonPhasePanel.add(fullMoon, BorderLayout.SOUTH);
+-        moonPhasePanel.add(waningGibbous, BorderLayout.SOUTH);
+-        moonPhasePanel.add(thirdQuarter, BorderLayout.SOUTH);
+-        moonPhasePanel.add(waningCrescent, BorderLayout.SOUTH);
+     }
+ 
+     // MODIFIES: this
+     // EFFECTS: a helper method which declares and instantiates all radio moon phase buttons
+     private void initializePhaseButtons() {
+-        JRadioButton newMButton = new JRadioButton("New Moon");
++        newMButton = new JRadioButton("New Moon");
+         newMButton.setActionCommand("New Moon");
+-        JRadioButton waxCrButton = new JRadioButton("Waxing Crescent");
++        waxCrButton = new JRadioButton("Waxing Crescent");
+         waxCrButton.setActionCommand("Waxing Crescent");
+-        JRadioButton firstQButton = new JRadioButton("First Quarter");
++        firstQButton = new JRadioButton("First Quarter");
+         firstQButton.setActionCommand("First Quarter");
+-        JRadioButton waxGibButton = new JRadioButton("Waxing Gibbous");
++        waxGibButton = new JRadioButton("Waxing Gibbous");
+         waxGibButton.setActionCommand("Waxing Gibbous");
+-        JRadioButton fullMButton = new JRadioButton("Full Moon");
++        fullMButton = new JRadioButton("Full Moon");
+         fullMButton.setActionCommand("Full Moon");
+-        JRadioButton wanGibButton = new JRadioButton("Waning Gibbous");
++        wanGibButton = new JRadioButton("Waning Gibbous");
+         wanGibButton.setActionCommand("Waning Gibbous");
+-        JRadioButton thirdQButton = new JRadioButton("Third Quarter");
++        thirdQButton = new JRadioButton("Third Quarter");
+         thirdQButton.setActionCommand("Third Quarter");
+-        JRadioButton wanCrButton = new JRadioButton("Waning Crescent");
++        wanCrButton = new JRadioButton("Waning Crescent");
+         wanCrButton.setActionCommand("Waning Crescent");
+ 
+         ButtonGroup group = new ButtonGroup();
+@@ -88,11 +68,30 @@
+         wanGibButton.addActionListener(this);
+     }
+ 
++    private void addPhaseButtonsToPanel() {
++        gbc.insets = new Insets(0,5,0,5);
++        gbc.gridx = 0;
++        this.add(newMButton, gbc);
++        gbc.gridx = 1;
++        this.add(waxCrButton, gbc);
++        gbc.gridx = 2;
++        this.add(firstQButton, gbc);
++        gbc.gridx = 3;
++        this.add(waxGibButton, gbc);
++        gbc.gridx = 4;
++        this.add(fullMButton, gbc);
++        gbc.gridx = 5;
++        this.add(wanGibButton, gbc);
++        gbc.gridx = 6;
++        this.add(thirdQButton, gbc);
++        gbc.gridx = 7;
++        this.add(wanGibButton, gbc);
++
++    }
++
+     @Override
+     public void actionPerformed(ActionEvent e) {
+         moonPhase = e.getActionCommand(); // todo maybe some issues here
+-        moonPhasePanel.setVisible(false);
+ 
+     }
+-
+ }
+Index: src/main/ui/MoondialGUI.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ui;\r\n\r\nimport model.Entry;\r\nimport model.EntryList;\r\n\r\nimport javax.swing.*;\r\nimport javax.swing.border.Border;\r\nimport java.awt.*;\r\n\r\nimport static ui.EntryListPanel.LBL_WIDTH;\r\n\r\npublic class MoondialGUI extends JFrame {\r\n\r\n\r\n    private JFrame frame;\r\n    public static final int WIDTH = 1000;\r\n    public static final int HEIGHT = 700;\r\n    private EntryList entryList;\r\n    private EntryListPanel ep;\r\n    private JPanel op;\r\n    private MoonPhasePanel moonPhasePanel;\r\n    private Entry currentObservation;\r\n    public String moonPhase;\r\n    private int angleFromEast;\r\n    public AnglePanel anglePanel;\r\n\r\n\r\n    public MoondialGUI() {\r\n        super(\"Moondial\");\r\n        initializeGraphics();\r\n        initializeFields();\r\n    }\r\n\r\n    // MODIFIES: this\r\n    // EFFECTS: draws the JFrame window where Moondial will operate\r\n    private void initializeGraphics() {\r\n        setLayout(new BorderLayout());\r\n        setSize(new Dimension(WIDTH, HEIGHT));\r\n//        try {\r\n//            addNewEntry();\r\n//        } catch (IllegalListSize illegalListSize) {\r\n//            System.out.println(\"The list is full.\");\r\n//        }\r\n        setDefaultCloseOperation(EXIT_ON_CLOSE);\r\n        setLocationRelativeTo(null);\r\n        initializePanels();\r\n        setVisible(true);\r\n    }\r\n\r\n    private void initializePanels() {\r\n        entryList = new EntryList();\r\n        ep = new EntryListPanel(entryList);\r\n        op = new JPanel();\r\n        op.setBackground(new Color(0x095166));\r\n        op.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, HEIGHT));\r\n\r\n        moonPhasePanel = new MoonPhasePanel();\r\n      //  moonPhasePanel.setBounds(0, HEIGHT - 200, WIDTH, 100);\r\n        anglePanel = new AnglePanel();\r\n       // anglePanel.setBounds(0,HEIGHT - 100, WIDTH, 100);\r\n\r\n        add(ep, BorderLayout.EAST);\r\n        add(op, BorderLayout.WEST);\r\n        op.add(moonPhasePanel, BorderLayout.NORTH);\r\n        op.add(anglePanel, BorderLayout.SOUTH);\r\n    }\r\n\r\n\r\n\r\n    // MODIFIES: this\r\n    // EFFECTS: sets currentObservation to null\r\n    private void initializeFields() {\r\n        currentObservation = null;\r\n    }\r\n\r\n//    // MODIFIES: this\r\n//    // EFFECTS: declares and instantiates an entry (newEntry), and adds it to the entryList\r\n//    private void addNewEntry() throws IllegalListSize {\r\n//        Entry newEntry = new Entry(moonPhase, angleFromEast);\r\n//        currentObservation = newEntry;\r\n//        entryList.addObservation(newEntry);\r\n//        validate();\r\n//\r\n\r\n\r\n\r\n\r\n\r\n    \r\n\r\n\r\n    public static void main(String[] args) {\r\n        new MoondialGUI();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/ui/MoondialGUI.java	(revision 6d6c160e09015112418cc82d161a11e9cc4dfaf2)
++++ src/main/ui/MoondialGUI.java	(date 1596670390866)
+@@ -3,8 +3,8 @@
+ import model.Entry;
+ import model.EntryList;
+ 
++
+ import javax.swing.*;
+-import javax.swing.border.Border;
+ import java.awt.*;
+ 
+ import static ui.EntryListPanel.LBL_WIDTH;
+@@ -13,8 +13,8 @@
+ 
+ 
+     private JFrame frame;
+-    public static final int WIDTH = 1000;
+-    public static final int HEIGHT = 700;
++    public static final int WIDTH = 1200;
++    public static final int HEIGHT = 800;
+     private EntryList entryList;
+     private EntryListPanel ep;
+     private JPanel op;
+@@ -23,6 +23,7 @@
+     public String moonPhase;
+     private int angleFromEast;
+     public AnglePanel anglePanel;
++    public static final int PANEL_HEIGHT = 100;
+ 
+ 
+     public MoondialGUI() {
+@@ -35,7 +36,8 @@
+     // EFFECTS: draws the JFrame window where Moondial will operate
+     private void initializeGraphics() {
+         setLayout(new BorderLayout());
+-        setSize(new Dimension(WIDTH, HEIGHT));
++        setMinimumSize(new Dimension(WIDTH, HEIGHT));
++
+ //        try {
+ //            addNewEntry();
+ //        } catch (IllegalListSize illegalListSize) {
+@@ -55,9 +57,12 @@
+         op.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, HEIGHT));
+ 
+         moonPhasePanel = new MoonPhasePanel();
+-      //  moonPhasePanel.setBounds(0, HEIGHT - 200, WIDTH, 100);
++        moonPhasePanel.setBackground(new Color(0x488090));
++        moonPhasePanel.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, PANEL_HEIGHT));
++
+         anglePanel = new AnglePanel();
+-       // anglePanel.setBounds(0,HEIGHT - 100, WIDTH, 100);
++        anglePanel.setBackground(new Color(0xA00F32));
++        anglePanel.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, PANEL_HEIGHT * 3));
+ 
+         add(ep, BorderLayout.EAST);
+         add(op, BorderLayout.WEST);

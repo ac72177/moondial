@@ -15,6 +15,7 @@ public class EntryListPanel extends JPanel {
     public static final int LBL_WIDTH = 200;
     private static final int LBL_HEIGHT = HEIGHT;
 
+    // EFFECTS: constructs an EntryListPanel
     public EntryListPanel(EntryList e) {
         entryList = e;
         entryListPanel = new JPanel(new BorderLayout());

@@ -23,7 +23,7 @@ public class MoondialGUI extends JFrame {
     public String moonPhase;
     private int angleFromEast;
     public AnglePanel anglePanel;
-    private static final int PANEL_HEIGHT = 200;
+    private static final int PANEL_HEIGHT = 300;
 
 
     public MoondialGUI() {
@@ -60,7 +60,7 @@ public class MoondialGUI extends JFrame {
         moonPhasePanel.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, PANEL_HEIGHT));
         anglePanel = new AnglePanel();
         anglePanel.setBackground(new Color(0xA00F32));
-        anglePanel.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, PANEL_HEIGHT * 2));
+        anglePanel.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, PANEL_HEIGHT));
 
         add(ep, BorderLayout.EAST);
         add(op, BorderLayout.WEST);

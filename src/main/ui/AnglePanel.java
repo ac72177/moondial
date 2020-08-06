@@ -18,8 +18,10 @@ public class AnglePanel extends JPanel implements ActionListener {
     private JRadioButton ninetyButton;
     private JRadioButton hundredThirtyFiveButton;
     private JRadioButton hundredEightyButton;
+    private Icon icon;
 
 
+    // EFFECTS: Constructs anglePanel to be placed on another panel
     public AnglePanel() {
         gbc = new GridBagConstraints();
         setLayout(new GridBagLayout());
@@ -27,7 +29,7 @@ public class AnglePanel extends JPanel implements ActionListener {
 
         angleInstruction = new JLabel("Please choose the angle the moon makes with the east.");
         anglePanel.add(angleInstruction);
-
+        icon = null;
         initializeAngleButtons();
         addAngleButtonsToPanel();
     }
@@ -35,17 +37,17 @@ public class AnglePanel extends JPanel implements ActionListener {
 
 
     // MODIFIES: this
-    // EFFECTS: a helper method which declares and instantiates all radio moon phase buttons
+    // EFFECTS: a helper method which declares and instantiates all radio angle buttons
     private void initializeAngleButtons() {
-        zeroButton = new JRadioButton("0");
+        zeroButton = new JRadioButton("0", icon);
         zeroButton.setActionCommand("0");
-        fortyFiveButton = new JRadioButton("45");
+        fortyFiveButton = new JRadioButton("45", icon);
         fortyFiveButton.setActionCommand("45");
-        ninetyButton = new JRadioButton("90");
+        ninetyButton = new JRadioButton("90", icon);
         ninetyButton.setActionCommand("90");
-        hundredThirtyFiveButton = new JRadioButton("135");
+        hundredThirtyFiveButton = new JRadioButton("135", icon);
         hundredThirtyFiveButton.setActionCommand("135");
-        hundredEightyButton = new JRadioButton("180");
+        hundredEightyButton = new JRadioButton("180", icon);
         hundredEightyButton.setActionCommand("180");
 
 
@@ -63,6 +65,8 @@ public class AnglePanel extends JPanel implements ActionListener {
         hundredEightyButton.addActionListener(this);
     }
 
+    // MODIFIES: this
+    // EFFECTS: helper method to add buttons to the panel
     private void addAngleButtonsToPanel() {
         gbc.insets = new Insets(40,70,40,70);
         gbc.gridx = 0;
