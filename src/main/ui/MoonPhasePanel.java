@@ -5,10 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static ui.EntryListPanel.LBL_WIDTH;
-
-public class MoonPhasePanel extends JPanel implements ActionListener {
-    private final JPanel moonPhasePanel;
+public class MoonPhasePanel extends SkyPanel implements ActionListener {
     private String moonPhase;
     private JRadioButton newMButton;
     private JRadioButton waxCrButton;
@@ -18,49 +15,22 @@ public class MoonPhasePanel extends JPanel implements ActionListener {
     private JRadioButton wanGibButton;
     private JRadioButton thirdQButton;
     private JRadioButton wanCrButton;
-    private GridBagConstraints gbc;
-    private ImageIcon newMoonImage;
-    private ImageIcon waxCrImage;
-    private ImageIcon firstQImage;
-    private ImageIcon waxGibImage;
-    private ImageIcon fullMImage;
-    private ImageIcon wanGibImage;
-    private ImageIcon thirdQImage;
-    private ImageIcon wanCrImage;
+
+    protected Icon icon;
 
 
     // EFFECTS: constructs a moonPhasePanel to be added onto a panel
     public MoonPhasePanel() {
-        gbc = new GridBagConstraints();
-        setLayout(new GridBagLayout());
-        moonPhasePanel = new JPanel();
-
-        initializePhaseButtons();
-        addMoonPhaseButtonToPanel();
+        super();
     }
-
 
 
     // MODIFIES: this
     // EFFECTS: a helper method which declares and instantiates all radio moon phase buttons
-    private void initializePhaseButtons() {
+    @Override
+    public void initializeButtons() {
         loadImages();
-        newMButton = new JRadioButton("New Moon", newMoonImage);
-        newMButton.setActionCommand("New Moon");
-        waxCrButton = new JRadioButton("Waxing Crescent",waxCrImage);
-        waxCrButton.setActionCommand("Waxing Crescent");
-        firstQButton = new JRadioButton("First Quarter",firstQImage);
-        firstQButton.setActionCommand("First Quarter");
-        waxGibButton = new JRadioButton("Waxing Gibbous",waxGibImage);
-        waxGibButton.setActionCommand("Waxing Gibbous");
-        fullMButton = new JRadioButton("Full Moon", fullMImage);
-        fullMButton.setActionCommand("Full Moon");
-        wanGibButton = new JRadioButton("Waning Gibbous", wanGibImage);
-        wanGibButton.setActionCommand("Waning Gibbous");
-        thirdQButton = new JRadioButton("Third Quarter", thirdQImage);
-        thirdQButton.setActionCommand("Third Quarter");
-        wanCrButton = new JRadioButton("Waning Crescent", wanCrImage);
-        wanCrButton.setActionCommand("Waning Crescent");
+        makeButtons();
 
         ButtonGroup group = new ButtonGroup();
         group.add(newMButton);
@@ -82,54 +52,70 @@ public class MoonPhasePanel extends JPanel implements ActionListener {
         wanGibButton.addActionListener(this);
     }
 
-    // EFFECTS: loads all the images of the moon onto variables
-    private void loadImages() {
-        newMoonImage = new ImageIcon("./data/newMoon.jpeg");
-        waxCrImage = new ImageIcon("./data/waxingCrescent.jpeg");
-        firstQImage = new ImageIcon("./data/firstQuarter.jpeg");
-        waxGibImage = new ImageIcon("./data/waxingGibbous.jpg");
-        fullMImage = new ImageIcon("./data/fullMoon.jpg");
-        wanGibImage = new ImageIcon("./data/waningGibbous.jpg");
-        thirdQImage = new ImageIcon("./data/thirdQuarter.jpg");
-        wanCrImage = new ImageIcon("./data/waningCrescent.jpg");
-
+    private void makeButtons() {
+        newMButton = new JRadioButton("New Moon", newMoonImage);
+        newMButton.setActionCommand("New Moon");
+        waxCrButton = new JRadioButton("Waxing Crescent", waxCrImage);
+        waxCrButton.setActionCommand("Waxing Crescent");
+        firstQButton = new JRadioButton("First Quarter", firstQImage);
+        firstQButton.setActionCommand("First Quarter");
+        waxGibButton = new JRadioButton("Waxing Gibbous", waxGibImage);
+        waxGibButton.setActionCommand("Waxing Gibbous");
+        fullMButton = new JRadioButton("Full Moon", fullMImage);
+        fullMButton.setActionCommand("Full Moon");
+        wanGibButton = new JRadioButton("Waning Gibbous", wanGibImage);
+        wanGibButton.setActionCommand("Waning Gibbous");
+        thirdQButton = new JRadioButton("Third Quarter", thirdQImage);
+        thirdQButton.setActionCommand("Third Quarter");
+        wanCrButton = new JRadioButton("Waning Crescent", wanCrImage);
+        wanCrButton.setActionCommand("Waning Crescent");
     }
+
 
     // MODIFIES: this
     // EFFECTS: helper method that adds all buttons to panel
-    private void addMoonPhaseButtonToPanel() {
+    @Override
+    public void addButtonsToPanel() {
         gbc.insets = new Insets(15, 15, 15, 15);
-        gbc.gridx = 1;
-        gbc.gridy = 1;
+        setGbcCoordinates(0,0);
         this.add(newMButton, gbc);
-        gbc.gridx = 2;
-        gbc.gridy = 1;
+        setGbcCoordinates(1,0);
         this.add(waxCrButton, gbc);
-        gbc.gridx = 3;
-        gbc.gridy = 1;
+        setGbcCoordinates(2,0);
         this.add(firstQButton, gbc);
-        gbc.gridx = 4;
-        gbc.gridy = 1;
+        setGbcCoordinates(3,0);
         this.add(waxGibButton, gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 2;
+        setGbcCoordinates(0,1);
         this.add(fullMButton, gbc);
-        gbc.gridx = 2;
-        gbc.gridy = 2;
+        setGbcCoordinates(1,1);
         this.add(wanGibButton, gbc);
-        gbc.gridx = 3;
-        gbc.gridy = 2;
+        setGbcCoordinates(2,1);
         this.add(thirdQButton, gbc);
-        gbc.gridx = 4;
-        gbc.gridy = 2;
+        setGbcCoordinates(3,1);
         this.add(wanCrButton, gbc);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        moonPhase = e.getActionCommand(); // todo maybe some issues here
-        moonPhasePanel.setVisible(false);
-
+        moonPhase = e.getActionCommand();
+        if (moonPhase.equals("New Moon")) {
+            icon = newMoonImage;
+        } else if (moonPhase.equals("Waxing Crescent")) {
+            icon = waxCrImage;
+        } else if (moonPhase.equals("First Quarter")) {
+            icon = firstQImage;
+        } else if (moonPhase.equals("Waxing Gibbous")) {
+            icon = waxGibImage;
+        } else if (moonPhase.equals("Full Moon")) {
+            icon = fullMImage;
+        } else if (moonPhase.equals("Waning Gibbous")) {
+            icon = wanGibImage;
+        } else if (moonPhase.equals("Third Quarter")) {
+            icon = thirdQImage;
+        } else if (moonPhase.equals("Waning Crescent")) {
+            icon = wanCrImage;
+        } else {
+            icon = null;
+        }
     }
-
 }

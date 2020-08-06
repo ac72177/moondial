@@ -52,20 +52,23 @@ public class MoondialGUI extends JFrame {
         entryList = new EntryList();
         ep = new EntryListPanel(entryList);
         op = new JPanel();
-        op.setBackground(new Color(0x095166));
+        op.setBackground(new Color(0x000000));
         op.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, HEIGHT));
 
+
         moonPhasePanel = new MoonPhasePanel();
-        moonPhasePanel.setBackground(new Color(0x488090));
+        moonPhasePanel.setBackground(new Color(0x021623));
         moonPhasePanel.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, PANEL_HEIGHT));
         anglePanel = new AnglePanel();
-        anglePanel.setBackground(new Color(0xA00F32));
+        anglePanel.setBackground(new Color(0x021623));
         anglePanel.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, PANEL_HEIGHT));
 
         add(ep, BorderLayout.EAST);
         add(op, BorderLayout.WEST);
         op.add(moonPhasePanel, BorderLayout.NORTH);
-        op.add(anglePanel, BorderLayout.SOUTH);
+        op.add(anglePanel, BorderLayout.CENTER);
+        JButton makeObservation = new JButton("Enter Data");
+        op.add(makeObservation, BorderLayout.SOUTH); // todo add a mouse listener
     }
 
 
