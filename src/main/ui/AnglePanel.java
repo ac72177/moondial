@@ -9,53 +9,43 @@ import static ui.EntryListPanel.LBL_WIDTH;
 
 public class AnglePanel extends JPanel implements ActionListener {
     private JPanel anglePanel;
-    private JPanel zeroDegrees;
-    private JPanel fortyFiveDegrees;
-    private JPanel ninetyDegrees;
-    private JPanel hundredThirtyFiveDegrees;
-    private JPanel hundredEightyDegrees;
+    private GridBagConstraints gbc;
     private int angleFromEast;
-    private static final int ANGLE_PANEL_HEIGHT = 200;
+    private static final int ANGLE_PANEL_HEIGHT = 400;
     private JLabel angleInstruction;
+    private JRadioButton zeroButton;
+    private JRadioButton fortyFiveButton;
+    private JRadioButton ninetyButton;
+    private JRadioButton hundredThirtyFiveButton;
+    private JRadioButton hundredEightyButton;
 
 
     public AnglePanel() {
-        anglePanel = new JPanel(new FlowLayout());
-        anglePanel.setBackground(new Color(0xA00F32));
-        anglePanel.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, ANGLE_PANEL_HEIGHT));
+        gbc = new GridBagConstraints();
+        setLayout(new GridBagLayout());
+        anglePanel = new JPanel();
+
         angleInstruction = new JLabel("Please choose the angle the moon makes with the east.");
         anglePanel.add(angleInstruction);
 
-       // initializeAngleButtonPanels();
-       // initializeAngleButtons();  todo uncomment
+        initializeAngleButtons();
+        addAngleButtonsToPanel();
     }
 
-    private void initializeAngleButtonPanels() {
-        zeroDegrees = new JPanel();
-        fortyFiveDegrees = new JPanel();
-        ninetyDegrees = new JPanel();
-        hundredThirtyFiveDegrees = new JPanel();
-        hundredEightyDegrees = new JPanel();
 
-        anglePanel.add(zeroDegrees, FlowLayout.LEFT);
-        anglePanel.add(fortyFiveDegrees, FlowLayout.CENTER);
-        anglePanel.add(ninetyDegrees, FlowLayout.RIGHT);
-        anglePanel.add(hundredThirtyFiveDegrees, FlowLayout.LEADING);
-        anglePanel.add(hundredEightyDegrees, FlowLayout.TRAILING);
-    }
 
     // MODIFIES: this
     // EFFECTS: a helper method which declares and instantiates all radio moon phase buttons
     private void initializeAngleButtons() {
-        JRadioButton zeroButton = new JRadioButton("0");
+        zeroButton = new JRadioButton("0");
         zeroButton.setActionCommand("0");
-        JRadioButton fortyFiveButton = new JRadioButton("45");
+        fortyFiveButton = new JRadioButton("45");
         fortyFiveButton.setActionCommand("45");
-        JRadioButton ninetyButton = new JRadioButton("90");
+        ninetyButton = new JRadioButton("90");
         ninetyButton.setActionCommand("90");
-        JRadioButton hundredThirtyFiveButton = new JRadioButton("135");
+        hundredThirtyFiveButton = new JRadioButton("135");
         hundredThirtyFiveButton.setActionCommand("135");
-        JRadioButton hundredEightyButton = new JRadioButton("180");
+        hundredEightyButton = new JRadioButton("180");
         hundredEightyButton.setActionCommand("180");
 
 
@@ -71,6 +61,27 @@ public class AnglePanel extends JPanel implements ActionListener {
         ninetyButton.addActionListener(this);
         hundredThirtyFiveButton.addActionListener(this);
         hundredEightyButton.addActionListener(this);
+    }
+
+    private void addAngleButtonsToPanel() {
+        gbc.insets = new Insets(40,70,40,70);
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 1;
+        this.add(zeroButton, gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        this.add(fortyFiveButton, gbc);
+        gbc.gridx = 2;
+        gbc.gridy = 1;
+        this.add(ninetyButton, gbc);
+        gbc.gridx = 3;
+        gbc.gridy = 2;
+        this.add(hundredThirtyFiveButton, gbc);
+        gbc.gridx = 4;
+        gbc.gridy = 3;
+        this.add(hundredEightyButton, gbc);
     }
 
     @Override

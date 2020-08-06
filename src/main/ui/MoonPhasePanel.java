@@ -9,63 +9,46 @@ import static ui.EntryListPanel.LBL_WIDTH;
 
 public class MoonPhasePanel extends JPanel implements ActionListener {
     private final JPanel moonPhasePanel;
-    private JPanel newMoon;
-    private JPanel waxingCrescent;
-    private JPanel firstQuarter;
-    private JPanel waxingGibbous;
-    private JPanel fullMoon;
-    private JPanel waningGibbous;
-    private JPanel thirdQuarter;
-    private JPanel waningCrescent;
     private String moonPhase;
-    private static final int ANGLE_PANEL_HEIGHT = 200;
+    private JRadioButton newMButton;
+    private JRadioButton waxCrButton;
+    private JRadioButton firstQButton;
+    private JRadioButton waxGibButton;
+    private JRadioButton fullMButton;
+    private JRadioButton wanGibButton;
+    private JRadioButton thirdQButton;
+    private JRadioButton wanCrButton;
+    private GridBagConstraints gbc;
 
     public MoonPhasePanel() {
-        moonPhasePanel = new JPanel(new FlowLayout());
-        moonPhasePanel.setBackground(new Color(0x488090));
-        moonPhasePanel.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, ANGLE_PANEL_HEIGHT));
-      //  initializeMoonPhaseButtonPanels();
-      //  initializePhaseButtons();
+        gbc = new GridBagConstraints();
+        setLayout(new GridBagLayout());
+        moonPhasePanel = new JPanel();
+
+        initializePhaseButtons();
+        addMoonPhaseButtonToPanel();
     }
 
-    private void initializeMoonPhaseButtonPanels() {
-        newMoon = new JPanel();
-        waxingCrescent = new JPanel();
-        firstQuarter = new JPanel();
-        waxingGibbous = new JPanel();
-        fullMoon = new JPanel();
-        waningGibbous = new JPanel();
-        thirdQuarter = new JPanel();
-        waningCrescent = new JPanel();
 
-        moonPhasePanel.add(newMoon, FlowLayout.LEFT);
-        moonPhasePanel.add(waxingCrescent, FlowLayout.RIGHT);
-        moonPhasePanel.add(firstQuarter, FlowLayout.CENTER);
-        moonPhasePanel.add(waxingGibbous, FlowLayout.SOUTH);
-        moonPhasePanel.add(fullMoon, BorderLayout.SOUTH);
-        moonPhasePanel.add(waningGibbous, BorderLayout.SOUTH);
-        moonPhasePanel.add(thirdQuarter, BorderLayout.SOUTH);
-        moonPhasePanel.add(waningCrescent, BorderLayout.SOUTH);
-    }
 
     // MODIFIES: this
     // EFFECTS: a helper method which declares and instantiates all radio moon phase buttons
     private void initializePhaseButtons() {
-        JRadioButton newMButton = new JRadioButton("New Moon");
+        newMButton = new JRadioButton("New Moon");
         newMButton.setActionCommand("New Moon");
-        JRadioButton waxCrButton = new JRadioButton("Waxing Crescent");
+        waxCrButton = new JRadioButton("Waxing Crescent");
         waxCrButton.setActionCommand("Waxing Crescent");
-        JRadioButton firstQButton = new JRadioButton("First Quarter");
+        firstQButton = new JRadioButton("First Quarter");
         firstQButton.setActionCommand("First Quarter");
-        JRadioButton waxGibButton = new JRadioButton("Waxing Gibbous");
+        waxGibButton = new JRadioButton("Waxing Gibbous");
         waxGibButton.setActionCommand("Waxing Gibbous");
-        JRadioButton fullMButton = new JRadioButton("Full Moon");
+        fullMButton = new JRadioButton("Full Moon");
         fullMButton.setActionCommand("Full Moon");
-        JRadioButton wanGibButton = new JRadioButton("Waning Gibbous");
+        wanGibButton = new JRadioButton("Waning Gibbous");
         wanGibButton.setActionCommand("Waning Gibbous");
-        JRadioButton thirdQButton = new JRadioButton("Third Quarter");
+        thirdQButton = new JRadioButton("Third Quarter");
         thirdQButton.setActionCommand("Third Quarter");
-        JRadioButton wanCrButton = new JRadioButton("Waning Crescent");
+        wanCrButton = new JRadioButton("Waning Crescent");
         wanCrButton.setActionCommand("Waning Crescent");
 
         ButtonGroup group = new ButtonGroup();
@@ -86,6 +69,26 @@ public class MoonPhasePanel extends JPanel implements ActionListener {
         wanGibButton.addActionListener(this);
         thirdQButton.addActionListener(this);
         wanGibButton.addActionListener(this);
+    }
+
+    private void addMoonPhaseButtonToPanel() {
+        gbc.insets = new Insets(0, 15, 0, 15);
+        gbc.gridx = 1;
+        this.add(newMButton, gbc);
+        gbc.gridx = 2;
+        this.add(waxCrButton, gbc);
+        gbc.gridx = 3;
+        this.add(firstQButton, gbc);
+        gbc.gridx = 4;
+        this.add(waxGibButton, gbc);
+        gbc.gridx = 5;
+        this.add(fullMButton, gbc);
+        gbc.gridx = 6;
+        this.add(wanGibButton, gbc);
+        gbc.gridx = 7;
+        this.add(thirdQButton, gbc);
+        gbc.gridx = 8;
+        this.add(wanGibButton, gbc);
     }
 
     @Override
