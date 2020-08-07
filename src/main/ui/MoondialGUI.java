@@ -21,18 +21,20 @@ public class MoondialGUI extends JFrame {
     public EntryListPanel elp;
     private JPanel op;
     private MoonPhasePanel moonPhasePanel;
-    private Entry currentObservation;
     public EntryList entryListFromGUI;
     public String moonPhase;
     public int angleFromEast;
     public AnglePanel anglePanel;
-    private static final int PANEL_HEIGHT = 170;
+    private static final int PANEL_HEIGHT = 150;
     public EntryPanel ep;
+    protected ImageIcon icon;
 
 
     public MoondialGUI() {
         super("Moondial");
         initializeGraphics();
+
+        icon = null;
     }
 
     // MODIFIES: this
@@ -59,10 +61,10 @@ public class MoondialGUI extends JFrame {
         moonPhasePanel.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, PANEL_HEIGHT));
 
         anglePanel = new AnglePanel(this);
-        anglePanel.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, PANEL_HEIGHT / 2));
+        anglePanel.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, PANEL_HEIGHT * 2));
 
         ep = new EntryPanel(this);
-        ep.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, PANEL_HEIGHT));
+        ep.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, PANEL_HEIGHT / 3 * 2));
 
         addPanelsToSpecifiedLocation();
     }

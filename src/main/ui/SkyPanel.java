@@ -15,7 +15,6 @@ public abstract class SkyPanel extends JPanel {
     protected ImageIcon wanGibImage;
     protected ImageIcon thirdQImage;
     protected ImageIcon wanCrImage;
-    protected ImageIcon icon;
     protected ImageIcon blankImage;
 
     public SkyPanel(MoondialGUI moondialGUI) {
@@ -25,7 +24,6 @@ public abstract class SkyPanel extends JPanel {
         gbc = new GridBagConstraints();
         setLayout(new GridBagLayout());
         panel = new JPanel();
-        icon = blankImage;
 
         initializeButtons();
         addButtonsToPanel();

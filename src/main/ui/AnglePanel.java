@@ -7,11 +7,11 @@ import java.awt.event.ActionListener;
 
 public class AnglePanel extends SkyPanel implements ActionListener {
 
-    private JRadioButton zeroButton;
-    private JRadioButton fortyFiveButton;
-    private JRadioButton ninetyButton;
-    private JRadioButton hundredThirtyFiveButton;
-    private JRadioButton hundredEightyButton;
+    public JRadioButton zeroButton;
+    public JRadioButton fortyFiveButton;
+    public JRadioButton ninetyButton;
+    public JRadioButton hundredThirtyFiveButton;
+    public JRadioButton hundredEightyButton;
 
     // EFFECTS: Constructs anglePanel to be placed on another panel
     public AnglePanel(MoondialGUI moondialGUI) {
@@ -23,17 +23,7 @@ public class AnglePanel extends SkyPanel implements ActionListener {
     // EFFECTS: a helper method which declares and instantiates all radio angle buttons
     @Override
     public void initializeButtons() {
-        zeroButton = new JRadioButton("0", this.icon);
-        zeroButton.setActionCommand("0");
-        fortyFiveButton = new JRadioButton("45", this.icon);
-        fortyFiveButton.setActionCommand("45");
-        ninetyButton = new JRadioButton("90", this.icon);
-        ninetyButton.setActionCommand("90");
-        hundredThirtyFiveButton = new JRadioButton("135", this.icon);
-        hundredThirtyFiveButton.setActionCommand("135");
-        hundredEightyButton = new JRadioButton("180", this.icon);
-        hundredEightyButton.setActionCommand("180");
-
+        makeAngleButtonsWithIcon(moondialGUI.icon);
 
         ButtonGroup group = new ButtonGroup();
         group.add(zeroButton);
@@ -49,11 +39,24 @@ public class AnglePanel extends SkyPanel implements ActionListener {
         hundredEightyButton.addActionListener(this);
     }
 
+    public void makeAngleButtonsWithIcon(ImageIcon icon) {
+        zeroButton = new JRadioButton("0", icon);
+        zeroButton.setActionCommand("0");
+        fortyFiveButton = new JRadioButton("45", icon);
+        fortyFiveButton.setActionCommand("45");
+        ninetyButton = new JRadioButton("90", icon);
+        ninetyButton.setActionCommand("90");
+        hundredThirtyFiveButton = new JRadioButton("135", icon);
+        hundredThirtyFiveButton.setActionCommand("135");
+        hundredEightyButton = new JRadioButton("180", icon);
+        hundredEightyButton.setActionCommand("180");
+    }
+
     // MODIFIES: this
     // EFFECTS: helper method to add buttons to the panel
     @Override
     public void addButtonsToPanel() {
-        gbc.insets = new Insets(40,60,40,60);
+        gbc.insets = new Insets(40,50,40,50);
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridheight = 1;

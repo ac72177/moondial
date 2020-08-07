@@ -1,4 +1,1 @@
-Third Quarter,135,9AM
-Third Quarter,90,6AM
-Waning Crescent,135,Noon
-Third Quarter,90,6AM
+Waxing Gibbous,45,6PM

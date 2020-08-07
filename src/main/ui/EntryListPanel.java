@@ -9,8 +9,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static ui.MoondialGUI.FRAME_HEIGHT;
-
 
 // Represents the panel in which the entry list is displayed
 public class EntryListPanel extends JPanel implements ActionListener {
@@ -19,7 +17,6 @@ public class EntryListPanel extends JPanel implements ActionListener {
     private EntryList entryList;
     private JPanel entryListPanel;
     public JLabel entryListLbl;
-    //private JPanel entryListLblPanel;
     public static final int LBL_WIDTH = 400;
 
     // EFFECTS: constructs an EntryListPanel
@@ -37,14 +34,14 @@ public class EntryListPanel extends JPanel implements ActionListener {
         this.removeAll();
         this.revalidate();
         this.repaint();
-        gbc.insets = new Insets (10, 10, 10, 10);
+        gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridx = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         if (!(entryList.size() == 0)) {
             for (int i = 0; i < entryList.size(); i++) {
                 gbc.gridy = i;
-                entryListLbl = new JLabel(("  Entry " + i + ": " + getEntryMoonPhaseFromEntryList(i)
-                        + " " + getEntryAngleFromEntryList(i) + " degrees at " + getEntryTimeFromEntryList(i) + "  \n"));
+                entryListLbl = new JLabel(("  Entry " + i + " : " + getEntryMoonPhaseFromEntryList(i)
+                        + " " + getEntryAngleFromEntryList(i) + " degrees at " + getEntryTimeFromEntryList(i) + " \n"));
                 JPanel entryListLblPanel = new JPanel(new BorderLayout());
                 entryListLblPanel.add(entryListLbl, BorderLayout.WEST);
                 addRemoveButtonToEntryListLblPanel(entryListLblPanel, i);

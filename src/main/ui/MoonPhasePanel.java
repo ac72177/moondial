@@ -104,27 +104,38 @@ public class MoonPhasePanel extends SkyPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        moondialGUI.setMoonPhase(e.getActionCommand());
+        String moonPhase = e.getActionCommand();
+        moondialGUI.setMoonPhase(moonPhase);
         moondialGUI.ep.moonStatusLabel.setText("Selected Phase: " + moondialGUI.moonPhase);
 
-//        if (moonPhase.equals("New Moon")) { todo
-//            anglePanel.icon = newMoonImage;
-//        } else if (moonPhase.equals("Waxing Crescent")) {
-//            anglePanel.icon = waxCrImage;
-//        } else if (moonPhase.equals("First Quarter")) {
-//            anglePanel.icon = firstQImage;
-//        } else if (moonPhase.equals("Waxing Gibbous")) {
-//            anglePanel.icon = waxGibImage;
-//        } else if (moonPhase.equals("Full Moon")) {
-//            anglePanel.icon = fullMImage;
-//        } else if (moonPhase.equals("Waning Gibbous")) {
-//            anglePanel.icon = wanGibImage;
-//        } else if (moonPhase.equals("Third Quarter")) {
-//            anglePanel.icon = thirdQImage;
-//        } else if (moonPhase.equals("Waning Crescent")) {
-//            anglePanel.icon = wanCrImage;
-//        } else {
-//            anglePanel.icon = blankImage;
-//        }
+        if (moonPhase.equals("New Moon")) {
+            moondialGUI.icon = newMoonImage;
+        } else if (moonPhase.equals("Waxing Crescent")) {
+            moondialGUI.icon = waxCrImage;
+        } else if (moonPhase.equals("First Quarter")) {
+            moondialGUI.icon = firstQImage;
+        } else if (moonPhase.equals("Waxing Gibbous")) {
+            moondialGUI.icon = waxGibImage;
+        } else if (moonPhase.equals("Full Moon")) {
+            moondialGUI.icon = fullMImage;
+        } else if (moonPhase.equals("Waning Gibbous")) {
+            moondialGUI.icon = wanGibImage;
+        } else if (moonPhase.equals("Third Quarter")) {
+            moondialGUI.icon = thirdQImage;
+        } else if (moonPhase.equals("Waning Crescent")) {
+            moondialGUI.icon = wanCrImage;
+        } else {
+            moondialGUI.icon = blankImage;
+        }
+
+        setAnglePanelButtonIcon(moondialGUI.icon);
+    }
+
+    private void setAnglePanelButtonIcon(ImageIcon icon) {
+        moondialGUI.anglePanel.zeroButton.setIcon(icon);
+        moondialGUI.anglePanel.fortyFiveButton.setIcon(icon);
+        moondialGUI.anglePanel.ninetyButton.setIcon(icon);
+        moondialGUI.anglePanel.hundredThirtyFiveButton.setIcon(icon);
+        moondialGUI.anglePanel.hundredEightyButton.setIcon(icon);
     }
 }

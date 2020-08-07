@@ -2,7 +2,6 @@ package ui;
 
 import exceptions.IllegalListSize;
 import model.Entry;
-import persistence.Reader;
 import persistence.Writer;
 
 import javax.swing.*;
@@ -11,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 public class EntryPanel extends JPanel implements ActionListener {
@@ -43,6 +41,7 @@ public class EntryPanel extends JPanel implements ActionListener {
         makeEntryLabel();
         makeObservationButton();
         makeSaveButton();
+
     }
 
     public void makeMoonPhaseStatusLabel() {
