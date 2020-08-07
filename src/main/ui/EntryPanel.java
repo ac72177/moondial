@@ -1,7 +1,5 @@
 package ui;
 
-import observer.Observer;
-import observer.Subject;
 import exceptions.IllegalListSize;
 import model.Entry;
 
@@ -70,8 +68,13 @@ public class EntryPanel extends JPanel implements ActionListener {
         } catch (IllegalListSize illegalListSize) {
             entryLabel.setText("Too many entries, delete one first.");
         }
-        moondialGUI.elp.entryListLbl.setText(moondialGUI.elp.addEntryListLbl());
 
+        setEntryListPanelLabels();
+
+    }
+
+    private void setEntryListPanelLabels() {
+        moondialGUI.elp.addEntryListLblToPanel();
     }
 
 }

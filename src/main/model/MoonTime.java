@@ -1,10 +1,5 @@
 package model;
 
-import observer.Observer;
-import observer.Subject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 // Represents an observation given a moon phase and an angle
 public class MoonTime {

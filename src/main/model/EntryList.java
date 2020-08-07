@@ -1,7 +1,6 @@
 package model;
 
 import exceptions.IllegalListSize;
-import observer.Observer;
 import persistence.Reader;
 
 import java.io.PrintWriter;
