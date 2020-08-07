@@ -76,6 +76,9 @@ public class AnglePanel extends SkyPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         moondialGUI.setAngleFromEast(Integer.parseInt(e.getActionCommand()));
+        moondialGUI.ep.angleStatusLabel.setText("Selected Angle: " + moondialGUI.angleFromEast);
+
     }
 }

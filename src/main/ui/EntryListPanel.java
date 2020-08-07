@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 
 import static ui.MoondialGUI.FRAME_HEIGHT;
 
@@ -20,7 +19,7 @@ public class EntryListPanel extends JPanel implements ActionListener {
     private EntryList entryList;
     private JPanel entryListPanel;
     public JLabel entryListLbl;
-    private JPanel entryListLblPanel;
+    //private JPanel entryListLblPanel;
     public static final int LBL_WIDTH = 400;
 
     // EFFECTS: constructs an EntryListPanel
@@ -28,35 +27,40 @@ public class EntryListPanel extends JPanel implements ActionListener {
         this.moondialGUI = moondialGUI;
         entryList = moondialGUI.entryListFromGUI;
         gbc = new GridBagConstraints();
-        entryListPanel = new JPanel(new GridBagLayout());
-        setBackground(new Color(0xFFFFFFFF, true));
-        entryListPanel.setMinimumSize(new Dimension(LBL_WIDTH, FRAME_HEIGHT));
+        setLayout(new GridBagLayout());
+        entryListPanel = new JPanel();
+        setBackground(new Color(0xFF863A04, true));
         addEntryListLblToPanel();
     }
 
     public void addEntryListLblToPanel() {
         this.removeAll();
+        this.revalidate();
+        this.repaint();
+        gbc.insets = new Insets (10, 10, 10, 10);
+        gbc.gridx = 0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         if (!(entryList.size() == 0)) {
             for (int i = 0; i < entryList.size(); i++) {
-                entryListLbl = new JLabel(("Entry " + i + ": " + getEntryMoonPhaseFromEntryList(i)
-                        + " " + getEntryAngleFromEntryList(i) + " degrees at " + getEntryTimeFromEntryList(i) + "\n"));
-                gbc.gridx = i;
-                entryListLblPanel = new JPanel();
-                addRemoveButtonToEntryListLblPanel(i);
-                entryListLblPanel.add(entryListLbl,gbc);
+                gbc.gridy = i;
+                entryListLbl = new JLabel(("  Entry " + i + ": " + getEntryMoonPhaseFromEntryList(i)
+                        + " " + getEntryAngleFromEntryList(i) + " degrees at " + getEntryTimeFromEntryList(i) + "  \n"));
+                JPanel entryListLblPanel = new JPanel(new BorderLayout());
+                entryListLblPanel.add(entryListLbl, BorderLayout.WEST);
+                addRemoveButtonToEntryListLblPanel(entryListLblPanel, i);
                 this.add(entryListLblPanel, gbc);
             }
         } else {
             entryListLbl = new JLabel("No Observations have been made.");
-            gbc.gridx = 0;
+            gbc.gridy = 0;
             this.add(entryListLbl, gbc);
         }
     }
 
-    private void addRemoveButtonToEntryListLblPanel(int i) {
+    private void addRemoveButtonToEntryListLblPanel(JPanel jp, int i) {
         JButton removeButton = new JButton("Remove");
         removeButton.addActionListener(this);
-        entryListLblPanel.add(removeButton);
+        jp.add(removeButton, BorderLayout.EAST);
         removeButton.setActionCommand(Integer.toString(i));
     }
 

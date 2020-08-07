@@ -3,8 +3,6 @@ package ui;
 import javax.swing.*;
 import java.awt.*;
 
-import static ui.EntryListPanel.LBL_WIDTH;
-
 public abstract class SkyPanel extends JPanel {
     protected GridBagConstraints gbc;
     protected JPanel panel;

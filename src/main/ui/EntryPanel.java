@@ -2,46 +2,77 @@ package ui;
 
 import exceptions.IllegalListSize;
 import model.Entry;
+import persistence.Reader;
+import persistence.Writer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import static ui.EntryListPanel.LBL_WIDTH;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 public class EntryPanel extends JPanel implements ActionListener {
     private MoondialGUI moondialGUI;
     private GridBagConstraints gbc;
-    private String moonPhase;
-    private int angleFromEast;
     private Entry entry;
     private JPanel entryPanel;
     private JLabel entryLabel;
-    private JButton makeObservation;
-    public static final int EP_LBL_WIDTH = WIDTH - LBL_WIDTH;
-    private static final int LBL_HEIGHT = 200;
+    private static final String ENTRYLISTGUI_FILE = "./data/entrylistgui.txt";
     private String labelText;
+    private JButton observationButton;
+    private JButton saveButton;
+    public JButton loadButton;
+    public JLabel moonStatusLabel;
+    public JLabel angleStatusLabel;
 
     // EFFECTS: constructs an EntryListPanel
-    public EntryPanel(MoondialGUI moondialGUI) { // todo when you wake up
+    public EntryPanel(MoondialGUI moondialGUI) {
         this.moondialGUI = moondialGUI;
-//        gbc = new GridBagConstraints();
-//        setLayout(new GridBagLayout());
-        entryPanel = new JPanel(new BorderLayout());
+        gbc = new GridBagConstraints();
+        setLayout(new GridBagLayout());
+        entryPanel = new JPanel();
         setBackground(new Color(0xFF5A102A, true));
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        makeMoonPhaseStatusLabel();
+
+        makeAngleStatusLabel();
         makeEntryLabel();
         makeObservationButton();
+        makeSaveButton();
+        makeLoadButton();
+    }
+
+    public void makeMoonPhaseStatusLabel() {
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        moonStatusLabel = new JLabel("Selected Phase: " + moondialGUI.moonPhase);
+        JPanel moonStatusPanel = new JPanel();
+        moonStatusPanel.add(moonStatusLabel);
+        this.add(moonStatusPanel, gbc);
+    }
+
+    public void makeAngleStatusLabel() {
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        angleStatusLabel = new JLabel("Selected Angle: " + moondialGUI.angleFromEast);
+        JPanel angleStatusPanel = new JPanel();
+        angleStatusPanel.add(angleStatusLabel);
+        this.add(angleStatusPanel, gbc);
     }
 
     private void makeEntryLabel() {
+        gbc.gridx = 1;
+        gbc.gridy = 0;
         JPanel entryLabelPanel = new JPanel();
         initializeText();
         entryLabel = new JLabel(labelText);
 
         entryLabelPanel.add(entryLabel);
-        this.add(entryLabelPanel);
-
+        this.add(entryLabelPanel, gbc);
     }
 
     private void initializeText() {
@@ -49,19 +80,47 @@ public class EntryPanel extends JPanel implements ActionListener {
     }
 
     private void makeObservationButton() {
-        makeObservation = new JButton("Enter Data");
-        makeObservation.addActionListener(this);
-        this.add(makeObservation, BorderLayout.EAST);
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        observationButton = new JButton("Enter Data");
+        observationButton.addActionListener(this);
+        this.add(observationButton, gbc);
     }
 
 
+    private void makeSaveButton() {
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        saveButton = new JButton("Save Entry List");
+        saveButton.addActionListener(this);
+        this.add(saveButton, gbc);
+    }
+
+    private void makeLoadButton() {
+        gbc.gridx = 2;
+        gbc.gridy = 1;
+        loadButton = new JButton("Load Entry List");
+        loadButton.addActionListener(this);
+        this.add(loadButton, gbc);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == makeObservation) {
-            entry = new Entry(moondialGUI.moonPhase, moondialGUI.angleFromEast);
-            entryLabel.setText("You have observed the " + entry.getMoonPhase() + " at "
-                    + entry.getAngleFromEast() + " degrees at " + entry.getTime() + ".");
+        if (e.getSource() == observationButton) {
+            addObservationToEntryListPanel();
+        } else if (e.getSource() == saveButton) {
+            saveEntryList();
+        } else {
+            loadEntryList();
+            setEntryListPanelLabels();
         }
+    }
+
+
+    private void addObservationToEntryListPanel() {
+        entry = new Entry(moondialGUI.moonPhase, moondialGUI.angleFromEast);
+        entryLabel.setText("You have observed the " + entry.getMoonPhase() + " at "
+                + entry.getAngleFromEast() + " degrees at " + entry.getTime() + ".");
 
         try {
             moondialGUI.entryListFromGUI.addObservation(entry);
@@ -70,11 +129,37 @@ public class EntryPanel extends JPanel implements ActionListener {
         }
 
         setEntryListPanelLabels();
-
     }
 
     private void setEntryListPanelLabels() {
         moondialGUI.elp.addEntryListLblToPanel();
     }
 
+
+    // EFFECTS: saves state of entryList to ENTRYLIST_FILE
+    private void saveEntryList() {
+        try {
+            Writer writer = new Writer(new File(ENTRYLISTGUI_FILE));
+            writer.write(moondialGUI.entryListFromGUI);
+            writer.close();
+            System.out.println("List of Observations saved to file " + ENTRYLISTGUI_FILE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to save observations to " + ENTRYLISTGUI_FILE);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            // this is due to a programming error
+        }
+    }
+
+    private void loadEntryList() {
+        try {
+            moondialGUI.entryListFromGUI = Reader.readEntryList(new File(ENTRYLISTGUI_FILE));
+        } catch (IOException e) {
+            moondialGUI.ep.loadButton.setText("");
+        }
+
+
+    }
 }
+
+

@@ -4,7 +4,6 @@ import model.Entry;
 import model.EntryList;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 import static ui.EntryListPanel.LBL_WIDTH;
@@ -24,7 +23,7 @@ public class MoondialGUI extends JFrame {
     public int angleFromEast;
     public AnglePanel anglePanel;
     private static final int PANEL_HEIGHT = 170;
-    private EntryPanel ep;
+    public EntryPanel ep;
 
 
     public MoondialGUI() {
@@ -48,6 +47,7 @@ public class MoondialGUI extends JFrame {
     private void initializePanels() {
         entryListFromGUI = new EntryList();
         elp = new EntryListPanel(this);
+        elp.setPreferredSize(new Dimension(LBL_WIDTH, FRAME_HEIGHT));
 
         op = new JPanel(new BorderLayout());
         op.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, FRAME_HEIGHT));

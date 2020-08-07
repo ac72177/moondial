@@ -5,8 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static ui.EntryListPanel.LBL_WIDTH;
-
 public class MoonPhasePanel extends SkyPanel implements ActionListener {
     private AnglePanel anglePanel = new AnglePanel(moondialGUI);
     private JRadioButton newMButton;
@@ -107,6 +105,7 @@ public class MoonPhasePanel extends SkyPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         moondialGUI.setMoonPhase(e.getActionCommand());
+        moondialGUI.ep.moonStatusLabel.setText("Selected Phase: " + moondialGUI.moonPhase);
 
 //        if (moonPhase.equals("New Moon")) {
 //            anglePanel.icon = newMoonImage;
