@@ -2,17 +2,21 @@ package ui;
 
 import model.Entry;
 import model.EntryList;
+import persistence.Reader;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 import static ui.EntryListPanel.LBL_WIDTH;
+import static ui.EntryPanel.ENTRYLISTGUI_FILE;
 
 public class MoondialGUI extends JFrame {
 
 
     private GridBagConstraints gbc;
-    public static final int WIDTH = 1200;
+    public static final int WIDTH = 1300;
     public static final int FRAME_HEIGHT = 700;
     public EntryListPanel elp;
     private JPanel op;
@@ -29,7 +33,6 @@ public class MoondialGUI extends JFrame {
     public MoondialGUI() {
         super("Moondial");
         initializeGraphics();
-        initializeFields();
     }
 
     // MODIFIES: this
@@ -45,7 +48,7 @@ public class MoondialGUI extends JFrame {
     }
 
     private void initializePanels() {
-        entryListFromGUI = new EntryList();
+        loadEntryList();
         elp = new EntryListPanel(this);
         elp.setPreferredSize(new Dimension(LBL_WIDTH, FRAME_HEIGHT));
 
@@ -76,21 +79,17 @@ public class MoondialGUI extends JFrame {
 
     }
 
+    private void loadEntryList() {
+        try {
+            entryListFromGUI = Reader.readEntryList(new File(ENTRYLISTGUI_FILE));
 
-    // MODIFIES: this
-    // EFFECTS: sets currentObservation to null
-    private void initializeFields() {
-        currentObservation = null;
+        } catch (IOException e) {
+            entryListFromGUI = new EntryList();
+        }
+
+
     }
 
-//    // MODIFIES: this
-//    // EFFECTS: declares and instantiates an entry (newEntry), and adds it to the entryList
-//    private void addNewEntry() throws IllegalListSize {
-//        Entry newEntry = new Entry(moonPhase, angleFromEast);
-//        currentObservation = newEntry;
-//        entryList.addObservation(newEntry);
-//        validate();
-//
 
 
 

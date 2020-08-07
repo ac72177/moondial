@@ -20,7 +20,7 @@ public class EntryPanel extends JPanel implements ActionListener {
     private Entry entry;
     private JPanel entryPanel;
     private JLabel entryLabel;
-    private static final String ENTRYLISTGUI_FILE = "./data/entrylistgui.txt";
+    public static final String ENTRYLISTGUI_FILE = "./data/entrylistgui.txt";
     private String labelText;
     private JButton observationButton;
     private JButton saveButton;
@@ -43,7 +43,6 @@ public class EntryPanel extends JPanel implements ActionListener {
         makeEntryLabel();
         makeObservationButton();
         makeSaveButton();
-        makeLoadButton();
     }
 
     public void makeMoonPhaseStatusLabel() {
@@ -67,6 +66,7 @@ public class EntryPanel extends JPanel implements ActionListener {
     private void makeEntryLabel() {
         gbc.gridx = 1;
         gbc.gridy = 0;
+        gbc.gridwidth = 2;
         JPanel entryLabelPanel = new JPanel();
         initializeText();
         entryLabel = new JLabel(labelText);
@@ -80,6 +80,7 @@ public class EntryPanel extends JPanel implements ActionListener {
     }
 
     private void makeObservationButton() {
+        gbc.gridwidth = 1;
         gbc.gridx = 1;
         gbc.gridy = 1;
         observationButton = new JButton("Enter Data");
@@ -90,29 +91,18 @@ public class EntryPanel extends JPanel implements ActionListener {
 
     private void makeSaveButton() {
         gbc.gridx = 2;
-        gbc.gridy = 0;
+        gbc.gridy = 1;
         saveButton = new JButton("Save Entry List");
         saveButton.addActionListener(this);
         this.add(saveButton, gbc);
-    }
-
-    private void makeLoadButton() {
-        gbc.gridx = 2;
-        gbc.gridy = 1;
-        loadButton = new JButton("Load Entry List");
-        loadButton.addActionListener(this);
-        this.add(loadButton, gbc);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == observationButton) {
             addObservationToEntryListPanel();
-        } else if (e.getSource() == saveButton) {
-            saveEntryList();
         } else {
-            loadEntryList();
-            setEntryListPanelLabels();
+            saveEntryList();
         }
     }
 
@@ -151,15 +141,15 @@ public class EntryPanel extends JPanel implements ActionListener {
         }
     }
 
-    private void loadEntryList() {
-        try {
-            moondialGUI.entryListFromGUI = Reader.readEntryList(new File(ENTRYLISTGUI_FILE));
-        } catch (IOException e) {
-            moondialGUI.ep.loadButton.setText("");
-        }
-
-
-    }
+//    private void loadEntryList() {
+//        try {
+//            moondialGUI.entryListFromGUI = Reader.readEntryList(new File(ENTRYLISTGUI_FILE));
+//        } catch (IOException e) {
+//            moondialGUI.ep.loadButton.setText("");
+//        }
+//
+//
+//    }
 }
 
 

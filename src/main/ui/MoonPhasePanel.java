@@ -107,7 +107,7 @@ public class MoonPhasePanel extends SkyPanel implements ActionListener {
         moondialGUI.setMoonPhase(e.getActionCommand());
         moondialGUI.ep.moonStatusLabel.setText("Selected Phase: " + moondialGUI.moonPhase);
 
-//        if (moonPhase.equals("New Moon")) {
+//        if (moonPhase.equals("New Moon")) { todo
 //            anglePanel.icon = newMoonImage;
 //        } else if (moonPhase.equals("Waxing Crescent")) {
 //            anglePanel.icon = waxCrImage;
