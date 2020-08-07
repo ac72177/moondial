@@ -5,39 +5,34 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static ui.EntryListPanel.LBL_WIDTH;
+public class AnglePanel extends SkyPanel implements ActionListener {
+    public int angleFromEast;
 
-public class AnglePanel extends MoonPhasePanel implements ActionListener {
-    private int angleFromEast;
-    private static final int ANGLE_PANEL_HEIGHT = 400;
     private JRadioButton zeroButton;
     private JRadioButton fortyFiveButton;
     private JRadioButton ninetyButton;
     private JRadioButton hundredThirtyFiveButton;
     private JRadioButton hundredEightyButton;
 
-
-
     // EFFECTS: Constructs anglePanel to be placed on another panel
-    public AnglePanel() {
-
+    public AnglePanel(MoondialGUI moondialGUI) {
+        super(moondialGUI);
     }
-
 
 
     // MODIFIES: this
     // EFFECTS: a helper method which declares and instantiates all radio angle buttons
     @Override
     public void initializeButtons() {
-        zeroButton = new JRadioButton("0", super.icon);
+        zeroButton = new JRadioButton("0", this.icon);
         zeroButton.setActionCommand("0");
-        fortyFiveButton = new JRadioButton("45", super.icon);
+        fortyFiveButton = new JRadioButton("45", this.icon);
         fortyFiveButton.setActionCommand("45");
-        ninetyButton = new JRadioButton("90", super.icon);
+        ninetyButton = new JRadioButton("90", this.icon);
         ninetyButton.setActionCommand("90");
-        hundredThirtyFiveButton = new JRadioButton("135", super.icon);
+        hundredThirtyFiveButton = new JRadioButton("135", this.icon);
         hundredThirtyFiveButton.setActionCommand("135");
-        hundredEightyButton = new JRadioButton("180", super.icon);
+        hundredEightyButton = new JRadioButton("180", this.icon);
         hundredEightyButton.setActionCommand("180");
 
 
@@ -81,7 +76,6 @@ public class AnglePanel extends MoonPhasePanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        angleFromEast = Integer.parseInt(e.getActionCommand());
+        moondialGUI.setAngleFromEast(Integer.parseInt(e.getActionCommand()));
     }
-
 }

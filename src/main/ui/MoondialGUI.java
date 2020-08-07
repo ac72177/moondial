@@ -12,18 +12,19 @@ import static ui.EntryListPanel.LBL_WIDTH;
 public class MoondialGUI extends JFrame {
 
 
-    private JFrame frame;
+    private GridBagConstraints gbc;
     public static final int WIDTH = 1200;
-    public static final int HEIGHT = 700;
+    public static final int FRAME_HEIGHT = 700;
     private EntryList entryList;
-    private EntryListPanel ep;
+    private EntryListPanel elp;
     private JPanel op;
     private MoonPhasePanel moonPhasePanel;
     private Entry currentObservation;
     public String moonPhase;
-    private int angleFromEast;
+    public int angleFromEast;
     public AnglePanel anglePanel;
-    private static final int PANEL_HEIGHT = 300;
+    private static final int PANEL_HEIGHT = 170;
+    private EntryPanel ep;
 
 
     public MoondialGUI() {
@@ -35,13 +36,9 @@ public class MoondialGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: draws the JFrame window where Moondial will operate
     private void initializeGraphics() {
+        gbc = new GridBagConstraints();
         setLayout(new BorderLayout());
-        setSize(new Dimension(WIDTH, HEIGHT));
-//        try {
-//            addNewEntry();
-//        } catch (IllegalListSize illegalListSize) {
-//            System.out.println("The list is full.");
-//        }
+        setSize(new Dimension(WIDTH, FRAME_HEIGHT));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         initializePanels();
@@ -50,27 +47,34 @@ public class MoondialGUI extends JFrame {
 
     private void initializePanels() {
         entryList = new EntryList();
-        ep = new EntryListPanel(entryList);
-        op = new JPanel();
-        op.setBackground(new Color(0x000000));
-        op.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, HEIGHT));
+        elp = new EntryListPanel(entryList);
 
+        op = new JPanel(new BorderLayout());
+        op.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, FRAME_HEIGHT));
 
-        moonPhasePanel = new MoonPhasePanel();
-        moonPhasePanel.setBackground(new Color(0x021623));
+        moonPhasePanel = new MoonPhasePanel(this);
         moonPhasePanel.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, PANEL_HEIGHT));
-        anglePanel = new AnglePanel();
-        anglePanel.setBackground(new Color(0x021623));
-        anglePanel.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, PANEL_HEIGHT));
 
-        add(ep, BorderLayout.EAST);
-        add(op, BorderLayout.WEST);
-        op.add(moonPhasePanel, BorderLayout.NORTH);
-        op.add(anglePanel, BorderLayout.CENTER);
-        JButton makeObservation = new JButton("Enter Data");
-        op.add(makeObservation, BorderLayout.SOUTH); // todo add a mouse listener
+        anglePanel = new AnglePanel(this);
+        anglePanel.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, PANEL_HEIGHT / 2));
+
+        ep = new EntryPanel(this);
+        ep.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, PANEL_HEIGHT));
+
+        addPanelsToSpecifiedLocation();
     }
 
+    private void addPanelsToSpecifiedLocation() {
+        this.add(elp, BorderLayout.EAST);
+        this.add(op, BorderLayout.WEST);
+
+        op.add(moonPhasePanel, BorderLayout.NORTH);
+
+        op.add(anglePanel, BorderLayout.CENTER);
+
+        op.add(ep, BorderLayout.SOUTH);
+
+    }
 
 
     // MODIFIES: this
@@ -90,7 +94,13 @@ public class MoondialGUI extends JFrame {
 
 
 
+    public void setMoonPhase(String moonPhase) {
+        this.moonPhase = moonPhase;
+    }
 
+    public void setAngleFromEast(int angleFromEast) {
+        this.angleFromEast = angleFromEast;
+    }
 
     
 

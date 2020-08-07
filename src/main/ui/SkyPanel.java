@@ -3,24 +3,31 @@ package ui;
 import javax.swing.*;
 import java.awt.*;
 
+import static ui.EntryListPanel.LBL_WIDTH;
+
 public abstract class SkyPanel extends JPanel {
     protected GridBagConstraints gbc;
     protected JPanel panel;
-    public ImageIcon newMoonImage;
-    public ImageIcon waxCrImage;
-    public ImageIcon firstQImage;
-    public ImageIcon waxGibImage;
-    public ImageIcon fullMImage;
-    public ImageIcon wanGibImage;
-    public ImageIcon thirdQImage;
-    public ImageIcon wanCrImage;
+    protected MoondialGUI moondialGUI;
+    protected ImageIcon newMoonImage;
+    protected ImageIcon waxCrImage;
+    protected ImageIcon firstQImage;
+    protected ImageIcon waxGibImage;
+    protected ImageIcon fullMImage;
+    protected ImageIcon wanGibImage;
+    protected ImageIcon thirdQImage;
+    protected ImageIcon wanCrImage;
     protected ImageIcon icon;
+    protected ImageIcon blankImage;
 
-    public SkyPanel() {
+    public SkyPanel(MoondialGUI moondialGUI) {
+        this.moondialGUI = moondialGUI;
+        setBackground(new Color(0x021623));
+
         gbc = new GridBagConstraints();
         setLayout(new GridBagLayout());
         panel = new JPanel();
-        icon = null;
+        icon = blankImage;
 
         initializeButtons();
         addButtonsToPanel();
@@ -50,5 +57,6 @@ public abstract class SkyPanel extends JPanel {
         wanGibImage = new ImageIcon("./data/waningGibbous.jpg");
         thirdQImage = new ImageIcon("./data/thirdQuarter.jpg");
         wanCrImage = new ImageIcon("./data/waningCrescent.jpg");
+        blankImage = new ImageIcon("./data/blank.jpg");
     }
 }

@@ -7,21 +7,23 @@ import model.EntryList;
 import javax.swing.*;
 import java.awt.*;
 
+import static ui.MoondialGUI.FRAME_HEIGHT;
+
+
 // Represents the panel in which the entry list is displayed
-public class EntryListPanel extends JPanel {
+public class EntryListPanel extends JPanel implements Observer {
     private EntryList entryList;
     private JPanel entryListPanel;
     private JLabel entryListLbl;
-    public static final int LBL_WIDTH = 200;
-    private static final int LBL_HEIGHT = HEIGHT;
+    public static final int LBL_WIDTH = 400;
 
     // EFFECTS: constructs an EntryListPanel
     public EntryListPanel(EntryList e) {
         entryList = e;
         entryListPanel = new JPanel(new BorderLayout());
-        setBackground(new Color(0xFF5A102A, true));
+        setBackground(new Color(0xFFFFFFFF, true));
         entryListLbl = new JLabel(addEntryListLbl());
-        entryListLbl.setPreferredSize(new Dimension(LBL_WIDTH, LBL_HEIGHT));
+        entryListPanel.setMinimumSize(new Dimension(LBL_WIDTH, FRAME_HEIGHT));
 
         this.add(entryListLbl);
     }

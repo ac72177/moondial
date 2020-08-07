@@ -5,8 +5,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static ui.EntryListPanel.LBL_WIDTH;
+
 public class MoonPhasePanel extends SkyPanel implements ActionListener {
-    private String moonPhase;
+    private AnglePanel anglePanel = new AnglePanel(moondialGUI);
     private JRadioButton newMButton;
     private JRadioButton waxCrButton;
     private JRadioButton firstQButton;
@@ -16,12 +18,13 @@ public class MoonPhasePanel extends SkyPanel implements ActionListener {
     private JRadioButton thirdQButton;
     private JRadioButton wanCrButton;
 
-    protected Icon icon;
+    protected ImageIcon icon;
 
 
     // EFFECTS: constructs a moonPhasePanel to be added onto a panel
-    public MoonPhasePanel() {
-        super();
+    public MoonPhasePanel(MoondialGUI moondialGUI) {
+        super(moondialGUI);
+
     }
 
 
@@ -31,7 +34,11 @@ public class MoonPhasePanel extends SkyPanel implements ActionListener {
     public void initializeButtons() {
         loadImages();
         makeButtons();
+        addActionListenerToButtons();
+        addButtonsToButtonGroup();
+    }
 
+    private void addButtonsToButtonGroup() {
         ButtonGroup group = new ButtonGroup();
         group.add(newMButton);
         group.add(waxCrButton);
@@ -41,7 +48,9 @@ public class MoonPhasePanel extends SkyPanel implements ActionListener {
         group.add(wanGibButton);
         group.add(thirdQButton);
         group.add(wanCrButton);
+    }
 
+    private void addActionListenerToButtons() {
         newMButton.addActionListener(this);
         waxCrButton.addActionListener(this);
         firstQButton.addActionListener(this);
@@ -97,25 +106,26 @@ public class MoonPhasePanel extends SkyPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        moonPhase = e.getActionCommand();
-        if (moonPhase.equals("New Moon")) {
-            icon = newMoonImage;
-        } else if (moonPhase.equals("Waxing Crescent")) {
-            icon = waxCrImage;
-        } else if (moonPhase.equals("First Quarter")) {
-            icon = firstQImage;
-        } else if (moonPhase.equals("Waxing Gibbous")) {
-            icon = waxGibImage;
-        } else if (moonPhase.equals("Full Moon")) {
-            icon = fullMImage;
-        } else if (moonPhase.equals("Waning Gibbous")) {
-            icon = wanGibImage;
-        } else if (moonPhase.equals("Third Quarter")) {
-            icon = thirdQImage;
-        } else if (moonPhase.equals("Waning Crescent")) {
-            icon = wanCrImage;
-        } else {
-            icon = null;
-        }
+        moondialGUI.setMoonPhase(e.getActionCommand());
+
+//        if (moonPhase.equals("New Moon")) {
+//            anglePanel.icon = newMoonImage;
+//        } else if (moonPhase.equals("Waxing Crescent")) {
+//            anglePanel.icon = waxCrImage;
+//        } else if (moonPhase.equals("First Quarter")) {
+//            anglePanel.icon = firstQImage;
+//        } else if (moonPhase.equals("Waxing Gibbous")) {
+//            anglePanel.icon = waxGibImage;
+//        } else if (moonPhase.equals("Full Moon")) {
+//            anglePanel.icon = fullMImage;
+//        } else if (moonPhase.equals("Waning Gibbous")) {
+//            anglePanel.icon = wanGibImage;
+//        } else if (moonPhase.equals("Third Quarter")) {
+//            anglePanel.icon = thirdQImage;
+//        } else if (moonPhase.equals("Waning Crescent")) {
+//            anglePanel.icon = wanCrImage;
+//        } else {
+//            anglePanel.icon = blankImage;
+//        }
     }
 }
