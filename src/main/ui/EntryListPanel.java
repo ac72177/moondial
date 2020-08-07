@@ -11,15 +11,17 @@ import static ui.MoondialGUI.FRAME_HEIGHT;
 
 
 // Represents the panel in which the entry list is displayed
-public class EntryListPanel extends JPanel implements Observer {
+public class EntryListPanel extends JPanel {
+    private MoondialGUI moondialGUI;
     private EntryList entryList;
     private JPanel entryListPanel;
-    private JLabel entryListLbl;
+    public JLabel entryListLbl;
     public static final int LBL_WIDTH = 400;
 
     // EFFECTS: constructs an EntryListPanel
-    public EntryListPanel(EntryList e) {
-        entryList = e;
+    public EntryListPanel(MoondialGUI moondialGUI) {
+        this.moondialGUI = moondialGUI;
+        entryList = moondialGUI.entryListFromGUI;
         entryListPanel = new JPanel(new BorderLayout());
         setBackground(new Color(0xFFFFFFFF, true));
         entryListLbl = new JLabel(addEntryListLbl());
@@ -29,7 +31,7 @@ public class EntryListPanel extends JPanel implements Observer {
     }
 
     // EFFECTS: prints entry List
-    private String addEntryListLbl() {
+    public String addEntryListLbl() {
         if (!(entryList.size() == 0)) {
             for (int i = 0; i < entryList.size(); i++) {
                 return ("Entry " + i + ": " + getEntryMoonPhaseFromEntryList(i)
@@ -62,6 +64,4 @@ public class EntryListPanel extends JPanel implements Observer {
         Entry entry = entryList.getEntryFromList(i);
         return entry.getTime();
     }
-
-
 }

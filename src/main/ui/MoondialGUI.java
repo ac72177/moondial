@@ -15,11 +15,11 @@ public class MoondialGUI extends JFrame {
     private GridBagConstraints gbc;
     public static final int WIDTH = 1200;
     public static final int FRAME_HEIGHT = 700;
-    private EntryList entryList;
-    private EntryListPanel elp;
+    public EntryListPanel elp;
     private JPanel op;
     private MoonPhasePanel moonPhasePanel;
     private Entry currentObservation;
+    public EntryList entryListFromGUI;
     public String moonPhase;
     public int angleFromEast;
     public AnglePanel anglePanel;
@@ -46,8 +46,8 @@ public class MoondialGUI extends JFrame {
     }
 
     private void initializePanels() {
-        entryList = new EntryList();
-        elp = new EntryListPanel(entryList);
+        entryListFromGUI = new EntryList();
+        elp = new EntryListPanel(this);
 
         op = new JPanel(new BorderLayout());
         op.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, FRAME_HEIGHT));

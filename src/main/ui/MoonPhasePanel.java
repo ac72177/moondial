@@ -58,7 +58,7 @@ public class MoonPhasePanel extends SkyPanel implements ActionListener {
         fullMButton.addActionListener(this);
         wanGibButton.addActionListener(this);
         thirdQButton.addActionListener(this);
-        wanGibButton.addActionListener(this);
+        wanCrButton.addActionListener(this);
     }
 
     private void makeButtons() {

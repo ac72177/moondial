@@ -1,6 +1,8 @@
 package ui;
 
-import javafx.beans.property.Property;
+import observer.Observer;
+import observer.Subject;
+import exceptions.IllegalListSize;
 import model.Entry;
 
 import javax.swing.*;
@@ -10,7 +12,7 @@ import java.awt.event.ActionListener;
 
 import static ui.EntryListPanel.LBL_WIDTH;
 
-public class EntryPanel extends Subject implements ActionListener {
+public class EntryPanel extends JPanel implements ActionListener {
     private MoondialGUI moondialGUI;
     private GridBagConstraints gbc;
     private String moonPhase;
@@ -63,6 +65,12 @@ public class EntryPanel extends Subject implements ActionListener {
                     + entry.getAngleFromEast() + " degrees at " + entry.getTime() + ".");
         }
 
+        try {
+            moondialGUI.entryListFromGUI.addObservation(entry);
+        } catch (IllegalListSize illegalListSize) {
+            entryLabel.setText("Too many entries, delete one first.");
+        }
+        moondialGUI.elp.entryListLbl.setText(moondialGUI.elp.addEntryListLbl());
 
     }
 
