@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 // Represents the panel in which the entry list is displayed
 public class EntryListPanel extends JPanel implements ActionListener {
     private MoondialGUI moondialGUI;
@@ -26,7 +25,7 @@ public class EntryListPanel extends JPanel implements ActionListener {
         gbc = new GridBagConstraints();
         setLayout(new GridBagLayout());
         entryListPanel = new JPanel();
-        setBackground(new Color(0xFF863A04, true));
+        setBackground(new Color(0xFF031C23, true));
         addEntryListLblToPanel();
     }
 
@@ -41,14 +40,19 @@ public class EntryListPanel extends JPanel implements ActionListener {
             for (int i = 0; i < entryList.size(); i++) {
                 gbc.gridy = i;
                 entryListLbl = new JLabel(("  Entry " + i + " : " + getEntryMoonPhaseFromEntryList(i)
-                        + " " + getEntryAngleFromEntryList(i) + " degrees at " + getEntryTimeFromEntryList(i) + " \n"));
+                        + " at " + getEntryAngleFromEntryList(i) + " degrees at " + getEntryTimeFromEntryList(i) + " \n"));
                 JPanel entryListLblPanel = new JPanel(new BorderLayout());
+                entryListLbl.setForeground(new Color(0xFF031C23));
+                entryListLblPanel.setBackground(new Color(0xCAEAF1));
+                entryListLbl.setFont(new Font("Serif", Font.PLAIN, 16));
+
                 entryListLblPanel.add(entryListLbl, BorderLayout.WEST);
                 addRemoveButtonToEntryListLblPanel(entryListLblPanel, i);
                 this.add(entryListLblPanel, gbc);
             }
         } else {
             entryListLbl = new JLabel("No Observations have been made.");
+            entryListLbl.setFont(new Font("Serif", Font.PLAIN, 14));
             gbc.gridy = 0;
             this.add(entryListLbl, gbc);
         }
@@ -57,6 +61,9 @@ public class EntryListPanel extends JPanel implements ActionListener {
     private void addRemoveButtonToEntryListLblPanel(JPanel jp, int i) {
         JButton removeButton = new JButton("Remove");
         removeButton.addActionListener(this);
+        removeButton.setForeground(new Color(0xB48208));
+        removeButton.setBackground(new Color(0x440218));
+        removeButton.setFont(new Font("Serif", Font.PLAIN, 16));
         jp.add(removeButton, BorderLayout.EAST);
         removeButton.setActionCommand(Integer.toString(i));
     }

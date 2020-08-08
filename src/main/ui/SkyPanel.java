@@ -1,9 +1,11 @@
 package ui;
 
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 
 public abstract class SkyPanel extends JPanel {
+    private static final Color BACKGROUND_COLOUR = new Color(0x02020A);
     protected GridBagConstraints gbc;
     protected JPanel panel;
     protected MoondialGUI moondialGUI;
@@ -19,7 +21,7 @@ public abstract class SkyPanel extends JPanel {
 
     public SkyPanel(MoondialGUI moondialGUI) {
         this.moondialGUI = moondialGUI;
-        setBackground(new Color(0x021623));
+        setBackground(BACKGROUND_COLOUR);
 
         gbc = new GridBagConstraints();
         setLayout(new GridBagLayout());
@@ -28,6 +30,7 @@ public abstract class SkyPanel extends JPanel {
         initializeButtons();
         addButtonsToPanel();
     }
+
 
     // MODIFIES: this
     // EFFECTS: a helper method which declares and instantiates all radio buttons
@@ -41,6 +44,13 @@ public abstract class SkyPanel extends JPanel {
     protected void setGbcCoordinates(int x,int y) {
         gbc.gridx = x;
         gbc.gridy = y;
+    }
+
+    protected void setButtonFeatures(JRadioButton button, String s) {
+        button.setBackground(BACKGROUND_COLOUR);
+        button.setForeground(new Color(0xFFFFFF));
+        button.setActionCommand(s);
+        button.setFont(new Font("Serif", Font.PLAIN, 14));
     }
 
     // EFFECTS: loads all the images of the moon

@@ -16,8 +16,8 @@ public class MoondialGUI extends JFrame {
 
 
     private GridBagConstraints gbc;
-    public static final int WIDTH = 1300;
-    public static final int FRAME_HEIGHT = 700;
+    public static final int WIDTH = 1400;
+    public static final int FRAME_HEIGHT = 600;
     public EntryListPanel elp;
     private JPanel op;
     private MoonPhasePanel moonPhasePanel;
@@ -34,7 +34,6 @@ public class MoondialGUI extends JFrame {
         super("Moondial");
         initializeGraphics();
 
-        icon = null;
     }
 
     // MODIFIES: this
@@ -52,19 +51,21 @@ public class MoondialGUI extends JFrame {
     private void initializePanels() {
         loadEntryList();
         elp = new EntryListPanel(this);
-        elp.setPreferredSize(new Dimension(LBL_WIDTH, FRAME_HEIGHT));
+        elp.setPreferredSize(new Dimension(425, FRAME_HEIGHT));
 
         op = new JPanel(new BorderLayout());
         op.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, FRAME_HEIGHT));
 
         moonPhasePanel = new MoonPhasePanel(this);
-        moonPhasePanel.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, PANEL_HEIGHT));
+        moonPhasePanel.setPreferredSize(new Dimension(200, 400));
+
 
         anglePanel = new AnglePanel(this);
-        anglePanel.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, PANEL_HEIGHT * 2));
+        this.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH - 200, 400));
+
 
         ep = new EntryPanel(this);
-        ep.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, PANEL_HEIGHT / 3 * 2));
+        ep.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, 100));
 
         addPanelsToSpecifiedLocation();
     }
@@ -73,11 +74,11 @@ public class MoondialGUI extends JFrame {
         this.add(elp, BorderLayout.EAST);
         this.add(op, BorderLayout.WEST);
 
-        op.add(moonPhasePanel, BorderLayout.NORTH);
+        op.add(moonPhasePanel, BorderLayout.WEST);
 
         op.add(anglePanel, BorderLayout.CENTER);
 
-        op.add(ep, BorderLayout.SOUTH);
+        op.add(ep, BorderLayout.NORTH);
 
     }
 

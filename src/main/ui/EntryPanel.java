@@ -13,6 +13,9 @@ import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 
 public class EntryPanel extends JPanel implements ActionListener {
+    private static final Color BACKGROUND_COLOR = new Color(0x102322);
+    private static final Color BUTTON_BACKGRD_COLOR = new Color(0x084D4E);
+    private static final Color FONT_COLOR = new Color(0xFFFFFF) ;
     private MoondialGUI moondialGUI;
     private GridBagConstraints gbc;
     private Entry entry;
@@ -32,58 +35,75 @@ public class EntryPanel extends JPanel implements ActionListener {
         gbc = new GridBagConstraints();
         setLayout(new GridBagLayout());
         entryPanel = new JPanel();
-        setBackground(new Color(0xFF5A102A, true));
+        setBackground(BACKGROUND_COLOR);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 10, 10, 10);
-        makeMoonPhaseStatusLabel();
 
-        makeAngleStatusLabel();
         makeEntryLabel();
+        makeMoonPhaseStatusLabel();
+        makeAngleStatusLabel();
         makeObservationButton();
         makeSaveButton();
 
     }
 
-    public void makeMoonPhaseStatusLabel() {
+    private void makeEntryLabel() {
         gbc.gridx = 0;
         gbc.gridy = 0;
-        moonStatusLabel = new JLabel("Selected Phase: " + moondialGUI.moonPhase);
+        gbc.gridheight = 2;
+        JPanel entryLabelPanel = new JPanel();
+        initializeText();
+        entryLabel = new JLabel(labelText);
+        entryLabel.setOpaque(true);
+        entryLabel.setBackground(BACKGROUND_COLOR);
+        entryLabel.setForeground(FONT_COLOR);
+        entryLabel.setFont(new Font("DialogInput", Font.PLAIN, 16));
+
+        entryLabelPanel.add(entryLabel);
+        entryLabelPanel.setBackground(BACKGROUND_COLOR);
+        this.add(entryLabelPanel, gbc);
+        gbc.gridheight = 1;
+    }
+
+    public void makeMoonPhaseStatusLabel() {
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        moonStatusLabel = new JLabel("Selected: " + moondialGUI.moonPhase);
+        moonStatusLabel.setFont(new Font("DialogInput", Font.PLAIN, 12));
+        moonStatusLabel.setForeground(FONT_COLOR);
         JPanel moonStatusPanel = new JPanel();
+        moonStatusPanel.setBackground(BACKGROUND_COLOR);
+
         moonStatusPanel.add(moonStatusLabel);
         this.add(moonStatusPanel, gbc);
     }
 
     public void makeAngleStatusLabel() {
-        gbc.gridx = 0;
+        gbc.gridx = 1;
         gbc.gridy = 1;
-        angleStatusLabel = new JLabel("Selected Angle: " + moondialGUI.angleFromEast);
+        angleStatusLabel = new JLabel("Selected: " + moondialGUI.angleFromEast);
+        angleStatusLabel.setFont(new Font("DialogInput", Font.PLAIN, 12));
+        angleStatusLabel.setForeground(FONT_COLOR);
         JPanel angleStatusPanel = new JPanel();
+        angleStatusPanel.setBackground(BACKGROUND_COLOR);
         angleStatusPanel.add(angleStatusLabel);
         this.add(angleStatusPanel, gbc);
     }
 
-    private void makeEntryLabel() {
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        gbc.gridwidth = 2;
-        JPanel entryLabelPanel = new JPanel();
-        initializeText();
-        entryLabel = new JLabel(labelText);
 
-        entryLabelPanel.add(entryLabel);
-        this.add(entryLabelPanel, gbc);
-    }
 
     private void initializeText() {
-        labelText = "Please select Moon Phase and Angle viewed.";
+        labelText = " Welcome to Moondial";
     }
 
     private void makeObservationButton() {
-        gbc.gridwidth = 1;
-        gbc.gridx = 1;
-        gbc.gridy = 1;
+        gbc.gridx = 2;
+        gbc.gridy = 0;
         observationButton = new JButton("Enter Data");
         observationButton.addActionListener(this);
+        observationButton.setBackground(BUTTON_BACKGRD_COLOR);
+        observationButton.setForeground(FONT_COLOR);
+        observationButton.setFont(new Font("DialogInput", Font.PLAIN, 12));
         this.add(observationButton, gbc);
     }
 
@@ -91,8 +111,11 @@ public class EntryPanel extends JPanel implements ActionListener {
     private void makeSaveButton() {
         gbc.gridx = 2;
         gbc.gridy = 1;
-        saveButton = new JButton("Save Entry List");
+        saveButton = new JButton("Save List");
         saveButton.addActionListener(this);
+        saveButton.setBackground(BUTTON_BACKGRD_COLOR);
+        saveButton.setForeground(FONT_COLOR);
+        saveButton.setFont(new Font("DialogInput", Font.PLAIN, 12));
         this.add(saveButton, gbc);
     }
 
@@ -108,8 +131,7 @@ public class EntryPanel extends JPanel implements ActionListener {
 
     private void addObservationToEntryListPanel() {
         entry = new Entry(moondialGUI.moonPhase, moondialGUI.angleFromEast);
-        entryLabel.setText("You have observed the " + entry.getMoonPhase() + " at "
-                + entry.getAngleFromEast() + " degrees at " + entry.getTime() + ".");
+        entryLabel.setText("Observed Time: " + entry.getTime() + ".");
 
         try {
             moondialGUI.entryListFromGUI.addObservation(entry);
@@ -123,6 +145,7 @@ public class EntryPanel extends JPanel implements ActionListener {
     private void setEntryListPanelLabels() {
         moondialGUI.elp.addEntryListLblToPanel();
     }
+
 
 
     // EFFECTS: saves state of entryList to ENTRYLIST_FILE
@@ -140,15 +163,6 @@ public class EntryPanel extends JPanel implements ActionListener {
         }
     }
 
-//    private void loadEntryList() {
-//        try {
-//            moondialGUI.entryListFromGUI = Reader.readEntryList(new File(ENTRYLISTGUI_FILE));
-//        } catch (IOException e) {
-//            moondialGUI.ep.loadButton.setText("");
-//        }
-//
-//
-//    }
 }
 
 

@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static ui.EntryListPanel.LBL_WIDTH;
+
+
 public class AnglePanel extends SkyPanel implements ActionListener {
 
     public JRadioButton zeroButton;
@@ -14,8 +17,10 @@ public class AnglePanel extends SkyPanel implements ActionListener {
     public JRadioButton hundredEightyButton;
 
     // EFFECTS: Constructs anglePanel to be placed on another panel
-    public AnglePanel(MoondialGUI moondialGUI) {
+    public AnglePanel(MoondialGUI moondialGUI)  {
+
         super(moondialGUI);
+
     }
 
 
@@ -40,23 +45,30 @@ public class AnglePanel extends SkyPanel implements ActionListener {
     }
 
     public void makeAngleButtonsWithIcon(ImageIcon icon) {
+
         zeroButton = new JRadioButton("0", icon);
-        zeroButton.setActionCommand("0");
+        setButtonFeatures(zeroButton, "0");
         fortyFiveButton = new JRadioButton("45", icon);
-        fortyFiveButton.setActionCommand("45");
+        setButtonFeatures(fortyFiveButton, "45");
+
+
+
         ninetyButton = new JRadioButton("90", icon);
-        ninetyButton.setActionCommand("90");
+        setButtonFeatures(ninetyButton, "90");
+
         hundredThirtyFiveButton = new JRadioButton("135", icon);
-        hundredThirtyFiveButton.setActionCommand("135");
+        setButtonFeatures(hundredThirtyFiveButton, "135");
+
         hundredEightyButton = new JRadioButton("180", icon);
-        hundredEightyButton.setActionCommand("180");
+        setButtonFeatures(hundredEightyButton, "180");
+
     }
 
     // MODIFIES: this
     // EFFECTS: helper method to add buttons to the panel
     @Override
     public void addButtonsToPanel() {
-        gbc.insets = new Insets(40,50,40,50);
+        gbc.insets = new Insets(50,40,50,40);
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridheight = 1;
