@@ -1,23 +1,30 @@
 package ui;
 
-import model.Entry;
 import model.EntryList;
 import persistence.Reader;
+import ui.panels.AnglePanel;
+import ui.panels.DisplayPanel;
+import ui.panels.EntryListPanel;
+import ui.panels.MoonPhasePanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-import static ui.EntryListPanel.LBL_WIDTH;
-import static ui.EntryPanel.ENTRYLISTGUI_FILE;
+import static ui.panels.EntryListPanel.ENTRYLISTGUI_FILE;
 
+// GUI for Moondial
 public class MoondialGUI extends JFrame {
-
-
+    private static final int WIDTH = 1400;
+    private static final int FRAME_HEIGHT = 600;
+    private static final int ELP_WIDTH = 425;
+    private static final int OP_WIDTH = WIDTH - ELP_WIDTH;
+    private static final int DISPLAYPANEL_HEIGHT = 100;
+    private static final int SKYPANEL_HEIGHT = WIDTH - DISPLAYPANEL_HEIGHT;
+    private static final int MOONPHASEPANEL_WIDTH = 200;
+    private static final int ANGLEPANEL_WIDTH = OP_WIDTH - MOONPHASEPANEL_WIDTH;
     private GridBagConstraints gbc;
-    public static final int WIDTH = 1400;
-    public static final int FRAME_HEIGHT = 600;
     public EntryListPanel elp;
     private JPanel op;
     private MoonPhasePanel moonPhasePanel;
@@ -25,11 +32,10 @@ public class MoondialGUI extends JFrame {
     public String moonPhase;
     public int angleFromEast;
     public AnglePanel anglePanel;
-    private static final int PANEL_HEIGHT = 150;
-    public EntryPanel ep;
-    protected ImageIcon icon;
+    public DisplayPanel dp;
+    public ImageIcon angleIcon;
 
-
+    // EFFECTS: creates a moondialGUI
     public MoondialGUI() {
         super("Moondial");
         initializeGraphics();
@@ -48,28 +54,30 @@ public class MoondialGUI extends JFrame {
         setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes the panels that appear on the JFrame window
     private void initializePanels() {
         loadEntryList();
         elp = new EntryListPanel(this);
-        elp.setPreferredSize(new Dimension(425, FRAME_HEIGHT));
+        elp.setPreferredSize(new Dimension(ELP_WIDTH, FRAME_HEIGHT));
 
         op = new JPanel(new BorderLayout());
-        op.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, FRAME_HEIGHT));
+        op.setPreferredSize(new Dimension(OP_WIDTH, FRAME_HEIGHT));
 
         moonPhasePanel = new MoonPhasePanel(this);
-        moonPhasePanel.setPreferredSize(new Dimension(200, 400));
-
+        moonPhasePanel.setPreferredSize(new Dimension(MOONPHASEPANEL_WIDTH, SKYPANEL_HEIGHT));
 
         anglePanel = new AnglePanel(this);
-        this.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH - 200, 400));
+        this.setPreferredSize(new Dimension(ANGLEPANEL_WIDTH, SKYPANEL_HEIGHT));
 
-
-        ep = new EntryPanel(this);
-        ep.setPreferredSize(new Dimension(WIDTH - LBL_WIDTH, 100));
+        dp = new DisplayPanel(this);
+        dp.setPreferredSize(new Dimension(OP_WIDTH, DISPLAYPANEL_HEIGHT));
 
         addPanelsToSpecifiedLocation();
     }
 
+    // MODIFIES: this
+    // EFFECTS: helper method to add panels to specified location
     private void addPanelsToSpecifiedLocation() {
         this.add(elp, BorderLayout.EAST);
         this.add(op, BorderLayout.WEST);
@@ -78,10 +86,10 @@ public class MoondialGUI extends JFrame {
 
         op.add(anglePanel, BorderLayout.CENTER);
 
-        op.add(ep, BorderLayout.NORTH);
-
+        op.add(dp, BorderLayout.NORTH);
     }
 
+    // EFFECTS: loads entryList from ENTRYLISTGUI_FILE, creates new entry list if empty
     private void loadEntryList() {
         try {
             entryListFromGUI = Reader.readEntryList(new File(ENTRYLISTGUI_FILE));
@@ -89,23 +97,17 @@ public class MoondialGUI extends JFrame {
         } catch (IOException e) {
             entryListFromGUI = new EntryList();
         }
-
-
     }
 
-
-
-
+    // EFFECTS: moonPhase setter
     public void setMoonPhase(String moonPhase) {
         this.moonPhase = moonPhase;
     }
 
+    // EFFECTS: angleFromEast setter
     public void setAngleFromEast(int angleFromEast) {
         this.angleFromEast = angleFromEast;
     }
-
-    
-
 
     public static void main(String[] args) {
         new MoondialGUI();

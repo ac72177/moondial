@@ -1,10 +1,13 @@
-package ui;
+package ui.panels;
+
+import ui.MoondialGUI;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// A panel with moon phase options to select
 public class MoonPhasePanel extends SkyPanel implements ActionListener {
     private JRadioButton newMButton;
     private JRadioButton waxCrButton;
@@ -15,15 +18,10 @@ public class MoonPhasePanel extends SkyPanel implements ActionListener {
     private JRadioButton thirdQButton;
     private JRadioButton wanCrButton;
 
-    protected ImageIcon icon;
-
-
     // EFFECTS: constructs a moonPhasePanel to be added onto a panel
     public MoonPhasePanel(MoondialGUI moondialGUI) {
         super(moondialGUI);
-
     }
-
 
     // MODIFIES: this
     // EFFECTS: a helper method which declares and instantiates all radio moon phase buttons
@@ -35,29 +33,7 @@ public class MoonPhasePanel extends SkyPanel implements ActionListener {
         addButtonsToButtonGroup();
     }
 
-    private void addButtonsToButtonGroup() {
-        ButtonGroup group = new ButtonGroup();
-        group.add(newMButton);
-        group.add(waxCrButton);
-        group.add(firstQButton);
-        group.add(waxGibButton);
-        group.add(fullMButton);
-        group.add(wanGibButton);
-        group.add(thirdQButton);
-        group.add(wanCrButton);
-    }
-
-    private void addActionListenerToButtons() {
-        newMButton.addActionListener(this);
-        waxCrButton.addActionListener(this);
-        firstQButton.addActionListener(this);
-        waxGibButton.addActionListener(this);
-        fullMButton.addActionListener(this);
-        wanGibButton.addActionListener(this);
-        thirdQButton.addActionListener(this);
-        wanCrButton.addActionListener(this);
-    }
-
+    // EFFECTS: helper method that makes the buttons
     private void makeButtons() {
         newMButton = new JRadioButton("New Moon", newMoonImage);
         setButtonFeatures(newMButton, "New Moon");
@@ -86,8 +62,34 @@ public class MoonPhasePanel extends SkyPanel implements ActionListener {
 
         wanCrButton = new JRadioButton("Waning Crescent", wanCrImage);
         setButtonFeatures(wanCrButton, "Waning Crescent");
-
     }
+
+    // EFFECTS: helper method that adds an action listener to the buttons
+    private void addActionListenerToButtons() {
+        newMButton.addActionListener(this);
+        waxCrButton.addActionListener(this);
+        firstQButton.addActionListener(this);
+        waxGibButton.addActionListener(this);
+        fullMButton.addActionListener(this);
+        wanGibButton.addActionListener(this);
+        thirdQButton.addActionListener(this);
+        wanCrButton.addActionListener(this);
+    }
+
+    // EFFECTS: helper method that adds buttons to a button group
+    private void addButtonsToButtonGroup() {
+        ButtonGroup group = new ButtonGroup();
+        group.add(newMButton);
+        group.add(waxCrButton);
+        group.add(firstQButton);
+        group.add(waxGibButton);
+        group.add(fullMButton);
+        group.add(wanGibButton);
+        group.add(thirdQButton);
+        group.add(wanCrButton);
+    }
+
+
 
     // MODIFIES: this
     // EFFECTS: helper method that adds all buttons to panel
@@ -113,42 +115,49 @@ public class MoonPhasePanel extends SkyPanel implements ActionListener {
         this.add(wanCrButton, gbc);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String moonPhase = e.getActionCommand();
-        moondialGUI.setMoonPhase(moonPhase);
-        moondialGUI.ep.moonStatusLabel.setText("Selected Phase: " + moondialGUI.moonPhase);
-        setAngleIcon(moonPhase);
-        updateAnglePanelButtonIcon(moondialGUI.icon);
-    }
-
+    // MODIFIES: moondialGUI
+    // EFFECTS: helper method that sets the icon variable to the selected moon phase's icon
     private void setAngleIcon(String moonPhase) {
         if (moonPhase.equals("New Moon")) {
-            moondialGUI.icon = newMoonImage;
+            moondialGUI.angleIcon = newMoonImage;
         } else if (moonPhase.equals("Waxing Crescent")) {
-            moondialGUI.icon = waxCrImage;
+            moondialGUI.angleIcon = waxCrImage;
         } else if (moonPhase.equals("First Quarter")) {
-            moondialGUI.icon = firstQImage;
+            moondialGUI.angleIcon = firstQImage;
         } else if (moonPhase.equals("Waxing Gibbous")) {
-            moondialGUI.icon = waxGibImage;
+            moondialGUI.angleIcon = waxGibImage;
         } else if (moonPhase.equals("Full Moon")) {
-            moondialGUI.icon = fullMImage;
+            moondialGUI.angleIcon = fullMImage;
         } else if (moonPhase.equals("Waning Gibbous")) {
-            moondialGUI.icon = wanGibImage;
+            moondialGUI.angleIcon = wanGibImage;
         } else if (moonPhase.equals("Third Quarter")) {
-            moondialGUI.icon = thirdQImage;
+            moondialGUI.angleIcon = thirdQImage;
         } else if (moonPhase.equals("Waning Crescent")) {
-            moondialGUI.icon = wanCrImage;
+            moondialGUI.angleIcon = wanCrImage;
         } else {
-            moondialGUI.icon = blankImage;
+            moondialGUI.angleIcon = blankImage;
         }
     }
 
+    // MODIFIES: moondialGUI
+    // effects: updates the angle icon with the moonPhase icon
     private void updateAnglePanelButtonIcon(ImageIcon icon) {
         moondialGUI.anglePanel.zeroButton.setIcon(icon);
         moondialGUI.anglePanel.fortyFiveButton.setIcon(icon);
         moondialGUI.anglePanel.ninetyButton.setIcon(icon);
         moondialGUI.anglePanel.hundredThirtyFiveButton.setIcon(icon);
         moondialGUI.anglePanel.hundredEightyButton.setIcon(icon);
+    }
+
+    // MODIFIES: moondialGUI
+    // EFFECTS: sets the moonphase status in display panel to selected moonphase and updates the angle icon with
+    //          the icon of the selected moon phase
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String moonPhase = e.getActionCommand();
+        moondialGUI.setMoonPhase(moonPhase);
+        moondialGUI.dp.moonStatusLabel.setText("Selected Phase: " + moondialGUI.moonPhase);
+        setAngleIcon(moonPhase);
+        updateAnglePanelButtonIcon(moondialGUI.angleIcon);
     }
 }

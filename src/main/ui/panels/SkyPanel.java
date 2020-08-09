@@ -1,9 +1,11 @@
-package ui;
+package ui.panels;
+
+import ui.MoondialGUI;
 
 import javax.swing.*;
-import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 
+// Abstract class for AnglePanel and MoonPhasePanel
 public abstract class SkyPanel extends JPanel {
     private static final Color BACKGROUND_COLOUR = new Color(0x02020A);
     protected GridBagConstraints gbc;
@@ -19,6 +21,7 @@ public abstract class SkyPanel extends JPanel {
     protected ImageIcon wanCrImage;
     protected ImageIcon blankImage;
 
+    // EFFECTS: sets up the panel specifications and components
     public SkyPanel(MoondialGUI moondialGUI) {
         this.moondialGUI = moondialGUI;
         setBackground(BACKGROUND_COLOUR);
@@ -46,6 +49,7 @@ public abstract class SkyPanel extends JPanel {
         gbc.gridy = y;
     }
 
+    // EFFECTS: helper method that sets the radio button features
     protected void setButtonFeatures(JRadioButton button, String s) {
         button.setBackground(BACKGROUND_COLOUR);
         button.setForeground(new Color(0xFFFFFF));
