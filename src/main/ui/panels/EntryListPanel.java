@@ -167,6 +167,7 @@ public class EntryListPanel extends JPanel implements ActionListener {
             entryList.removeObservation(i);
             moondialGUI.dp.entryLabel.setText("Select moon phase and angle");
             addEntryListLblToPanel();
+            moondialGUI.slp.makeSortedLabels();
         }
     }
 }

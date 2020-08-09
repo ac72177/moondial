@@ -322,14 +322,14 @@ public class MoondialApp {
         sortedByPhase = entryList.sortAndCountListByPhase();
         System.out.println(" Here is your summary of observations");
         System.out.println(" ");
-        System.out.println("# of New Moon = " + sortedByPhase.get(0));
-        System.out.println("# of Waxing Crescent = " + sortedByPhase.get(1));
-        System.out.println("# of First Quarter = " + sortedByPhase.get(2));
-        System.out.println("# of Waxing Gibbous = " + sortedByPhase.get(3));
-        System.out.println("# of Full Moon = " + sortedByPhase.get(4));
-        System.out.println("# of Waning Gibbous = " + sortedByPhase.get(5));
-        System.out.println("# of Third Quarter = " + sortedByPhase.get(6));
-        System.out.println("# of Waning Crescent = " + sortedByPhase.get(7));
+        System.out.println("# of New Moon : " + sortedByPhase.get(0));
+        System.out.println("# of Waxing Crescent : " + sortedByPhase.get(1));
+        System.out.println("# of First Quarter : " + sortedByPhase.get(2));
+        System.out.println("# of Waxing Gibbous : " + sortedByPhase.get(3));
+        System.out.println("# of Full Moon : " + sortedByPhase.get(4));
+        System.out.println("# of Waning Gibbous : " + sortedByPhase.get(5));
+        System.out.println("# of Third Quarter : " + sortedByPhase.get(6));
+        System.out.println("# of Waning Crescent : " + sortedByPhase.get(7));
     }
 
     // EFFECTS: prints entry List

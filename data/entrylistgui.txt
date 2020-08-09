@@ -1,1 +1,2 @@
-Third Quarter,0,Midnight
+Waxing Crescent,45,Noon
+First Quarter,45,3PM

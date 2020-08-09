@@ -110,7 +110,7 @@ public class AnglePanel extends SkyPanel implements ActionListener {
         gbc.gridx = 1;
         gbc.gridy = 4;
         JLabel eastLabel = new JLabel("E");
-        eastLabel.setForeground(new Color(0xFFFFFF));
+        eastLabel.setForeground(FONT_COLOR);
         eastLabel.setFont(new Font("Serif", Font.PLAIN, 17));
         JPanel eastPanel = new JPanel();
         eastPanel.setOpaque(false);
@@ -120,7 +120,7 @@ public class AnglePanel extends SkyPanel implements ActionListener {
         gbc.gridx = 5;
         gbc.gridy = 4;
         JLabel westLabel = new JLabel("W");
-        westLabel.setForeground(new Color(0xFFFFFF));
+        westLabel.setForeground(FONT_COLOR);
         westLabel.setFont(new Font("Serif", Font.PLAIN, 17));
         JPanel westPanel = new JPanel();
         westPanel.setOpaque(false);
@@ -140,11 +140,22 @@ public class AnglePanel extends SkyPanel implements ActionListener {
             moondialGUI.dp.entryLabel.setText("Too many entries, delete one first.");
         }
         setEntryListPanelLabels();
+        setSortedListPanelLabels();
     }
 
+    // MODIFIES: moondialGUI
+    // EFFECTS: helper method that sets EntryListPanel
     private void setEntryListPanelLabels() {
         moondialGUI.elp.addEntryListLblToPanel();
     }
+
+    // MODIFIES: moondialGUI
+    // EFFECTS: helper method that sets EntryListPanel
+    private void setSortedListPanelLabels() {
+        moondialGUI.slp.makeSortedLabels();
+    }
+
+
 
     // MODIFIES: moondialGUI
     // EFFECTS: adds an observation to the entry list or sets the angle to the selected one

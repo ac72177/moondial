@@ -21,10 +21,23 @@ any user how to use the moon, when it is visible, to determine the approximate t
 ### User Stories
 
 - As a user, I want to be able to make and add an observation to a list of observations
-- As a user, I want to select an entry from my past observations to see
-- As a user, I want to see a list of my past observations that have not been deleted
-- As a user, I want to see a summary of my past observations categorized by moon phase
+- As a user, I want to select an entry from my past observations to see (not in GUI)
+- As a user, I want to see a list of my past observations that have not been deleted 
+- As a user, I want to see a summary of my past observations categorized by moon phase 
 - As a user, I want to select observations to delete 
-- As a user, I want to be able to save my current list of observations to file
+- As a user, I want to be able to save my current list of observations to file 
 - As a user, I want to be able to automatically load my previous list of observations from file when the program starts
-- As a user, I want to be able to automatically save my observations when I quit
+- As a user, I want to be able to automatically save my observations when I quit (not in GUI)
+
+### Instructions for Grader
+- You can generate the first required event by clicking on any moon phase, and clicking on any 
+angle, then clicking observe. The top Left panel will update with the currently selected states as you click them. The 
+entry list and sorted list will only update when you click observe. 
+- You can generate the second required event by clicking remove next to the entry item you want to remove. Both the 
+sorted and entry list in the Right panel will update as well as the Top Left panel.
+- You can locate my visual component by selecting a moon phase, this will change the image displayed on the angle 
+selection buttons.
+- You can save the state of my application by clicking the save button
+- You can reload the state of my application by running the application (it loads automatically)
+
+
