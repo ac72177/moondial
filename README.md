@@ -41,4 +41,8 @@ selection buttons.
 - You can save the state of my application by clicking the save button
 - You can reload the state of my application by running the application (it loads automatically)
 
+## External Citation 
+- Code from the audio found: https://stackoverflow.com/questions/2416935/how-to-play-wav-files-with-java
+
+
 
