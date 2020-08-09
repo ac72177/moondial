@@ -37,6 +37,7 @@ entry list and sorted list will only update when you click observe.
 sorted and entry list in the Right panel will update as well as the Top Left panel.
 - You can locate my visual component by selecting a moon phase, this will change the image displayed on the angle 
 selection buttons.
+- You can locate my audio component by clicking the save button
 - You can save the state of my application by clicking the save button
 - You can reload the state of my application by running the application (it loads automatically)
 

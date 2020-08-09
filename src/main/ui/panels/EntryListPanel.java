@@ -6,6 +6,9 @@ import model.EntryList;
 import persistence.Writer;
 import ui.MoondialGUI;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,6 +22,7 @@ public class EntryListPanel extends JPanel implements ActionListener {
     private static final Color BUTTON_BACKGRD_COLOR = new Color(0x084D4E);
     private static final Color FONT_COLOR = new Color(0xFFFFFF);
     public static final String ENTRYLISTGUI_FILE = "./data/entrylistgui.txt";
+    private final String moonLandingAudio = "./data/onesmallstep.wav";
     private MoondialGUI moondialGUI;
     private GridBagConstraints gbc;
     private EntryList entryList;
@@ -161,6 +165,7 @@ public class EntryListPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saveButton) {
             saveEntryList();
+            playSound(moonLandingAudio);
 
         } else {
             int i = Integer.parseInt(e.getActionCommand());
@@ -170,4 +175,17 @@ public class EntryListPanel extends JPanel implements ActionListener {
             moondialGUI.slp.makeSortedLabels();
         }
     }
+
+    private void playSound(String soundName) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
+    }
 }
+

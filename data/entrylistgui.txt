@@ -1,2 +1,3 @@
-Waxing Crescent,45,Noon
-First Quarter,45,3PM
+Waxing Gibbous,90,9PM
+New Moon,45,9AM
+New Moon,0,6AM
