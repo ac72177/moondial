@@ -67,5 +67,10 @@ Additionally, I created an interface called MoondialPanel which is implemented b
 SkyPanel with one method that needs to be implemented in the abstract classes/their subclasses called 
 makePanelComponents().
 
+Additional problems: 
+- Too much coupling with MoondialGUI with other classes in the ui package. 
+- Classes in the UI package have a field of type EntryList which is in the model package. Can be solved by implementing 
+the Observer pattern (EntryList is the Observable and other classes that have EntryList implement Observer.)
+
 
 
