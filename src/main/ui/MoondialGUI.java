@@ -1,7 +1,5 @@
 package ui;
 
-import exceptions.IllegalListSize;
-import model.Entry;
 import model.EntryList;
 import persistence.Reader;
 import ui.panels.*;
@@ -10,13 +8,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.Observable;
-import java.util.Observer;
 
 import static ui.panels.EntryListPanel.ENTRYLISTGUI_FILE;
 
 // GUI for Moondial
-public class MoondialGUI extends JFrame implements Observer {
+public class MoondialGUI extends JFrame {
     private static final int WIDTH = 1400;
     private static final int FRAME_HEIGHT = 700;
     private static final int ELP_WIDTH = 425;
@@ -29,6 +25,7 @@ public class MoondialGUI extends JFrame implements Observer {
     private GridBagConstraints gbc;
     public EntryListPanel elp;
     public SortedListPanel slp;
+    public EntryList entryListFromGUI;
     private JPanel op;
     private JPanel lp;
     private MoonPhasePanel moonPhasePanel;
@@ -105,12 +102,12 @@ public class MoondialGUI extends JFrame implements Observer {
 
     // EFFECTS: loads entryList from ENTRYLISTGUI_FILE, creates new entry list if empty
     private void loadEntryList() {
-        EntryList entryList = new EntryList();
+        entryListFromGUI = new EntryList();
         try {
-            entryList = Reader.readEntryList(new File(ENTRYLISTGUI_FILE));
+            entryListFromGUI = Reader.readEntryList(new File(ENTRYLISTGUI_FILE));
 
         } catch (IOException e) {
-            entryList = new EntryList();
+            entryListFromGUI = new EntryList();
         }
     }
 
@@ -126,15 +123,5 @@ public class MoondialGUI extends JFrame implements Observer {
 
     public static void main(String[] args) {
         new MoondialGUI();
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        EntryList entryList = new EntryList();
-        try {
-            entryList.addObservation((Entry) arg);
-        } catch (IllegalListSize illegalListSize) {
-            System.err.println("Too many entries");
-        }
     }
 }

@@ -26,7 +26,7 @@ public class SortedListPanel extends ListPanel {
     public void makePanelComponents() {
         resetListPanel();
         if (moondialGUI.entryListFromGUI.size() > 0) {
-            sortedByPhase = moondialGUI.entryListFromGUI.sortAndCountListByPhase();
+            sortedByPhase = entryList.sortAndCountListByPhase();
 
             JLabel newMoonCount = new JLabel("# of New Moon = " + sortedByPhase.get(0));
             setLabelFeatures(newMoonCount, 0, 0);

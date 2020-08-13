@@ -2,6 +2,7 @@ package ui.panels;
 
 
 import model.Entry;
+import model.EntryList;
 import persistence.Writer;
 import ui.MoondialGUI;
 
@@ -42,9 +43,10 @@ public class EntryListPanel extends ListPanel implements ActionListener {
 
     // EFFECTS: saves state of entryList to ENTRYLIST_FILE
     private void saveEntryList() {
+        EntryList entryList = new EntryList();
         try {
             Writer writer = new Writer(new File(ENTRYLISTGUI_FILE));
-            writer.write(moondialGUI.entryListFromGUI);
+            writer.write(entryList);
             writer.close();
             System.out.println("List of Observations saved to file " + ENTRYLISTGUI_FILE);
             moondialGUI.dp.entryLabel.setText("Saved");

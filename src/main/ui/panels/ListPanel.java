@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public abstract class ListPanel extends JPanel implements MoondialPanel, Observer {
+public abstract class ListPanel extends JPanel implements MoondialPanel {
     protected static final Color PANEL_BCKGRD_COLOR = new Color(0xFF031C23);
     protected static final Color FONT_COLOR = new Color(0xFFFFFF);
     protected MoondialGUI moondialGUI;
