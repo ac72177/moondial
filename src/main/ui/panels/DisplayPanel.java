@@ -1,7 +1,5 @@
 package ui.panels;
 
-import exceptions.IllegalListSize;
-import model.Entry;
 import ui.MoondialGUI;
 
 import javax.swing.*;

@@ -32,7 +32,7 @@ public class AnglePanel extends SkyPanel implements ActionListener {
     // MODIFIES: this
     // EFFECTS: a helper method which declares and instantiates all radio angle buttons
     @Override
-    public void initializeButtons() {
+    public void makePanelComponents() {
         makeAngleButtonsWithIcon(moondialGUI.angleIcon);
 
         ButtonGroup group = new ButtonGroup();
@@ -146,16 +146,14 @@ public class AnglePanel extends SkyPanel implements ActionListener {
     // MODIFIES: moondialGUI
     // EFFECTS: helper method that sets EntryListPanel
     private void setEntryListPanelLabels() {
-        moondialGUI.elp.addEntryListLblToPanel();
+        moondialGUI.elp.makePanelComponents();
     }
 
     // MODIFIES: moondialGUI
     // EFFECTS: helper method that sets EntryListPanel
     private void setSortedListPanelLabels() {
-        moondialGUI.slp.makeSortedLabels();
+        moondialGUI.slp.makePanelComponents();
     }
-
-
 
     // MODIFIES: moondialGUI
     // EFFECTS: adds an observation to the entry list or sets the angle to the selected one

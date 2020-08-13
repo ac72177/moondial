@@ -2,7 +2,6 @@ package ui.panels;
 
 
 import model.Entry;
-import model.EntryList;
 import persistence.Writer;
 import ui.MoondialGUI;
 
@@ -18,28 +17,19 @@ import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 
 // Represents the panel in which the entry list is displayed
-public class EntryListPanel extends JPanel implements ActionListener {
+public class EntryListPanel extends ListPanel implements ActionListener {
     private static final Color BUTTON_BACKGRD_COLOR = new Color(0x084D4E);
     private static final Color FONT_COLOR = new Color(0xFFFFFF);
     public static final String ENTRYLISTGUI_FILE = "./data/entrylistgui.txt";
     private final String moonLandingAudio = "./data/onesmallstep.wav";
-    private MoondialGUI moondialGUI;
-    private GridBagConstraints gbc;
-    private EntryList entryList;
     private JPanel entryListPanel;
     public JLabel entryListLbl;
     private JButton saveButton;
 
     // EFFECTS: constructs an EntryListPanel
     public EntryListPanel(MoondialGUI moondialGUI) {
-        this.moondialGUI = moondialGUI;
-        entryList = moondialGUI.entryListFromGUI;
-        gbc = new GridBagConstraints();
-        setLayout(new GridBagLayout());
+        super(moondialGUI);
         entryListPanel = new JPanel();
-        setBackground(new Color(0xFF031C23, true));
-        makeSaveButton();
-        addEntryListLblToPanel();
     }
 
     private void makeSaveButton() {
@@ -68,8 +58,10 @@ public class EntryListPanel extends JPanel implements ActionListener {
 
     // MODIFIES: this
     // EFFECTS: updates the entry list with empty status or entries
-    public void addEntryListLblToPanel() {
-        resetEntryListPanel();
+    @Override
+    public void makePanelComponents() {
+        this.resetListPanel();
+        makeSaveButton();
 
         if (!(entryList.size() == 0)) {
             for (int i = 0; i < entryList.size(); i++) {
@@ -81,19 +73,6 @@ public class EntryListPanel extends JPanel implements ActionListener {
             addSaveButtonToPanel(1);
         }
     }
-
-    // MODIFIES: this
-    // EFFECTS: resets entry list Panel to initial state
-    private void resetEntryListPanel() {
-        this.removeAll();
-        this.revalidate();
-        this.repaint();
-
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.gridx = 0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-    }
-
 
     // MODIFIES: this
     // EFFECTS: helper method that makes an entry panel with a label and remove button and adds it to this
@@ -171,8 +150,8 @@ public class EntryListPanel extends JPanel implements ActionListener {
             int i = Integer.parseInt(e.getActionCommand());
             entryList.removeObservation(i);
             moondialGUI.dp.entryLabel.setText("Select moon phase and angle");
-            addEntryListLblToPanel();
-            moondialGUI.slp.makeSortedLabels();
+            makePanelComponents();
+            moondialGUI.slp.makePanelComponents();
         }
     }
 

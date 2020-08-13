@@ -41,8 +41,31 @@ selection buttons.
 - You can save the state of my application by clicking the save button
 - You can reload the state of my application by running the application (it loads automatically)
 
-## External Citation 
+#### External Citation 
 - Code from the audio found: https://stackoverflow.com/questions/2416935/how-to-play-wav-files-with-java
+
+### Phase 4: Task 2
+Robust Design: 
+
+The method addObservation() found in the class EntryList, in the model package throws an IllegalListSize Exception when 
+the list size is larger than the constant maxListSize. The combination of expecting and not expecting Exceptions can be 
+found in the class EntryListTest.
+
+### Phase 4: Task 3
+
+- There is low cohesion in the model class because the class MoonTime and Entry hold extremely similar functions. 
+
+Solution: This was solved by making MoonTime an interface that Entry implements and moving its code and tests to the 
+class, Entry, and the class, EntryTest.
+
+- SortedListPanel and EntryListPanel had nearly identical code for their constructors, similar functionality in making 
+panel components and resetting the panel.
+
+Solution: I created an abstract ListPanel class which has the resetListPanel() method implemented, has an abstract 
+method makePanelComponents(), and most of the constructor's functionality in the abstract class' constructor.
+Additionally, I created an interface called MoondialPanel which is implemented by the abstract classes ListPanel and 
+SkyPanel with one method that needs to be implemented in the abstract classes/their subclasses called 
+makePanelComponents().
 
 
 

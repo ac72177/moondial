@@ -1,5 +1,7 @@
 package ui;
 
+import exceptions.IllegalListSize;
+import model.Entry;
 import model.EntryList;
 import persistence.Reader;
 import ui.panels.*;
@@ -8,11 +10,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
 
 import static ui.panels.EntryListPanel.ENTRYLISTGUI_FILE;
 
 // GUI for Moondial
-public class MoondialGUI extends JFrame {
+public class MoondialGUI extends JFrame implements Observer {
     private static final int WIDTH = 1400;
     private static final int FRAME_HEIGHT = 700;
     private static final int ELP_WIDTH = 425;
@@ -28,7 +32,6 @@ public class MoondialGUI extends JFrame {
     private JPanel op;
     private JPanel lp;
     private MoonPhasePanel moonPhasePanel;
-    public EntryList entryListFromGUI;
     public String moonPhase;
     public int angleFromEast;
     public AnglePanel anglePanel;
@@ -102,11 +105,12 @@ public class MoondialGUI extends JFrame {
 
     // EFFECTS: loads entryList from ENTRYLISTGUI_FILE, creates new entry list if empty
     private void loadEntryList() {
+        EntryList entryList = new EntryList();
         try {
-            entryListFromGUI = Reader.readEntryList(new File(ENTRYLISTGUI_FILE));
+            entryList = Reader.readEntryList(new File(ENTRYLISTGUI_FILE));
 
         } catch (IOException e) {
-            entryListFromGUI = new EntryList();
+            entryList = new EntryList();
         }
     }
 
@@ -122,5 +126,15 @@ public class MoondialGUI extends JFrame {
 
     public static void main(String[] args) {
         new MoondialGUI();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        EntryList entryList = new EntryList();
+        try {
+            entryList.addObservation((Entry) arg);
+        } catch (IllegalListSize illegalListSize) {
+            System.err.println("Too many entries");
+        }
     }
 }

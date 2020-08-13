@@ -8,32 +8,23 @@ import java.awt.*;
 import java.util.List;
 
 // Represents a panel of labels sorted entries
-public class SortedListPanel extends JPanel {
-    private static final Color PANEL_BCKGRD_COLOR = new Color(0xFF031C23);
-    private static final Color FONT_COLOR = new Color(0xFFFFFF);
-    private final MoondialGUI moondialGUI;
-    private final GridBagConstraints gbc;
-    private final EntryList entryList;
-    private final JPanel entryListPanel;
+public class SortedListPanel extends ListPanel {
+    private final JPanel sortedListPanel;
     private List<Integer> sortedByPhase;
 
     // EFFECTS: Constructs a sorted list panel
     public SortedListPanel(MoondialGUI moondialGUI) {
-        this.moondialGUI = moondialGUI;
-        entryList = moondialGUI.entryListFromGUI;
-        gbc = new GridBagConstraints();
-        setLayout(new GridBagLayout());
-        entryListPanel = new JPanel();
-        setBackground(PANEL_BCKGRD_COLOR);
-
-        makeSortedLabels();
+        super(moondialGUI);
+        sortedListPanel = new JPanel();
     }
+
 
 
     // MODIFIES: this
     // EFFECTS: initializes labels of sorted list
-    public void makeSortedLabels() {
-        resetSortedListPanel();
+    @Override
+    public void makePanelComponents() {
+        resetListPanel();
         if (moondialGUI.entryListFromGUI.size() > 0) {
             sortedByPhase = moondialGUI.entryListFromGUI.sortAndCountListByPhase();
 
@@ -47,7 +38,7 @@ public class SortedListPanel extends JPanel {
             setLabelFeatures(firstQCount, 2, 0);
 
             JLabel waxGibCount = new JLabel("# of Waxing Gibbous = " + sortedByPhase.get(3));
-            setLabelFeatures(waxGibCount,3, 0);
+            setLabelFeatures(waxGibCount, 3, 0);
 
             JLabel fullMCount = new JLabel("# of Full Moon = " + sortedByPhase.get(4));
             setLabelFeatures(fullMCount, 0, 1);
@@ -71,18 +62,6 @@ public class SortedListPanel extends JPanel {
         gbc.gridx = coordinateX;
         label.setForeground(FONT_COLOR);
         this.add(label, gbc);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: resets sorted list Panel to initial state
-    private void resetSortedListPanel() {
-        this.removeAll();
-        this.revalidate();
-        this.repaint();
-
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.gridx = 0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
     }
 }
 

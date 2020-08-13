@@ -6,6 +6,7 @@ import persistence.Reader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 // Represents a list of entries of the moon observations
 public class EntryList extends Sortable {
@@ -40,6 +41,8 @@ public class EntryList extends Sortable {
             throw new IllegalListSize();
         } else {
             entryList.add(e);
+            setChanged();
+            notifyObservers();
         }
     }
 
@@ -48,6 +51,8 @@ public class EntryList extends Sortable {
     public void removeObservation(int i) throws IndexOutOfBoundsException {
         if (entryList.size() > i) {
             entryList.remove(i);
+            setChanged();
+            notifyObservers();
         } else {
             throw new IndexOutOfBoundsException();
         }
@@ -75,6 +80,7 @@ public class EntryList extends Sortable {
             increment(item);
         }
         return sortedByPhase;
+
     }
 
     // MODIFIES: this

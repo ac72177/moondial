@@ -26,7 +26,7 @@ public class MoonPhasePanel extends SkyPanel implements ActionListener {
     // MODIFIES: this
     // EFFECTS: a helper method which declares and instantiates all radio moon phase buttons
     @Override
-    public void initializeButtons() {
+    public void makePanelComponents() {
         loadImages();
         makeButtons();
         addActionListenerToButtons();

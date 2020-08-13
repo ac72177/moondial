@@ -4,9 +4,10 @@ import persistence.Saveable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 // Represents a Sorted List by phase
-public abstract class Sortable implements Saveable {
+public abstract class Sortable extends Observable implements Saveable {
     public List<Integer> sortedByPhase;
 
     public Sortable() {

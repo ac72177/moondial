@@ -1,3 +1,0 @@
-Waxing Gibbous,90,9PM
-New Moon,45,9AM
-New Moon,0,6AM

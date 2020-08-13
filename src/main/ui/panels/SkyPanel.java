@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 // Abstract class for AnglePanel and MoonPhasePanel
-public abstract class SkyPanel extends JPanel {
+public abstract class SkyPanel extends JPanel implements MoondialPanel {
     private static final Color BACKGROUND_COLOUR = new Color(0x02020A);
     protected GridBagConstraints gbc;
     protected JPanel panel;
@@ -30,14 +30,14 @@ public abstract class SkyPanel extends JPanel {
         setLayout(new GridBagLayout());
         panel = new JPanel();
 
-        initializeButtons();
+        makePanelComponents();
         addButtonsToPanel();
     }
 
 
     // MODIFIES: this
     // EFFECTS: a helper method which declares and instantiates all radio buttons
-    protected abstract void initializeButtons();
+    public abstract void makePanelComponents();
 
     // MODIFIES: this
     // EFFECTS: helper method that adds all buttons to panel
