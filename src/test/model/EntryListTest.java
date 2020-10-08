@@ -21,9 +21,6 @@ public class EntryListTest {
     private Entry thirdQuarterSingleEntry;
     private Entry waningCrescentSingleEntry;
 
-    public EntryListTest() {
-    }
-
     @BeforeEach
     public void setUpBeforeEachTest() {
         newEntryList = new EntryList();
